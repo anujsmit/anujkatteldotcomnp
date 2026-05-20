@@ -1,696 +1,634 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform, useSpring, useInView } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+  useSpring,
+  useInView,
+  useMotionValue,
+  useVelocity,
+  useAnimationFrame,
+} from "framer-motion";
 
-// ─── TECH STACK DATA with Devicons ──────────────────────────────────────────
+import {
+  FaGlobe,
+  FaMobileAlt,
+  FaSearch,
+} from "react-icons/fa";
+
+// ─── DATA ────────────────────────────────────────────────────────────────────
 const techStack = [
-  { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", color: "#F7DF1E" },
-  { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", color: "#3178C6" },
-  { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", color: "#61DAFB" },
-  { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", color: "#339933" },
-  { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", color: "#3776AB" },
-  { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", color: "#4169E1" },
-  { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", color: "#2496ED" },
-  { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg", color: "#FF9900" },
-  { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", color: "#F05032" },
-  { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", color: "#4479A1" },
-  { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", color: "#ffffff" },
-  { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg", color: "#009688" },
-  { name: "React Native", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", color: "#61DAFB" },
-  { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", color: "#FFCA28" },
+  { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+  { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+  { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+  { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+  { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+  { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+  { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+  { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" },
+  { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+  { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+  { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", invert: true },
+  { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" },
+  { name: "React Native", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+  { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
 ];
 
-// ─── COMPANIES LIST ─────────────────────────────────────────────────────────
-const companies = [
-  "Stripe", "Vercel", "Supabase", "Linear", "Figma",
-  "Netflix", "Shopify", "Slack", "Airbnb", "Coinbase"
-];
-
-// ─── SERVICES ───────────────────────────────────────────────────────────────
 const services = [
   {
     num: "01",
-    title: "Full-Stack Web",
-    desc: "End-to-end web platforms with blazing fast frontends, robust APIs, and secure, scalable backends. Every line of code written with performance in mind.",
-    tags: ["React", "Node.js", "PostgreSQL"],
+    title: "Website Development",
+    desc: "Modern, responsive, and high-performance websites built for businesses and brands.",
+    tags: ["React", "Node.js", "Responsive"],
+    icon: <FaGlobe />,
   },
   {
     num: "02",
-    title: "Mobile Apps",
-    desc: "Cross-platform mobile applications for iOS and Android with fluid animations, offline capability, and real-time data synchronization.",
-    tags: ["React Native", "Firebase"],
+    title: "App Development",
+    desc: "Cross-platform mobile applications for Android and iOS with smooth UI and fast performance.",
+    tags: ["React Native", "Firebase", "Android"],
+    icon: <FaMobileAlt />,
   },
   {
     num: "03",
-    title: "API Architecture",
-    desc: "RESTful and GraphQL APIs designed for reliability and speed. Complete with authentication, rate limiting, and full documentation.",
-    tags: ["FastAPI", "Express", "Docker"],
+    title: "SEO Optimization",
+    desc: "Improve search rankings, website performance, and online visibility for more traffic.",
+    tags: ["SEO", "Performance", "Analytics"],
+    icon: <FaSearch />,
   },
 ];
 
-// ─── PROJECTS ───────────────────────────────────────────────────────────────
 const projects = [
-  {
-    index: "001",
-    title: "E-Commerce Architecture",
-    year: "2025",
-    desc: "A lightning-fast store with custom checkout pipeline, real-time inventory management, and an admin dashboard handling 10K+ daily transactions.",
-    tech: ["React", "Node.js", "MySQL"],
-    accent: "#a855f7",
-  },
-  {
-    index: "002",
-    title: "Fitness Tracking App",
-    year: "2025",
-    desc: "Cross-platform mobile app featuring real-time biometric syncing, personalized AI workout recommendations, and social leaderboards.",
-    tech: ["React Native", "Firebase"],
-    accent: "#06b6d4",
-  },
-  {
-    index: "003",
-    title: "SaaS Analytics Dashboard",
-    year: "2024",
-    desc: "Enterprise data visualization platform with live WebSocket feeds, role-based access, and exportable PDF reports.",
-    tech: ["TypeScript", "FastAPI", "PostgreSQL"],
-    accent: "#10b981",
-  },
+  { index: "001", title: "E‑Commerce Architecture", year: "2025", desc: "Lightning-fast store with custom checkout, real-time inventory, admin dashboard handling 10K+ daily transactions.", tech: ["React", "Node.js", "MySQL"], accent: "#c084fc" },
+  { index: "002", title: "Fitness Tracking App", year: "2025", desc: "Cross-platform mobile app with biometric syncing, AI workout recs, social leaderboards.", tech: ["React Native", "Firebase"], accent: "#22d3ee" },
+  { index: "003", title: "SaaS Analytics Dashboard", year: "2024", desc: "Enterprise data viz with WebSocket feeds, RBAC, exportable PDF reports.", tech: ["TypeScript", "FastAPI", "PostgreSQL"], accent: "#34d399" },
 ];
 
-// ─── UTILITIES ───────────────────────────────────────────────────────────────
-const easeOutExpo = [0.16, 1, 0.3, 1];
+const socialLinks = [
+  { platform: "GitHub", user: "anujsmit", url: "https://github.com/anujsmit", color: "#e4e4e7", icon: "GH" },
+  { platform: "LinkedIn", user: "anujkattel", url: "https://linkedin.com/in/anujkattel", color: "#60a5fa", icon: "LI" },
+  { platform: "Instagram", user: "@anujkattel", url: "https://instagram.com/anujkattel", color: "#f472b6", icon: "IG" },
+  { platform: "Twitter", user: "@anujkattel5", url: "https://twitter.com/anujkattel", color: "#a3e635", icon: "X" },
+];
 
-function useCountUp(target, duration = 2, start = false) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!start) return;
-    let startTime = null;
-    const step = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
-      const eased = 1 - Math.pow(1 - progress, 4);
-      setCount(Math.floor(eased * target));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [start, target, duration]);
-  return count;
+// ─── VELOCITY SCROLLER ──────────────────────────────────────────────────────
+function wrap(min, max, v) {
+  const range = max - min;
+  return ((((v - min) % range) + range) % range) + min;
 }
 
-function StatCard({ value, suffix, label }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
-  const count = useCountUp(value, 1.8, inView);
+function VelocityTicker({ children, baseVelocity = -2 }) {
+  const baseX = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], { clamp: false });
+  const x = useTransform(baseX, (v) => `${wrap(-50, 0, v)}%`);
+  const directionFactor = useRef(1);
+
+  useAnimationFrame((t, delta) => {
+    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+    if (velocityFactor.get() < 0) directionFactor.current = -1;
+    else if (velocityFactor.get() > 0) directionFactor.current = 1;
+    moveBy += directionFactor.current * moveBy * velocityFactor.get() * 0.3;
+    baseX.set(baseX.get() + moveBy);
+  });
+
   return (
-    <div ref={ref} style={{ textAlign: "center" }}>
-      <div style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 800, letterSpacing: "-0.04em", color: "#fff", lineHeight: 1 }}>
-        {count}{suffix}
-      </div>
-      <div style={{ fontSize: "0.85rem", color: "#52525b", fontWeight: 500, marginTop: "0.5rem", textTransform: "uppercase", letterSpacing: "0.12em" }}>
-        {label}
-      </div>
+    <div style={{ overflow: "hidden", whiteSpace: "nowrap" }}>
+      <motion.div style={{ x, display: "flex", gap: "1.5rem" }}>
+        {children}
+        {children}
+        {children}
+      </motion.div>
     </div>
   );
 }
 
-// ─── MAGNETIC BUTTON ────────────────────────────────────────────────────────
-function MagneticBtn({ children, onClick, style = {}, variant = "primary" }) {
+// ─── COUNTER ─────────────────────────────────────────────────────────────────
+function CountUp({ target, suffix = "", duration = 1600 }) {
   const ref = useRef(null);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-  const springX = useSpring(pos.x, { stiffness: 200, damping: 20 });
-  const springY = useSpring(pos.y, { stiffness: 200, damping: 20 });
+  const [val, setVal] = useState(0);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
 
-  const handleMouseMove = (e) => {
+  useEffect(() => {
+    if (!inView) return;
+    let startTime = null;
+    const step = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      setVal(Math.floor(easeOutQuart * target));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [inView, target, duration]);
+
+  return <span ref={ref}>{val}{suffix}</span>;
+}
+
+// ─── SMOOTH CURSOR ──────────────────────────────────────────────────────────
+function SmoothCursor() {
+  const dotRef = useRef(null);
+  const ringRef = useRef(null);
+  const pos = useRef({ x: -100, y: -100 });
+  const ringPos = useRef({ x: -100, y: -100 });
+  const raf = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 768px)").matches) return;
+    const onMove = (e) => {
+      pos.current = { x: e.clientX, y: e.clientY };
+      if (!visible) setVisible(true);
+    };
+    window.addEventListener("mousemove", onMove);
+    const animate = () => {
+      ringPos.current.x += (pos.current.x - ringPos.current.x) * 0.12;
+      ringPos.current.y += (pos.current.y - ringPos.current.y) * 0.12;
+      if (dotRef.current) dotRef.current.style.transform = `translate3d(${pos.current.x - 4}px, ${pos.current.y - 4}px, 0)`;
+      if (ringRef.current) ringRef.current.style.transform = `translate3d(${ringPos.current.x - 22}px, ${ringPos.current.y - 22}px, 0)`;
+      raf.current = requestAnimationFrame(animate);
+    };
+    raf.current = requestAnimationFrame(animate);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(raf.current);
+    };
+  }, [visible]);
+
+  if (!visible) return null;
+  return (
+    <>
+      <div ref={dotRef} style={{ position: "fixed", top: 0, left: 0, width: 8, height: 8, borderRadius: "50%", background: "#c084fc", pointerEvents: "none", zIndex: 9999, willChange: "transform", boxShadow: "0 0 8px #c084fc" }} />
+      <div ref={ringRef} style={{ position: "fixed", top: 0, left: 0, width: 44, height: 44, borderRadius: "50%", border: "1px solid rgba(192,132,252,0.4)", pointerEvents: "none", zIndex: 9998, willChange: "transform" }} />
+    </>
+  );
+}
+
+// ─── MAGNETIC BUTTON ────────────────────────────────────────────────────────
+function MagBtn({ children, onClick, variant = "primary", style = {} }) {
+  const ref = useRef(null);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const springX = useSpring(offset.x, { stiffness: 200, damping: 20 });
+  const springY = useSpring(offset.y, { stiffness: 200, damping: 20 });
+
+  const onMove = (e) => {
     const rect = ref.current.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    setPos({ x: (e.clientX - cx) * 0.35, y: (e.clientY - cy) * 0.35 });
+    setOffset({
+      x: (e.clientX - rect.left - rect.width / 2) * 0.25,
+      y: (e.clientY - rect.top - rect.height / 2) * 0.25,
+    });
   };
-  const handleMouseLeave = () => setPos({ x: 0, y: 0 });
 
-  const base = {
-    padding: "16px 36px",
-    borderRadius: "100px",
-    fontWeight: 700,
-    fontSize: "0.95rem",
-    cursor: "pointer",
-    border: "none",
-    letterSpacing: "0.02em",
+  const baseStyle = {
     display: "inline-flex",
     alignItems: "center",
-    gap: "8px",
-    transition: "background 0.2s",
-    ...(variant === "primary"
-      ? { background: "#a855f7", color: "#fff" }
-      : { background: "transparent", color: "#a1a1aa", border: "1px solid #27272a" }),
+    gap: "0.5rem",
+    padding: "12px 28px",
+    borderRadius: "9999px",
+    fontWeight: 700,
+    fontSize: "0.875rem",
+    letterSpacing: "0.04em",
+    cursor: "pointer",
+    border: "none",
+    fontFamily: "'DM Sans', sans-serif",
+    transition: "all 0.2s",
     ...style,
   };
+
+  const variantStyle = variant === "primary"
+    ? { background: "#c084fc", color: "#09090b" }
+    : { background: "transparent", color: "#71717a", border: "1px solid rgba(255,255,255,0.1)" };
 
   return (
     <motion.button
       ref={ref}
-      style={{ x: springX, y: springY, ...base }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      style={{ x: springX, y: springY, ...baseStyle, ...variantStyle }}
+      onMouseMove={onMove}
+      onMouseLeave={() => setOffset({ x: 0, y: 0 })}
+      whileTap={{ scale: 0.95 }}
       onClick={onClick}
-      whileTap={{ scale: 0.96 }}
     >
       {children}
     </motion.button>
   );
 }
 
-// ─── CURSOR ──────────────────────────────────────────────────────────────────
-function Cursor() {
-  const pos = useRef({ x: 0, y: 0 });
-  const dot = useRef(null);
-  const ring = useRef(null);
-  const rafRef = useRef(null);
-  const ringPos = useRef({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const move = (e) => { pos.current = { x: e.clientX, y: e.clientY }; };
-    window.addEventListener("mousemove", move);
-    const animate = () => {
-      if (dot.current) {
-        dot.current.style.transform = `translate(${pos.current.x - 4}px, ${pos.current.y - 4}px)`;
-      }
-      if (ring.current) {
-        ringPos.current.x += (pos.current.x - ringPos.current.x) * 0.12;
-        ringPos.current.y += (pos.current.y - ringPos.current.y) * 0.12;
-        ring.current.style.transform = `translate(${ringPos.current.x - 20}px, ${ringPos.current.y - 20}px)`;
-      }
-      rafRef.current = requestAnimationFrame(animate);
-    };
-    rafRef.current = requestAnimationFrame(animate);
-    return () => { window.removeEventListener("mousemove", move); cancelAnimationFrame(rafRef.current); };
-  }, []);
-
+// ─── SPLIT HEADING ──────────────────────────────────────────────────────────
+function SplitHeading({ text, highlight = [], style = {}, delayBase = 0 }) {
+  const words = text.split(" ");
   return (
-    <>
-      <div ref={dot} style={{ position: "fixed", top: 0, left: 0, width: 8, height: 8, background: "#a855f7", borderRadius: "50%", pointerEvents: "none", zIndex: 9999, willChange: "transform" }} />
-      <div ref={ring} style={{ position: "fixed", top: 0, left: 0, width: 40, height: 40, border: "1.5px solid rgba(168,85,247,0.5)", borderRadius: "50%", pointerEvents: "none", zIndex: 9998, willChange: "transform" }} />
-    </>
+    <h2 style={{ lineHeight: 1.1, fontFamily: "'Syne', sans-serif", ...style }}>
+      {words.map((word, idx) => (
+        <span key={idx} style={{ overflow: "hidden", display: "inline-block", marginRight: "0.3em" }}>
+          <motion.span
+            initial={{ y: "100%", opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: delayBase + idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              display: "inline-block",
+              fontFamily: "'Syne', sans-serif",
+              color: highlight.includes(word.replace(/[.,]/g, "")) ? "#c084fc" : "#fafafa",
+            }}
+          >
+            {word}
+          </motion.span>
+        </span>
+      ))}
+    </h2>
   );
 }
 
-// ─── NOISE OVERLAY ──────────────────────────────────────────────────────────
-function Noise() {
-  return (
-    <div style={{
-      position: "fixed", inset: 0, pointerEvents: "none", zIndex: 1,
-      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
-      opacity: 0.025,
-    }} />
-  );
-}
+// ─── SECTION PILL ───────────────────────────────────────────────────────────
+const Pill = ({ label }) => (
+  <motion.div
+    initial={{ opacity: 0, x: -20 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true }}
+    style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1.25rem" }}
+  >
+    <span style={{ width: 20, height: 1, background: "#c084fc" }} />
+    <span style={{ fontSize: "0.65rem", fontWeight: 800, color: "#c084fc", textTransform: "uppercase", letterSpacing: "0.2em", fontFamily: "'DM Sans', sans-serif" }}>{label}</span>
+  </motion.div>
+);
 
-// ─── GRID BG ─────────────────────────────────────────────────────────────────
-function GridBg() {
-  return (
-    <div style={{
-      position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0,
-      backgroundImage: "linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)",
-      backgroundSize: "60px 60px",
-    }} />
-  );
-}
-
-// ─── SECTION HEADER ──────────────────────────────────────────────────────────
-function SectionLabel({ label }) {
+// ─── TECH CHIP ──────────────────────────────────────────────────────────────
+function TechChip({ t }) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "1rem" }}
+      whileHover={{ y: -5, borderColor: "rgba(192,132,252,0.5)" }}
+      style={{
+        background: "rgba(255,255,255,0.025)",
+        border: "1px solid rgba(255,255,255,0.06)",
+        borderRadius: "1rem",
+        padding: "0.75rem 1.5rem",
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "0.625rem",
+        minWidth: "150px",
+        flexShrink: 0,
+        transition: "border-color 0.2s",
+      }}
     >
-      <div style={{ width: "24px", height: "1px", background: "#a855f7" }} />
-      <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#a855f7", textTransform: "uppercase", letterSpacing: "0.18em" }}>{label}</span>
+      <img src={t.icon} alt={t.name} style={{ width: 24, height: 24, objectFit: "contain", filter: t.invert ? "invert(1)" : "none" }} />
+      <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#71717a", textTransform: "uppercase", letterSpacing: "0.06em", whiteSpace: "nowrap", fontFamily: "'DM Sans', sans-serif" }}>{t.name}</span>
     </motion.div>
   );
 }
 
-// ─── MAIN APP ─────────────────────────────────────────────────────────────────
-export default function App() {
-  const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
+// ─── BACKGROUND ──────────────────────────────────────────────────────────────
+const Background = () => (
+  <>
+    <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: "linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)", backgroundSize: "64px 64px", pointerEvents: "none" }} />
+    <div style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none", opacity: 0.02, backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E")` }} />
+    <div style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none", background: "radial-gradient(circle at 50% 50%, rgba(192,132,252,0.03) 0%, transparent 70%)" }} />
+  </>
+);
+
+// ─── MAIN COMPONENT ─────────────────────────────────────────────────────────
+export default function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const [scrolled, setScrolled] = useState(false);
+  const { scrollYProgress, scrollY } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const heroY = useTransform(scrollY, [0, 500], [0, 120]);
+  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollTo = (id) => {
     setMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleSubmit = async () => {
-    if (!email.trim()) return;
-
-    try {
-      const response = await fetch(
-        "https://anujkattelcomnpbackend.onrender.com/subscribe",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-          }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        alert(data.message || "Something went wrong");
-        return;
-      }
-
-      setSent(true);
-
-      setEmail("");
-
-      setTimeout(() => {
-        setSent(false);
-      }, 4000);
-
-    } catch (error) {
-      console.log(error);
-
-      alert("Server Error");
-    }
-  };
-
-  const navLinks = ["Work", "Services", "Stack", "Contact"];
-
   return (
-    <div style={{ background: "#050507", color: "#fafafa", fontFamily: "'Syne', 'Plus Jakarta Sans', sans-serif", overflowX: "hidden", position: "relative" }}>
+    <div style={{ background: "#06060a", color: "#fafafa", fontFamily: "'DM Sans', sans-serif", overflowX: "hidden", minHeight: "100vh" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body { cursor: none !important; }
-        a, button { cursor: none !important; }
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #050507; }
-        ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 2px; }
-        ::selection { background: rgba(168,85,247,0.3); color: #fff; }
-        input:focus { outline: none; }
+        body { font-family: 'DM Sans', sans-serif; }
+        @media (min-width: 769px) { body, a, button { cursor: none !important; } }
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-thumb { background: #c084fc; }
+        ::selection { background: rgba(192,132,252,0.25); }
+        @media (max-width: 768px) {
+          .hero-title { font-size: clamp(2.8rem, 12vw, 5rem) !important; }
+          .nav-desktop { display: none !important; }
+          .hamburger { display: flex !important; }
+          .contact-grid-mobile { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+          .service-row-mobile { flex-direction: column !important; gap: 1rem !important; }
+          .hero-buttons-mobile { flex-direction: column !important; align-items: stretch !important; }
+        }
+        @media (min-width: 769px) {
+          .hamburger { display: none !important; }
+        }
+        @keyframes glow-pulse {
+          0%, 100% { opacity: 0.4; transform: scale(1); }
+          50% { opacity: 0.8; transform: scale(1.05); }
+        }
       `}</style>
 
-      <Cursor />
-      <Noise />
-      <GridBg />
+      <SmoothCursor />
+      <Background />
 
-      {/* ── PROGRESS BAR ── */}
-      <motion.div style={{ scaleX, position: "fixed", top: 0, left: 0, right: 0, height: "2px", background: "linear-gradient(90deg, #a855f7, #ec4899)", transformOrigin: "left", zIndex: 1000 }} />
+      {/* Progress Bar */}
+      <motion.div style={{ scaleX, position: "fixed", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg, #c084fc, #ec4899, #f97316)", transformOrigin: "0%", zIndex: 1000 }} />
 
-      {/* ── NAV ── */}
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: easeOutExpo }}
-        style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 500, padding: "1.5rem 8%", display: "flex", justifyContent: "space-between", alignItems: "center", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.04)", background: "rgba(5,5,7,0.7)" }}
+      {/* Header */}
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        style={{
+          position: "fixed", top: 0, left: 0, right: 0, zIndex: 500,
+          padding: "1rem 6%", display: "flex", justifyContent: "space-between", alignItems: "center",
+          background: scrolled ? "rgba(6,6,10,0.85)" : "transparent",
+          backdropFilter: scrolled ? "blur(24px)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.05)" : "none",
+          transition: "all 0.4s",
+        }}
       >
-        <motion.div style={{ fontWeight: 800, fontSize: "1.1rem", letterSpacing: "-0.02em", color: "#fff" }}>
-          AK<span style={{ color: "#a855f7" }}>.</span>
-        </motion.div>
-
-        <div style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}>
-          {navLinks.map((l) => (
-            <button key={l} onClick={() => scrollTo(l.toLowerCase())} style={{ background: "none", border: "none", color: "#71717a", fontWeight: 600, fontSize: "0.85rem", letterSpacing: "0.05em", textTransform: "uppercase", transition: "color 0.2s", fontFamily: "inherit" }}
-              onMouseEnter={e => e.target.style.color = "#fff"}
-              onMouseLeave={e => e.target.style.color = "#71717a"}
-            >{l}</button>
-          ))}
-          <MagneticBtn onClick={() => scrollTo("contact")} style={{ padding: "12px 24px", fontSize: "0.8rem" }}>
-            Hire Me ↗
-          </MagneticBtn>
+        <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: "1.25rem", letterSpacing: "-0.02em" }}>
+          AK<span style={{ color: "#c084fc" }}>.</span>
         </div>
-      </motion.nav>
 
-      {/* ══════════════ HERO ══════════════ */}
-      <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 8%", paddingTop: "100px", position: "relative", zIndex: 2 }}>
+        <nav className="nav-desktop" style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+          {["Work", "Services", "Stack", "Contact"].map((l) => (
+            <button key={l} onClick={() => scrollTo(l.toLowerCase())} style={{ background: "none", border: "none", color: "#52525b", fontWeight: 700, fontSize: "0.75rem", letterSpacing: "0.07em", textTransform: "uppercase", cursor: "pointer", transition: "color 0.2s", fontFamily: "'DM Sans', sans-serif" }} onMouseEnter={e => e.currentTarget.style.color = "#fafafa"} onMouseLeave={e => e.currentTarget.style.color = "#52525b"}>
+              {l}
+            </button>
+          ))}
+          <MagBtn onClick={() => scrollTo("contact")} style={{ padding: "8px 20px", fontSize: "0.7rem" }}>Hire Me ↗</MagBtn>
+        </nav>
 
-        {/* Glow orb */}
-        <div style={{ position: "absolute", top: "20%", right: "10%", width: "500px", height: "500px", background: "radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
-        <div style={{ position: "absolute", bottom: "10%", left: "5%", width: "350px", height: "350px", background: "radial-gradient(circle, rgba(236,72,153,0.07) 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
+        <button className="hamburger" onClick={() => setMenuOpen(true)} style={{ background: "none", border: "none", display: "flex", flexDirection: "column", gap: "5px", cursor: "pointer" }}>
+          <span style={{ width: 24, height: 2, background: "#fafafa", borderRadius: 2 }} />
+          <span style={{ width: 16, height: 2, background: "#c084fc", borderRadius: 2 }} />
+          <span style={{ width: 20, height: 2, background: "#fafafa", borderRadius: 2 }} />
+        </button>
+      </motion.header>
 
-        <div style={{ position: "relative", zIndex: 1, maxWidth: "1100px" }}>
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: easeOutExpo }}
-            style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "rgba(168,85,247,0.08)", border: "1px solid rgba(168,85,247,0.2)", padding: "8px 18px", borderRadius: "100px", marginBottom: "2.5rem" }}
+            exit={{ opacity: 0, y: -20 }}
+            style={{ position: "fixed", inset: 0, background: "#06060a", zIndex: 400, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "2rem" }}
           >
-            <motion.span animate={{ scale: [1, 1.3, 1] }} transition={{ repeat: Infinity, duration: 1.5 }} style={{ width: "7px", height: "7px", background: "#22c55e", borderRadius: "50%", display: "inline-block" }} />
-            <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#c084fc", letterSpacing: "0.08em", textTransform: "uppercase" }}>Available — Accepting New Projects</span>
+            <button onClick={() => setMenuOpen(false)} style={{ position: "absolute", top: "1.5rem", right: "6%", background: "none", border: "none", color: "#71717a", fontSize: "1.5rem", cursor: "pointer", fontFamily: "'DM Sans', sans-serif" }}>✕</button>
+            {["Work", "Services", "Stack", "Contact"].map((l, i) => (
+              <motion.button key={l} initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.07 }} onClick={() => scrollTo(l.toLowerCase())} style={{ background: "none", border: "none", color: "#fafafa", fontFamily: "'Syne', sans-serif", fontSize: "2rem", fontWeight: 800, cursor: "pointer" }}>
+                {l}
+              </motion.button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Hero Section */}
+      <section style={{ minHeight: "100svh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 6%", paddingTop: 90, position: "relative", zIndex: 2, overflow: "hidden" }}>
+        <motion.div style={{ y: heroY, opacity: heroOpacity, position: "relative", zIndex: 1, maxWidth: 1000 }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "rgba(192,132,252,0.07)", border: "1px solid rgba(192,132,252,0.2)", padding: "6px 16px", borderRadius: 100, marginBottom: "2rem" }}>
+            <motion.span animate={{ scale: [1, 1.4, 1] }} transition={{ repeat: Infinity, duration: 2 }} style={{ width: 7, height: 7, background: "#4ade80", borderRadius: "50%", display: "inline-block", boxShadow: "0 0 8px #4ade80" }} />
+            <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#c084fc", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'DM Sans', sans-serif" }}>Open for Projects</span>
           </motion.div>
 
-          <br></br>
-          {"Hi, I'm Anuj Kattel.".split(" ").map((word, wi) => (
-            <div key={wi} style={{ overflow: "hidden", display: "inline-block", marginRight: "0.35em" }}>
-              <motion.span
-                initial={{ y: "110%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.9, delay: 0.3 + wi * 0.08, ease: easeOutExpo }}
-                style={{ display: "inline-block", fontSize: "clamp(3rem, 7.5vw, 7rem)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1, color: word === "Anuj" || word === "Kattel." ? "#a855f7" : "#fff" }}
-              >
-                {word}
-              </motion.span>
-            </div>
-          ))}
-
-          <div style={{ overflow: "hidden", marginTop: "1rem" }}>
-            <motion.p
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8, ease: easeOutExpo }}
-              style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)", fontWeight: 700, color: "#52525b", letterSpacing: "-0.02em", lineHeight: 1.2 }}
-            >
-              I craft high-performance web & mobile experiences.
-            </motion.p>
+          <div className="hero-title" style={{ fontSize: "clamp(3rem, 8vw, 6rem)", fontWeight: 800, fontFamily: "'Syne', sans-serif", letterSpacing: "-0.04em", lineHeight: 0.95, marginBottom: "1.25rem" }}>
+            {"Hi, I'm".split(" ").map((w, i) => (
+              <span key={i} style={{ overflow: "hidden", display: "inline-block", marginRight: "0.3em" }}>
+                <motion.span initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 0.8, delay: 0.2 + i * 0.08 }} style={{ display: "inline-block", color: "#fafafa", fontFamily: "'Syne', sans-serif" }}>{w}</motion.span>
+              </span>
+            ))}
+            <br />
+            {"Anuj Kattel.".split(" ").map((w, i) => (
+              <span key={i} style={{ overflow: "hidden", display: "inline-block", marginRight: "0.3em" }}>
+                <motion.span initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 0.8, delay: 0.4 + i * 0.08 }} style={{ display: "inline-block", color: "#c084fc", fontFamily: "'Syne', sans-serif" }}>{w}</motion.span>
+              </span>
+            ))}
           </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.0 }}
-            style={{ fontSize: "1.05rem", marginTop: "1.8rem", color: "#71717a", maxWidth: "520px", lineHeight: 1.7, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400 }}
-          >
-            Clean architecture. Blazing speed. Products designed to convert visitors into loyal customers—delivered on time, every time.
+          <motion.p initial={{ y: "100%", opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.75 }} style={{ fontSize: "clamp(1.2rem, 2.5vw, 1.8rem)", fontWeight: 700, color: "#3f3f46", fontFamily: "'Syne', sans-serif", marginBottom: "1rem" }}>
+            Full-Stack Developer & App Developer
+          </motion.p>
+          <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.95 }} style={{ fontSize: "1rem", color: "#71717a", maxWidth: 500, lineHeight: 1.6, marginBottom: "2rem", fontFamily: "'DM Sans', sans-serif" }}>
+            Clean architecture. Blazing speed. Products designed to convert visitors into loyal customers — delivered on time, every time.
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.2 }}
-            style={{ display: "flex", gap: "1rem", marginTop: "3rem", alignItems: "center", flexWrap: "wrap" }}
-          >
-            <MagneticBtn onClick={() => scrollTo("work")}>
-              View Work →
-            </MagneticBtn>
-            <MagneticBtn onClick={() => scrollTo("contact")} variant="ghost">
-              Let's Talk
-            </MagneticBtn>
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.1 }} className="hero-buttons-mobile" style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            <MagBtn onClick={() => scrollTo("work")}>View Work →</MagBtn>
+            <MagBtn onClick={() => scrollTo("contact")} variant="ghost">Let's Talk</MagBtn>
           </motion.div>
-        </div>
+        </motion.div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-          style={{ position: "absolute", bottom: "3rem", left: "8%", display: "flex", alignItems: "center", gap: "12px", color: "#3f3f46", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600 }}
-        >
-          <motion.div animate={{ y: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }} style={{ width: "1px", height: "40px", background: "linear-gradient(to bottom, #a855f7, transparent)" }} />
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} style={{ position: "absolute", bottom: "2rem", left: "6%", display: "flex", alignItems: "center", gap: 8, color: "#3f3f46", fontSize: "0.65rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em", fontFamily: "'DM Sans', sans-serif" }}>
+          <motion.div animate={{ y: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 1.6 }} style={{ width: 1, height: 30, background: "linear-gradient(to bottom, #c084fc, transparent)" }} />
           Scroll
         </motion.div>
       </section>
 
-      {/* ──════════════ STATS BAND ══════════════ */}
-      <section style={{ padding: "5rem 8%", borderTop: "1px solid rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.04)", position: "relative", zIndex: 2 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: "2rem", maxWidth: "900px", margin: "0 auto" }}>
-          <StatCard value={20} suffix="+" label="Projects Shipped" />
-          <StatCard value={15} suffix="+" label="Happy Clients" />
-          <StatCard value={3} suffix="+" label="Years Experience" />
-          <StatCard value={99} suffix="%" label="Satisfaction Rate" />
+      {/* Velocity Ticker */}
+      <div style={{ borderTop: "1px solid rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.04)", padding: "1rem 0", overflow: "hidden", position: "relative", zIndex: 2 }}>
+        <VelocityTicker baseVelocity={-2.2}>
+          {["Full-Stack", "React", "Node.js", "Mobile", "TypeScript", "PostgreSQL", "Docker", "FastAPI", "Next.js", "Tailwind"].map((t, i) => (
+            <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "1rem", marginRight: "1rem" }}>
+              <span style={{ fontSize: "0.7rem", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.14em", color: i % 2 === 0 ? "#c084fc" : "#3f3f46", whiteSpace: "nowrap", fontFamily: "'DM Sans', sans-serif" }}>{t}</span>
+              <span style={{ width: 3, height: 3, borderRadius: "50%", background: "#27272a" }} />
+            </span>
+          ))}
+        </VelocityTicker>
+      </div>
+
+      {/* Stats with left-right animation */}
+      <section style={{ padding: "5rem 6%", position: "relative", zIndex: 2 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "1.5rem", maxWidth: 900, margin: "0 auto" }}>
+          {[
+            { v: 20, s: "+", l: "Projects Shipped" },
+            { v: 15, s: "+", l: "Happy Clients" },
+            { v: 3, s: "+", l: "Years Experience" },
+            { v: 99, s: "%", l: "Satisfaction Rate" },
+          ].map((stat, idx) => (
+            <motion.div
+              key={stat.l}
+              initial={{ opacity: 0, x: idx % 2 === 0 ? -40 : 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              style={{ textAlign: "center", padding: "2rem 1rem", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)", borderRadius: 24 }}
+            >
+              <div style={{ fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 800, fontFamily: "'Syne', sans-serif", color: "#fafafa" }}>
+                <CountUp target={stat.v} suffix={stat.s} />
+              </div>
+              <div style={{ fontSize: "0.7rem", color: "#52525b", fontWeight: 600, marginTop: "0.5rem", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'DM Sans', sans-serif" }}>{stat.l}</div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      {/* ──════════════ INFINITE TECH STACK SCROLLER ══════════════ */}
-      <section id="stack" style={{ padding: "6rem 0 4rem 0", position: "relative", zIndex: 2, overflow: "hidden" }}>
-        <div style={{ padding: "0 8%" }}>
-          <SectionLabel label="Arsenal" />
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: easeOutExpo }}
-            style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "3.5rem", color: "#fff" }}
-          >
-            Tools I Build With
-          </motion.h2>
+      {/* Tech Stack */}
+      <section id="stack" style={{ padding: "5rem 0", overflow: "hidden", position: "relative", zIndex: 2 }}>
+        <div style={{ padding: "0 6%", marginBottom: "2rem" }}>
+          <Pill label="Development tools" />
+          <SplitHeading text="Tools I Build With" highlight={["Build"]} style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)", fontFamily: "'Syne', sans-serif", fontWeight: 800, letterSpacing: "-0.03em" }} />
         </div>
 
-        {/* Infinite Moving Loop Area */}
-        <div style={{ display: "flex", position: "relative", width: "100%", padding: "1rem 0" }}>
-          {/* Gradient masking covers for side blending */}
-          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "120px", background: "linear-gradient(90deg, #050507 20%, transparent)", zIndex: 3, pointerEvents: "none" }} />
-          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "120px", background: "linear-gradient(-90deg, #050507 20%, transparent)", zIndex: 3, pointerEvents: "none" }} />
-
-          <motion.div
-            animate={{ x: [0, "-50%"] }}
-            transition={{ ease: "linear", duration: 28, repeat: Infinity }}
-            style={{ display: "flex", gap: "1.5rem", whiteSpace: "nowrap", paddingRight: "1.5rem", willChange: "transform" }}
-          >
-            {/* Double elements loop execution layout */}
-            {[...techStack, ...techStack].map((tech, i) => (
-              <div
-                key={i}
-                style={{
-                  background: "rgba(255,255,255,0.02)",
-                  border: "1px solid rgba(255,255,255,0.05)",
-                  borderRadius: "16px",
-                  padding: "1rem 2rem",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                  minWidth: "180px"
-                }}
-              >
-                <img src={tech.icon} alt={tech.name} style={{ width: "28px", height: "28px", objectFit: "contain", filter: tech.name === "Express" ? "invert(1)" : "none" }} />
-                <span style={{ fontSize: "0.8rem", fontWeight: 700, color: "#a1a1aa", textTransform: "uppercase", letterSpacing: "0.06em" }}>{tech.name}</span>
-              </div>
-            ))}
+        <div style={{ marginBottom: "1rem", position: "relative" }}>
+          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 80, background: "linear-gradient(90deg, #06060a, transparent)", zIndex: 3, pointerEvents: "none" }} />
+          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: 80, background: "linear-gradient(-90deg, #06060a, transparent)", zIndex: 3, pointerEvents: "none" }} />
+          <motion.div animate={{ x: [0, "-50%"] }} transition={{ ease: "linear", duration: 30, repeat: Infinity }} style={{ display: "flex", gap: "1rem", width: "max-content" }}>
+            {[...techStack, ...techStack].map((t, i) => <TechChip key={i} t={t} />)}
+          </motion.div>
+        </div>
+        <div style={{ position: "relative" }}>
+          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 80, background: "linear-gradient(90deg, #06060a, transparent)", zIndex: 3, pointerEvents: "none" }} />
+          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: 80, background: "linear-gradient(-90deg, #06060a, transparent)", zIndex: 3, pointerEvents: "none" }} />
+          <motion.div animate={{ x: ["-50%", 0] }} transition={{ ease: "linear", duration: 32, repeat: Infinity }} style={{ display: "flex", gap: "1rem", width: "max-content" }}>
+            {[...[...techStack].reverse(), ...[...techStack].reverse()].map((t, i) => <TechChip key={i} t={t} />)}
           </motion.div>
         </div>
       </section>
 
-      {/* ══════════════ SERVICES ══════════════ */}
-      <section id="services" style={{ padding: "7rem 8%", background: "rgba(255,255,255,0.01)", borderTop: "1px solid rgba(255,255,255,0.04)", position: "relative", zIndex: 2 }}>
-        <SectionLabel label="What I Do" />
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: easeOutExpo }}
-          style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "4rem", color: "#fff" }}
-        >
-          Core Capabilities
-        </motion.h2>
+      {/* Services with left-right on scroll */}
+      <section id="services" style={{ padding: "6rem 6%", borderTop: "1px solid rgba(255,255,255,0.04)", position: "relative", zIndex: 2 }}>
+        <Pill label="What I Do" />
+        <SplitHeading text="Core Capabilities" highlight={["Capabilities"]} style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)", fontFamily: "'Syne', sans-serif", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "3rem" }} />
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-          {services.map((s, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1, ease: easeOutExpo }}
-              whileHover={{ x: 8 }}
-              style={{
-                display: "flex",
-                gap: "3rem",
-                alignItems: "flex-start",
-                padding: "2.5rem 0",
-                borderBottom: "1px solid rgba(255,255,255,0.05)",
-                transition: "border-color 0.2s",
-                cursor: "default",
-              }}
-            >
-              <span style={{ fontSize: "0.75rem", fontWeight: 800, color: "#3f3f46", minWidth: "30px", paddingTop: "6px", fontFamily: "monospace" }}>{s.num}</span>
-              <div style={{ flex: 1 }}>
-                <h3 style={{ fontSize: "1.8rem", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "0.75rem", color: "#fff" }}>{s.title}</h3>
-                <p style={{ color: "#71717a", lineHeight: 1.7, fontSize: "1rem", maxWidth: "560px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{s.desc}</p>
-                <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginTop: "1.2rem" }}>
-                  {s.tags.map(t => (
-                    <span key={t} style={{ padding: "4px 14px", borderRadius: "100px", border: "1px solid rgba(168,85,247,0.3)", fontSize: "0.72rem", fontWeight: 700, color: "#c084fc", letterSpacing: "0.05em" }}>{t}</span>
-                  ))}
-                </div>
+        {services.map((s, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.55, delay: i * 0.1 }}
+            whileHover={{ x: 6 }}
+            className="service-row-mobile"
+            style={{ display: "flex", gap: "2rem", alignItems: "flex-start", padding: "2rem 0", borderBottom: "1px solid rgba(255,255,255,0.05)", cursor: "default" }}
+          >
+            <span style={{ fontSize: "0.7rem", fontWeight: 800, color: "#3f3f46", minWidth: 32, fontFamily: "'DM Sans', sans-serif" }}>{s.num}</span>
+            <span style={{ fontSize: "2rem", color: "#c084fc" }}>{s.icon}</span>
+            <div style={{ flex: 1 }}>
+              <h3 style={{ fontSize: "clamp(1.3rem, 2.5vw, 1.6rem)", fontWeight: 800, fontFamily: "'Syne', sans-serif", marginBottom: "0.5rem", color: "#fafafa" }}>{s.title}</h3>
+              <p style={{ color: "#71717a", lineHeight: 1.6, fontSize: "0.9rem", maxWidth: 540, fontFamily: "'DM Sans', sans-serif" }}>{s.desc}</p>
+              <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginTop: "1rem" }}>
+                {s.tags.map(t => <span key={t} style={{ padding: "4px 12px", borderRadius: 100, border: "1px solid rgba(192,132,252,0.25)", fontSize: "0.65rem", fontWeight: 700, color: "#c084fc", fontFamily: "'DM Sans', sans-serif" }}>{t}</span>)}
               </div>
-              <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                whileHover={{ opacity: 1, x: 0 }}
-                style={{ fontSize: "2rem", color: "#a855f7", alignSelf: "center" }}
-              >→</motion.div>
+            </div>
+            <motion.span initial={{ opacity: 0 }} whileHover={{ opacity: 1, x: 4 }} style={{ fontSize: "1.5rem", color: "#c084fc", transition: "all 0.2s", fontFamily: "'DM Sans', sans-serif" }}>→</motion.span>
+          </motion.div>
+        ))}
+      </section>
+
+      {/* Projects with alternating left-right */}
+      <section id="work" style={{ padding: "6rem 6%", position: "relative", zIndex: 2 }}>
+        <Pill label="Recent Work" />
+        <SplitHeading text="Recent Deployments" highlight={["Deployments"]} style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)", fontFamily: "'Syne', sans-serif", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "3rem" }} />
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+          {projects.map((p, idx) => (
+            <motion.div
+              key={p.index}
+              initial={{ opacity: 0, x: idx % 2 === 0 ? -60 : 60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              whileHover={{ y: -4 }}
+              style={{ background: `${p.accent}10`, border: `1px solid ${p.accent}30`, borderRadius: 24, padding: "clamp(1.5rem, 4vw, 2rem)", position: "relative", overflow: "hidden" }}
+            >
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${p.accent}80, transparent)` }} />
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "1.5rem", flexWrap: "wrap" }}>
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.75rem" }}>
+                    <span style={{ fontSize: "0.6rem", fontWeight: 800, color: "#3f3f46", fontFamily: "'DM Sans', sans-serif" }}>{p.index}</span>
+                    <span style={{ fontSize: "0.6rem", color: "#3f3f46", padding: "2px 8px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.07)", fontFamily: "'DM Sans', sans-serif" }}>{p.year}</span>
+                  </div>
+                  <h3 style={{ fontSize: "clamp(1.2rem, 2.5vw, 1.5rem)", fontWeight: 800, fontFamily: "'Syne', sans-serif", marginBottom: "0.5rem", color: "#fafafa" }}>{p.title}</h3>
+                  <p style={{ color: "#71717a", fontSize: "0.85rem", lineHeight: 1.6, maxWidth: 560, fontFamily: "'DM Sans', sans-serif" }}>{p.desc}</p>
+                  <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginTop: "1rem" }}>
+                    {p.tech.map(t => <span key={t} style={{ padding: "3px 10px", borderRadius: 6, background: `${p.accent}20`, fontSize: "0.65rem", fontWeight: 700, color: p.accent, fontFamily: "'DM Sans', sans-serif" }}>{t}</span>)}
+                  </div>
+                </div>
+                <motion.div whileHover={{ scale: 1.1, rotate: 5 }} style={{ width: 44, height: 44, borderRadius: 12, background: `${p.accent}20`, border: `1px solid ${p.accent}40`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.1rem", flexShrink: 0, fontFamily: "'DM Sans', sans-serif" }}>↗</motion.div>
+              </div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* ══════════════ PROJECTS ══════════════ */}
-      <section id="work" style={{ padding: "7rem 8%", position: "relative", zIndex: 2 }}>
-        <SectionLabel label="Selected Work" />
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: easeOutExpo }}
-          style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "4rem", color: "#fff" }}
-        >
-          Recent Deployments
-        </motion.h2>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-          {projects.map((p, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: i * 0.1, ease: easeOutExpo }}
-              whileHover={{ scale: 1.01 }}
-              style={{
-                background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.06)",
-                borderRadius: "24px",
-                padding: "2.5rem",
-                display: "grid",
-                gridTemplateColumns: "auto 1fr auto",
-                gap: "2rem",
-                alignItems: "center",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
-              {/* Accent glow */}
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: `linear-gradient(90deg, transparent, ${p.accent}60, transparent)` }} />
-
-              <div style={{ textAlign: "right" }}>
-                <span style={{ fontSize: "0.7rem", fontWeight: 800, color: "#3f3f46", fontFamily: "monospace" }}>{p.index}</span>
-                <div style={{ fontSize: "0.7rem", color: "#3f3f46", marginTop: "2px" }}>{p.year}</div>
-              </div>
-
-              <div>
-                <h3 style={{ fontSize: "1.5rem", fontWeight: 800, letterSpacing: "-0.02em", color: "#fff", marginBottom: "0.6rem" }}>{p.title}</h3>
-                <p style={{ color: "#71717a", fontSize: "0.95rem", lineHeight: 1.7, maxWidth: "600px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{p.desc}</p>
-                <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginTop: "1rem" }}>
-                  {p.tech.map(t => (
-                    <span key={t} style={{ padding: "3px 12px", borderRadius: "6px", background: `${p.accent}15`, fontSize: "0.7rem", fontWeight: 700, color: p.accent, letterSpacing: "0.05em" }}>{t}</span>
-                  ))}
-                </div>
-              </div>
-
-              <motion.button
-                whileHover={{ scale: 1.1, rotate: 45 }}
-                style={{ width: "52px", height: "52px", borderRadius: "50%", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "#fff", fontSize: "1.1rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
-              >→</motion.button>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* ══════════════ CTA / ORDER ══════════════ */}
-      <section style={{ padding: "7rem 8%", background: "rgba(168,85,247,0.03)", borderTop: "1px solid rgba(168,85,247,0.1)", borderBottom: "1px solid rgba(168,85,247,0.1)", position: "relative", zIndex: 2, textAlign: "center" }}>
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "600px", height: "400px", background: "radial-gradient(ellipse, rgba(168,85,247,0.1) 0%, transparent 70%)", pointerEvents: "none" }} />
-        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: easeOutExpo }} style={{ position: "relative", zIndex: 1 }}>
-          <span style={{ fontSize: "0.7rem", fontWeight: 800, color: "#a855f7", letterSpacing: "0.18em", textTransform: "uppercase" }}>Turn-Key Solution</span>
-          <h2 style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)", fontWeight: 800, letterSpacing: "-0.04em", margin: "1rem 0", lineHeight: 1.05, color: "#fff" }}>
-            Get a Production-Ready<br /><span style={{ color: "#a855f7" }}>Website</span> in Days.
-          </h2>
-          <p style={{ color: "#71717a", fontSize: "1.05rem", maxWidth: "500px", margin: "0 auto 2.5rem", lineHeight: 1.7, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-            Fully responsive, SEO-optimized, blazing fast. Everything you need to launch your business online—without the wait.
-          </p>
-          <div style={{ display: "flex", gap: "1.5rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "2.5rem" }}>
-            {["Responsive Design", "SEO Optimized", "Secure Codebase", "Lifetime Support"].map((f) => (
-              <div key={f} style={{ display: "flex", alignItems: "center", gap: "8px", color: "#a1a1aa", fontSize: "0.85rem", fontWeight: 600 }}>
-                <span style={{ color: "#a855f7", fontSize: "1rem" }}>✓</span> {f}
-              </div>
-            ))}
-          </div>
-          <MagneticBtn onClick={() => window.open("mailto:anujkattel6@gmail.com")} style={{ fontSize: "1rem", padding: "18px 40px" }}>
-            Order Now ↗
-          </MagneticBtn>
+      {/* CTA Section */}
+      <section style={{ padding: "6rem 6%", borderTop: "1px solid rgba(192,132,252,0.1)", borderBottom: "1px solid rgba(192,132,252,0.1)", background: "rgba(192,132,252,0.025)", textAlign: "center", position: "relative", zIndex: 2 }}>
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <span style={{ fontSize: "0.65rem", fontWeight: 800, color: "#c084fc", letterSpacing: "0.2em", textTransform: "uppercase", fontFamily: "'DM Sans', sans-serif" }}>Turn-Key Solution</span>
+          <SplitHeading text="Get a Production-Ready Website in Days." highlight={["Website"]} delayBase={0.1} style={{ fontSize: "clamp(2rem, 5vw, 4rem)", fontFamily: "'Syne', sans-serif", fontWeight: 800, letterSpacing: "-0.04em", margin: "1rem auto", maxWidth: 700 }} />
+          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} style={{ color: "#71717a", maxWidth: 460, margin: "0 auto 2rem", fontFamily: "'DM Sans', sans-serif" }}>Fully responsive, SEO-optimized, blazing fast. Everything you need to launch your business online.</motion.p>
+          <MagBtn onClick={() => window.open("mailto:anujkattel6@gmail.com")} style={{ padding: "14px 36px", fontSize: "0.9rem" }}>Order Now ↗</MagBtn>
         </motion.div>
       </section>
 
-      {/* ══════════════ CONTACT ══════════════ */}
-      <section id="contact" style={{ padding: "7rem 8%", position: "relative", zIndex: 2 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6rem", alignItems: "center", maxWidth: "1100px" }}>
+      {/* Contact Section */}
+      <section id="contact" style={{ padding: "6rem 6%", position: "relative", zIndex: 2 }}>
+        <div className="contact-grid-mobile" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "4rem", alignItems: "start", maxWidth: 1050, margin: "0 auto" }}>
           <div>
-            <SectionLabel label="Get In Touch" />
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: easeOutExpo }}
-              style={{ fontSize: "clamp(2.5rem, 4vw, 4rem)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.05, color: "#fff" }}
-            >
-              Let's Build<br />Something<br /><span style={{ color: "#a855f7" }}>Great.</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              style={{ color: "#71717a", fontSize: "1rem", marginTop: "1.5rem", lineHeight: 1.7, maxWidth: "380px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-            >
-              Drop your email and I'll reach out within 12 hours to review your project and get things moving.
-            </motion.p>
+            <Pill label="Get In Touch" />
+            <SplitHeading text="Let's Build Something Great." highlight={["Great."]} style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", fontFamily: "'Syne', sans-serif", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.05, marginBottom: "1rem" }} />
+            <p style={{ color: "#71717a", fontSize: "0.9rem", lineHeight: 1.6, maxWidth: 380, marginBottom: "2rem", fontFamily: "'DM Sans', sans-serif" }}>Have a project in mind? Reach out and let's create something exceptional together.</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+              {socialLinks.map((s, i) => (
+                <motion.a key={s.platform} href={s.url} target="_blank" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.35 + i * 0.07 }} whileHover={{ x: 4 }} style={{ display: "flex", alignItems: "center", gap: "0.75rem", textDecoration: "none", padding: "8px 0" }}>
+                  <div style={{ width: 34, height: 34, borderRadius: 10, background: `${s.color}14`, border: `1px solid ${s.color}25`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.6rem", fontWeight: 800, color: s.color, fontFamily: "'DM Sans', sans-serif" }}>{s.icon}</div>
+                  <div>
+                    <div style={{ fontSize: "0.8rem", fontWeight: 700, color: "#d4d4d8", fontFamily: "'DM Sans', sans-serif" }}>{s.platform}</div>
+                    <div style={{ fontSize: "0.7rem", color: "#52525b", fontFamily: "'DM Sans', sans-serif" }}>{s.user}</div>
+                  </div>
+                  <span style={{ marginLeft: "auto", color: s.color, opacity: 0.5, fontFamily: "'DM Sans', sans-serif" }}>↗</span>
+                </motion.a>
+              ))}
+            </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: easeOutExpo }}
-          >
-            <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: "24px", padding: "3rem" }}>
-              <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 700, color: "#52525b", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.75rem" }}>Your Email</label>
-              <div style={{ position: "relative", marginBottom: "1.5rem" }}>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  onKeyDown={e => e.key === "Enter" && handleSubmit()}
-                  placeholder="you@company.com"
-                  style={{ width: "100%", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "12px", padding: "18px 20px", color: "#fff", fontSize: "1rem", fontFamily: "inherit", transition: "border-color 0.2s" }}
-                  onFocus={e => e.target.style.borderColor = "rgba(168,85,247,0.5)"}
-                  onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
-                />
+          <motion.div initial={{ opacity: 0, y: 50, scale: 0.96 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true }} style={{ background: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 28, padding: "clamp(1.5rem, 5vw, 2.5rem)" }}>
+            {[
+              { icon: "📧", label: "Email", value: "anujkattel6@gmail.com", href: "mailto:anujkattel6@gmail.com" },
+              { icon: "📱", label: "WhatsApp / Call", value: "+91 95935 30260", href: "https://wa.me/919593530260" },
+              { icon: "🇳🇵", label: "Nepal Line", value: "+977 9825995421", href: "tel:+9779825995421" },
+              { icon: "🌐", label: "Based In", value: "Remote — Available Worldwide", href: null },
+            ].map((item, i) => (
+              <div key={i} style={{ padding: i > 0 ? "1.2rem 0 0 0" : "0 0 1.2rem 0", borderBottom: i < 3 ? "1px solid rgba(255,255,255,0.05)" : "none" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <span style={{ fontSize: "1.2rem" }}>{item.icon}</span>
+                  <div>
+                    <div style={{ fontSize: "0.65rem", fontWeight: 700, color: "#52525b", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'DM Sans', sans-serif" }}>{item.label}</div>
+                    {item.href ? <a href={item.href} style={{ color: "#c084fc", fontSize: "0.85rem", textDecoration: "none", fontFamily: "'DM Sans', sans-serif" }}>{item.value}</a> : <span style={{ color: "#a1a1aa", fontSize: "0.85rem", fontFamily: "'DM Sans', sans-serif" }}>{item.value}</span>}
+                  </div>
+                </div>
               </div>
-
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={handleSubmit}
-                style={{ width: "100%", padding: "18px", borderRadius: "12px", border: "none", background: "linear-gradient(135deg, #a855f7, #ec4899)", color: "#fff", fontWeight: 800, fontSize: "1rem", cursor: "pointer", letterSpacing: "0.02em", fontFamily: "inherit" }}
-              >
-                Send Message →
-              </motion.button>
-
-              <AnimatePresence>
-                {sent && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    style={{ marginTop: "1rem", textAlign: "center", color: "#22c55e", fontWeight: 600, fontSize: "0.9rem" }}
-                  >
-                    ✓ Message received. I'll be in touch soon!
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              <div style={{ marginTop: "2rem", paddingTop: "2rem", borderTop: "1px solid rgba(255,255,255,0.05)", display: "flex", justifyContent: "space-between" }}>
-                {["GitHub", "LinkedIn", "Twitter"].map(l => (
-                  <button key={l} style={{ background: "none", border: "none", color: "#52525b", fontWeight: 600, fontSize: "0.85rem", fontFamily: "inherit", transition: "color 0.2s" }}
-                    onMouseEnter={e => e.target.style.color = "#a855f7"}
-                    onMouseLeave={e => e.target.style.color = "#52525b"}
-                  >{l} ↗</button>
-                ))}
+            ))}
+            <div onClick={() => window.open("https://wa.me/919593530260")} style={{ marginTop: "1.5rem", padding: "0.75rem 1rem", background: "rgba(37,211,102,0.06)", border: "1px solid rgba(37,211,102,0.15)", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer" }}>
+              <div>
+                <div style={{ fontSize: "0.75rem", fontWeight: 700, color: "#fafafa", fontFamily: "'DM Sans', sans-serif" }}>Message on WhatsApp</div>
+                <div style={{ fontSize: "0.65rem", color: "#52525b", fontFamily: "'DM Sans', sans-serif" }}>Fastest way to reach me</div>
               </div>
+              <span style={{ color: "#4ade80", fontFamily: "'DM Sans', sans-serif" }}>→</span>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ══════════════ FOOTER ══════════════ */}
-      <footer style={{ padding: "3rem 8%", borderTop: "1px solid rgba(255,255,255,0.04)", display: "flex", justifyContent: "space-between", alignItems: "center", color: "#3f3f46", fontSize: "0.8rem", fontWeight: 600, position: "relative", zIndex: 2 }}>
-        <span>© 2026 Anuj Kattel. All rights reserved.</span>
-        <span style={{ color: "#a855f7" }}>Built with precision ✦</span>
+      {/* Footer */}
+      <footer style={{ padding: "2rem 6%", borderTop: "1px solid rgba(255,255,255,0.04)", display: "flex", justifyContent: "space-between", alignItems: "center", color: "#3f3f46", fontSize: "0.7rem", fontWeight: 600, flexWrap: "wrap", gap: "1rem", position: "relative", zIndex: 2 }}>
+        <span style={{ fontFamily: "'DM Sans', sans-serif" }}>© 2026 Anuj Kattel. All rights reserved.</span>
+        <div style={{ display: "flex", gap: "1.5rem" }}>
+          {socialLinks.map(s => <a key={s.platform} href={s.url} target="_blank" style={{ color: "#3f3f46", textDecoration: "none", transition: "color 0.2s", fontFamily: "'DM Sans', sans-serif" }} onMouseEnter={e => e.currentTarget.style.color = s.color} onMouseLeave={e => e.currentTarget.style.color = "#3f3f46"}>{s.platform.split(" ")[0]}</a>)}
+        </div>
+        <span style={{ color: "#c084fc", fontFamily: "'DM Sans', sans-serif" }}>Built with precision ✦</span>
       </footer>
     </div>
   );
