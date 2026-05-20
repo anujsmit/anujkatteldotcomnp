@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+body{ 
+background: rgba(255,255,255,0.05);
+  color: white;
+  outline: none;
+  font-size: 16px;
+}
+
+.contact-container input:focus,
+.contact-container textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 20px rgba(0,255,255,0.15);
+}
+
+.contact-container textarea {
+  min-height: 180px;
+  resize: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050816;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--primary), var(--secondary));
+  border-radius: 20px;
+}
+
+@media(max-width: 1000px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 120px;
+  }
+
+  .hero-left,
+  .hero-right {
+    width: 100%;
+  }
+
+  .hero-left h1 {
+    font-size: 56px;
+  }
+
+  .hero-right {
+    height: 450px;
+  }
+
+  .title {
+    font-size: 44px;
+  }
+}
+
+@media(max-width: 700px) {
+  .navbar {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-left h1 {
+    font-size: 42px;
+  }
+
+  section {
+    padding: 100px 6%;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+}
