@@ -58,13 +58,37 @@ const services = [
     icon: <FaSearch />,
   },
 ];
-
 const projects = [
-  { index: "001", title: "E‑Commerce Architecture", year: "2025", desc: "Lightning-fast store with custom checkout, real-time inventory, admin dashboard handling 10K+ daily transactions.", tech: ["React", "Node.js", "MySQL"], accent: "#c084fc" },
-  { index: "002", title: "Fitness Tracking App", year: "2025", desc: "Cross-platform mobile app with biometric syncing, AI workout recs, social leaderboards.", tech: ["React Native", "Firebase"], accent: "#22d3ee" },
-  { index: "003", title: "SaaS Analytics Dashboard", year: "2024", desc: "Enterprise data viz with WebSocket feeds, RBAC, exportable PDF reports.", tech: ["TypeScript", "FastAPI", "PostgreSQL"], accent: "#34d399" },
-];
+  {
+    index: "001",
+    title: "Modern Business Website",
+    year: "2026",
+    desc: "Premium responsive business website with modern UI, fast loading speed, SEO optimization, and contact integrations designed to convert visitors into clients.",
+    tech: ["React", "Node.js", "SEO", "Responsive"],
+    accent: "#c084fc",
+    live: "#",
+  },
 
+  {
+    index: "002",
+    title: "Gym Management Platform",
+    year: "2026",
+    desc: "Complete gym SaaS platform with membership management, attendance tracking, pricing plans, and a modern dashboard for fitness businesses.",
+    tech: ["React", "Firebase", "Dashboard", "Authentication"],
+    accent: "#22d3ee",
+    live: "#",
+  },
+
+  {
+    index: "003",
+    title: "Restaurant Ordering System",
+    year: "2025",
+    desc: "Online food ordering platform with real-time order tracking, admin controls, mobile-friendly design, and payment integration for restaurants.",
+    tech: ["React", "Express", "MongoDB", "Payments"],
+    accent: "#f97316",
+    live: "#",
+  }
+];
 const socialLinks = [
   { platform: "GitHub", user: "anujsmit", url: "https://github.com/anujsmit", color: "#e4e4e7", icon: "GH" },
   { platform: "LinkedIn", user: "anujkattel", url: "https://linkedin.com/in/anujkattel", color: "#60a5fa", icon: "LI" },
