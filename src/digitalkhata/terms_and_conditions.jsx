@@ -280,24 +280,68 @@ const TermsAndConditions = () => {
         }
 
         body {
-          font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
-          background-color: #f8fafc;
-          color: #334155;
         }
 
         .terms-page {
           min-height: 100vh;
           display: flex;
           flex-direction: column;
+          background: #0a0a0f;
+        }
+
+        /* Animated Background Blobs */
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+
+        .blob {
+          position: fixed;
+          border-radius: 50%;
+          filter: blur(100px);
+          opacity: 0.15;
+          animation: blob 20s infinite;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .blob-1 {
+          width: 400px;
+          height: 400px;
+          background: #10b981;
+          top: 100px;
+          left: -100px;
+        }
+
+        .blob-2 {
+          width: 500px;
+          height: 500px;
+          background: #3b82f6;
+          bottom: 100px;
+          right: -100px;
+          animation-delay: -5s;
+        }
+
+        .blob-3 {
+          width: 450px;
+          height: 450px;
+          background: #8b5cf6;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          animation-delay: -10s;
         }
 
         /* Navigation */
         .navbar {
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(8px);
-          border-bottom: 1px solid #e2e8f0;
+          background: rgba(10, 10, 15, 0.9);
+          backdrop-filter: blur(12px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           position: sticky;
           top: 0;
           z-index: 50;
@@ -332,7 +376,10 @@ const TermsAndConditions = () => {
         .logo-text {
           font-size: 1.15rem;
           font-weight: 700;
-          color: #0f172a;
+          background: linear-gradient(135deg, #10b981, #14b8a6);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
           letter-spacing: -0.025em;
         }
 
@@ -362,7 +409,7 @@ const TermsAndConditions = () => {
           background: transparent;
           border: none;
           cursor: pointer;
-          color: #475569;
+          color: #9ca3af;
         }
 
         @media (max-width: 768px) {
@@ -379,11 +426,12 @@ const TermsAndConditions = () => {
           bottom: 0;
           width: 100%;
           max-width: 300px;
-          background: white;
+          background: #0a0a0f;
+          border-left: 1px solid rgba(255, 255, 255, 0.05);
           transform: translateX(100%);
           transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
           z-index: 200;
-          box-shadow: -4px 0 24px rgba(0,0,0,0.08);
+          box-shadow: -4px 0 24px rgba(0,0,0,0.5);
           display: flex;
           flex-direction: column;
         }
@@ -397,7 +445,7 @@ const TermsAndConditions = () => {
           justify-content: space-between;
           align-items: center;
           padding: 1.25rem 1.5rem;
-          border-bottom: 1px solid #f1f5f9;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .mobile-menu-items {
@@ -417,7 +465,7 @@ const TermsAndConditions = () => {
           background: transparent;
           border: none;
           cursor: pointer;
-          color: #475569;
+          color: #9ca3af;
           font-weight: 500;
           font-size: 0.9rem;
           text-align: left;
@@ -426,11 +474,12 @@ const TermsAndConditions = () => {
         }
 
         .mobile-menu-item:hover {
-          background: #f1f5f9;
+          background: rgba(255, 255, 255, 0.05);
+          color: #ffffff;
         }
 
         .mobile-menu-item.active {
-          background: #ecfdf5;
+          background: rgba(16, 185, 129, 0.1);
           color: #10b981;
         }
 
@@ -440,8 +489,8 @@ const TermsAndConditions = () => {
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(15, 23, 42, 0.3);
-          backdrop-filter: blur(2px);
+          background: rgba(0, 0, 0, 0.5);
+          backdrop-filter: blur(4px);
           z-index: 199;
           opacity: 0;
           visibility: hidden;
@@ -455,10 +504,12 @@ const TermsAndConditions = () => {
 
         /* Hero Section */
         .hero {
-          background: white;
-          border-bottom: 1px solid #e2e8f0;
+          background: rgba(255, 255, 255, 0.02);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           padding: 4rem 1.5rem 3.5rem;
           text-align: center;
+          position: relative;
+          z-index: 10;
         }
 
         .hero-badge {
@@ -466,19 +517,19 @@ const TermsAndConditions = () => {
           align-items: center;
           gap: 6px;
           padding: 5px 14px;
-          background: #f0fdf4;
-          border: 1px solid #bbf7d0;
+          background: rgba(16, 185, 129, 0.1);
+          border: 1px solid rgba(16, 185, 129, 0.2);
           border-radius: 9999px;
           font-size: 0.8rem;
           font-weight: 600;
-          color: #15803d;
+          color: #10b981;
           margin-bottom: 1.5rem;
         }
 
         .hero-title {
           font-size: 2.25rem;
           font-weight: 800;
-          color: #0f172a;
+          color: #ffffff;
           margin-bottom: 1rem;
           letter-spacing: -0.03em;
         }
@@ -492,7 +543,7 @@ const TermsAndConditions = () => {
         .hero-description {
           font-size: 1.05rem;
           line-height: 1.6;
-          color: #64748b;
+          color: #9ca3af;
           max-width: 42rem;
           margin: 0 auto 1.5rem;
         }
@@ -502,12 +553,12 @@ const TermsAndConditions = () => {
           align-items: center;
           gap: 6px;
           padding: 4px 12px;
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 6px;
           font-size: 0.75rem;
           font-weight: 500;
-          color: #64748b;
+          color: #9ca3af;
         }
 
         /* Main Layout */
@@ -519,6 +570,8 @@ const TermsAndConditions = () => {
           display: grid;
           grid-template-columns: 1fr;
           gap: 3rem;
+          position: relative;
+          z-index: 10;
         }
 
         @media (min-width: 1024px) {
@@ -552,7 +605,7 @@ const TermsAndConditions = () => {
           border: none;
           border-radius: 10px;
           text-align: left;
-          color: #64748b;
+          color: #9ca3af;
           font-size: 0.875rem;
           font-weight: 500;
           cursor: pointer;
@@ -560,12 +613,12 @@ const TermsAndConditions = () => {
         }
 
         .sidebar-btn:hover {
-          background: #f1f5f9;
-          color: #0f172a;
+          background: rgba(255, 255, 255, 0.05);
+          color: #ffffff;
         }
 
         .sidebar-btn.active {
-          background: #ecfdf5;
+          background: rgba(16, 185, 129, 0.1);
           color: #10b981;
           font-weight: 600;
         }
@@ -578,18 +631,17 @@ const TermsAndConditions = () => {
         }
 
         .section-block {
-          background: white;
-          border: 1px solid #e2e8f0;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 16px;
           padding: 2rem;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+          transition: all 0.3s;
           scroll-margin-top: 90px;
-          transition: all 0.2s;
         }
 
         .section-block:hover {
-          border-color: #cbd5e1;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+          border-color: rgba(16, 185, 129, 0.3);
+          transform: translateY(-2px);
         }
 
         .section-heading-box {
@@ -598,7 +650,7 @@ const TermsAndConditions = () => {
           gap: 12px;
           margin-bottom: 1.25rem;
           padding-bottom: 1rem;
-          border-bottom: 2px solid #f1f5f9;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .section-icon-container {
@@ -608,21 +660,21 @@ const TermsAndConditions = () => {
           width: 40px;
           height: 40px;
           border-radius: 10px;
-          background: #ecfdf5;
+          background: rgba(16, 185, 129, 0.1);
           color: #10b981;
         }
 
         .section-block-title {
           font-size: 1.35rem;
           font-weight: 700;
-          color: #0f172a;
+          color: #ffffff;
           letter-spacing: -0.02em;
         }
 
         .section-main-paragraph {
           font-size: 0.95rem;
           line-height: 1.6;
-          color: #475569;
+          color: #9ca3af;
           margin-bottom: 1rem;
         }
 
@@ -643,8 +695,8 @@ const TermsAndConditions = () => {
           display: flex;
           gap: 8px;
           align-items: flex-start;
-          background: #f8fafc;
-          border: 1px solid #f1f5f9;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 10px;
           padding: 12px 14px;
         }
@@ -658,7 +710,7 @@ const TermsAndConditions = () => {
         .list-item-text {
           font-size: 0.85rem;
           line-height: 1.5;
-          color: #475569;
+          color: #9ca3af;
         }
 
         /* Contact Cards */
@@ -686,8 +738,8 @@ const TermsAndConditions = () => {
           align-items: center;
           gap: 12px;
           padding: 1rem;
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 12px;
           text-decoration: none;
           transition: all 0.2s;
@@ -695,15 +747,15 @@ const TermsAndConditions = () => {
 
         .contact-detail-card:hover {
           border-color: #10b981;
-          background: #f0fdf4;
+          background: rgba(16, 185, 129, 0.05);
           transform: translateY(-2px);
         }
 
         .contact-avatar-box {
           width: 42px;
           height: 42px;
-          background: white;
-          border: 1px solid #e2e8f0;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 10px;
           display: flex;
           align-items: center;
@@ -721,13 +773,13 @@ const TermsAndConditions = () => {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.05em;
-          color: #94a3b8;
+          color: #6b7280;
           margin-bottom: 2px;
         }
 
         .contact-main-value {
           font-weight: 600;
-          color: #1e293b;
+          color: #e5e7eb;
           font-size: 0.85rem;
           white-space: nowrap;
           text-overflow: ellipsis;
@@ -736,10 +788,12 @@ const TermsAndConditions = () => {
 
         /* Footer */
         .footer {
-          background-color: #0f172a;
-          color: #94a3b8;
+          background: #0a0a0f;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
           padding: 4rem 0 3rem;
           margin-top: auto;
+          position: relative;
+          z-index: 10;
         }
 
         .footer-container {
@@ -776,17 +830,21 @@ const TermsAndConditions = () => {
         .footer-logo-icon {
           width: 24px;
           height: 24px;
-          color: #34d399;
+          color: #4ade80;
         }
 
         .footer-logo-text {
           font-size: 1.1rem;
           font-weight: 700;
-          color: white;
+          background: linear-gradient(135deg, #10b981, #14b8a6);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
           letter-spacing: -0.02em;
         }
 
         .footer-description {
+          color: #9ca3af;
           font-size: 0.85rem;
           line-height: 1.5;
           max-width: 18rem;
@@ -798,7 +856,7 @@ const TermsAndConditions = () => {
           text-transform: uppercase;
           letter-spacing: 0.05em;
           margin-bottom: 1rem;
-          color: #f8fafc;
+          color: #e5e7eb;
         }
 
         .footer-links {
@@ -809,22 +867,22 @@ const TermsAndConditions = () => {
         }
 
         .footer-link {
-          color: #94a3b8;
+          color: #9ca3af;
           text-decoration: none;
           font-size: 0.85rem;
           transition: color 0.15s;
         }
 
         .footer-link:hover {
-          color: white;
+          color: #10b981;
         }
 
         .footer-bottom {
-          border-top: 1px solid #1e293b;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
           padding-top: 1.5rem;
           text-align: center;
           font-size: 0.8rem;
-          color: #64748b;
+          color: #6b7280;
         }
 
         /* Scroll to Top Button */
@@ -835,7 +893,7 @@ const TermsAndConditions = () => {
           width: 44px;
           height: 44px;
           border-radius: 50%;
-          background: #10b981;
+          background: linear-gradient(135deg, #10b981, #059669);
           border: none;
           cursor: pointer;
           display: flex;
@@ -843,7 +901,7 @@ const TermsAndConditions = () => {
           justify-content: center;
           box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
           transition: all 0.2s ease;
-          z-index: 90;
+          z-index: 100;
           opacity: 0;
           visibility: hidden;
           transform: translateY(8px);
@@ -856,8 +914,12 @@ const TermsAndConditions = () => {
         }
 
         .scroll-top-btn:hover {
-          background: #059669;
           transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+        }
+
+        .scroll-top-btn svg {
+          color: white;
         }
 
         @media (max-width: 768px) {
@@ -875,6 +937,11 @@ const TermsAndConditions = () => {
           }
         }
       `}</style>
+
+      {/* Animated Background Blobs */}
+      <div className="blob blob-1"></div>
+      <div className="blob blob-2"></div>
+      <div className="blob blob-3"></div>
 
       {/* Navigation */}
       <nav className="navbar">
@@ -1032,17 +1099,13 @@ const TermsAndConditions = () => {
               <ul className="footer-links">
                 <li><a href="/digitalkhata/" className="footer-link">Features</a></li>
                 <li><a href="/digitalkhata/" className="footer-link">Pricing</a></li>
-                <li><a href="#" className="footer-link">Downloads</a></li>
-                <li><a href="#" className="footer-link">Security</a></li>
               </ul>
             </div>
             <div>
               <h4 className="footer-title">Legal</h4>
               <ul className="footer-links">
                 <li><a href="/digitalkhata/privacy" className="footer-link">Privacy Policy</a></li>
-                <li><a href="/digitalkhata/terms" className="footer-link">Terms & Conditions</a></li>
-                <li><a href="#" className="footer-link">Cookie Policy</a></li>
-                <li><a href="#" className="footer-link">GDPR Compliance</a></li>
+
               </ul>
             </div>
             <div>

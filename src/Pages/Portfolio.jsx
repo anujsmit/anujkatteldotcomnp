@@ -17,16 +17,15 @@ import {
   FaCloud,
   FaReact,
   FaNodeJs,
-  FaPython,
-  FaJava,
-  FaAws,
   FaStar,
   FaUsers,
   FaChartLine,
   FaShieldAlt,
   FaRocket,
   FaHeart,
-  FaAward
+  FaAward,
+  FaGem,
+  FaLightbulb
 } from "react-icons/fa";
 
 // ─────────────────────────────────────────────────────────────
@@ -177,10 +176,11 @@ export default function Portfolio() {
       </Helmet>
 
       <div className="portfolio">
-        {/* Animated Background Blobs */}
+        {/* Animated Background Blobs - Dark Theme */}
         <div className="blob blob-1"></div>
         <div className="blob blob-2"></div>
         <div className="blob blob-3"></div>
+        <div className="blob blob-4"></div>
 
         {/* Progress Bar */}
         <motion.div className="progress-bar" style={{ scaleX, transformOrigin: "0%" }} />
@@ -189,7 +189,7 @@ export default function Portfolio() {
         <header className={`header ${scrolled ? "header-scrolled" : ""}`}>
           <div className="container header-container">
             <button onClick={() => scrollToSection("hero")} className="logo">
-              AK<span className="logo-accent">.</span>
+              Anuj<span className="logo-accent">.</span>
             </button>
             
             <nav className="desktop-nav">
@@ -244,7 +244,7 @@ export default function Portfolio() {
                   Hi, I'm <span className="hero-title-accent">Anuj Kattel</span>
                 </h1>
                 <p className="hero-description">
-                  Full-stack developer and creator of <strong>Digital Khata</strong> - Nepal's leading business management app with 10,000+ users. I build scalable applications that solve real business problems.
+                  Full-stack developer and creator of <strong className="highlight">Digital Khata</strong> - Nepal's leading business management app with 10,000+ users. I build scalable applications that solve real business problems.
                 </p>
                 <div className="hero-buttons">
                   <button onClick={() => scrollToSection("work")} className="btn-primary">
@@ -277,7 +277,9 @@ export default function Portfolio() {
           <section className="showcase">
             <div className="container">
               <div className="showcase-card">
-                <div className="showcase-badge">⭐ Featured Project</div>
+                <div className="showcase-badge">
+                  <FaGem className="showcase-badge-icon" /> Featured Project
+                </div>
                 <h2 className="showcase-title">Digital Khata</h2>
                 <p className="showcase-description">
                   Nepal's premier business management application helping thousands of small businesses digitize their operations.
@@ -456,7 +458,7 @@ export default function Portfolio() {
       </div>
 
       <style jsx>{`
-        /* Reset & Base */
+        /* Reset & Base - Dark Theme */
         * {
           margin: 0;
           padding: 0;
@@ -464,8 +466,8 @@ export default function Portfolio() {
         }
 
         .portfolio {
-          background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
-          color: #111827;
+          background: #0a0a0f;
+          color: #ffffff;
           font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
           min-height: 100vh;
           overflow-x: hidden;
@@ -474,7 +476,7 @@ export default function Portfolio() {
 
         ::selection {
           background: #10b981;
-          color: white;
+          color: #0a0a0f;
         }
 
         .container {
@@ -483,7 +485,7 @@ export default function Portfolio() {
           padding: 0 1.5rem;
         }
 
-        /* Animated Background Blobs */
+        /* Animated Background Blobs - Dark Theme */
         @keyframes blob {
           0% { transform: translate(0px, 0px) scale(1); }
           33% { transform: translate(30px, -50px) scale(1.1); }
@@ -494,24 +496,24 @@ export default function Portfolio() {
         .blob {
           position: fixed;
           border-radius: 50%;
-          filter: blur(80px);
-          opacity: 0.3;
+          filter: blur(100px);
+          opacity: 0.15;
           animation: blob 20s infinite;
           pointer-events: none;
           z-index: 0;
         }
 
         .blob-1 {
-          width: 300px;
-          height: 300px;
+          width: 400px;
+          height: 400px;
           background: #10b981;
           top: 100px;
           left: -100px;
         }
 
         .blob-2 {
-          width: 400px;
-          height: 400px;
+          width: 500px;
+          height: 500px;
           background: #3b82f6;
           bottom: 100px;
           right: -100px;
@@ -519,13 +521,22 @@ export default function Portfolio() {
         }
 
         .blob-3 {
-          width: 350px;
-          height: 350px;
+          width: 450px;
+          height: 450px;
           background: #8b5cf6;
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
           animation-delay: -10s;
+        }
+
+        .blob-4 {
+          width: 300px;
+          height: 300px;
+          background: #ec4899;
+          top: 70%;
+          right: 10%;
+          animation-delay: -15s;
         }
 
         /* Progress Bar */
@@ -539,7 +550,7 @@ export default function Portfolio() {
           z-index: 9999;
         }
 
-        /* Header */
+        /* Header - Dark Theme */
         .header {
           position: fixed;
           top: 0;
@@ -547,13 +558,13 @@ export default function Portfolio() {
           right: 0;
           z-index: 100;
           transition: all 0.3s ease;
-          background: rgba(255, 255, 255, 0.9);
+          background: rgba(10, 10, 15, 0.9);
           backdrop-filter: blur(12px);
         }
 
         .header-scrolled {
-          border-bottom: 1px solid #e5e7eb;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          box-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
         .header-container {
@@ -570,7 +581,7 @@ export default function Portfolio() {
           font-weight: 700;
           background: none;
           border: none;
-          color: #111827;
+          color: #ffffff;
           cursor: pointer;
         }
 
@@ -596,7 +607,7 @@ export default function Portfolio() {
         .nav-link {
           background: none;
           border: none;
-          color: #4b5563;
+          color: #9ca3af;
           font-size: 0.875rem;
           font-weight: 500;
           cursor: pointer;
@@ -635,7 +646,7 @@ export default function Portfolio() {
         .menu-line {
           width: 24px;
           height: 2px;
-          background: #111827;
+          background: #ffffff;
           transition: all 0.3s;
         }
 
@@ -650,8 +661,9 @@ export default function Portfolio() {
         }
 
         .mobile-nav {
-          background: white;
-          border-top: 1px solid #e5e7eb;
+          background: rgba(10, 10, 15, 0.95);
+          backdrop-filter: blur(12px);
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .mobile-nav-inner {
@@ -664,7 +676,7 @@ export default function Portfolio() {
         .mobile-nav-link {
           background: none;
           border: none;
-          color: #374151;
+          color: #d1d5db;
           font-size: 1rem;
           text-align: left;
           padding: 0.5rem 0;
@@ -682,7 +694,7 @@ export default function Portfolio() {
           margin-top: 0.5rem;
         }
 
-        /* Hero Section */
+        /* Hero Section - Dark Theme */
         .hero {
           min-height: 100vh;
           display: flex;
@@ -700,7 +712,8 @@ export default function Portfolio() {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          background: #ecfdf5;
+          background: rgba(16, 185, 129, 0.1);
+          border: 1px solid rgba(16, 185, 129, 0.2);
           padding: 0.5rem 1rem;
           border-radius: 9999px;
           margin-bottom: 2rem;
@@ -721,7 +734,7 @@ export default function Portfolio() {
 
         .hero-badge span:last-child {
           font-size: 0.75rem;
-          color: #059669;
+          color: #10b981;
           font-weight: 500;
         }
 
@@ -730,7 +743,7 @@ export default function Portfolio() {
           font-weight: 800;
           line-height: 1.1;
           margin-bottom: 1rem;
-          color: #111827;
+          color: #ffffff;
         }
 
         .hero-title-accent {
@@ -742,10 +755,14 @@ export default function Portfolio() {
 
         .hero-description {
           font-size: clamp(1rem, 2vw, 1.25rem);
-          color: #4b5563;
+          color: #9ca3af;
           max-width: 600px;
           line-height: 1.6;
           margin-bottom: 2rem;
+        }
+
+        .hero-description .highlight {
+          color: #10b981;
         }
 
         .hero-buttons {
@@ -779,25 +796,27 @@ export default function Portfolio() {
 
         .btn-secondary {
           background: transparent;
-          border: 1px solid #d1d5db;
-          color: #374151;
+          border: 1px solid #374151;
+          color: #d1d5db;
         }
 
         .btn-secondary:hover {
-          background: #f9fafb;
+          background: rgba(255, 255, 255, 0.05);
+          border-color: #10b981;
         }
 
         .btn-social {
-          background: #f3f4f6;
-          border: 1px solid #e5e7eb;
-          color: #374151;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid #374151;
+          color: #d1d5db;
         }
 
         .btn-social:hover {
-          background: #e5e7eb;
+          background: rgba(255, 255, 255, 0.1);
+          border-color: #10b981;
         }
 
-        /* Stats Section */
+        /* Stats Section - Dark Theme */
         .stats {
           padding: 4rem 0;
           position: relative;
@@ -817,8 +836,8 @@ export default function Portfolio() {
         }
 
         .stat-card {
-          background: white;
-          border: 1px solid #e5e7eb;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 1rem;
           padding: 1.5rem;
           text-align: center;
@@ -827,8 +846,8 @@ export default function Portfolio() {
 
         .stat-card:hover {
           transform: translateY(-4px);
-          box-shadow: 0 10px 25px rgba(0,0,0,0.1);
           border-color: #10b981;
+          background: rgba(16, 185, 129, 0.05);
         }
 
         .stat-icon {
@@ -840,7 +859,7 @@ export default function Portfolio() {
         .stat-value {
           font-size: 1.5rem;
           font-weight: 700;
-          color: #111827;
+          color: #ffffff;
         }
 
         @media (min-width: 768px) {
@@ -850,12 +869,12 @@ export default function Portfolio() {
         }
 
         .stat-label {
-          color: #6b7280;
+          color: #9ca3af;
           font-size: 0.875rem;
           margin-top: 0.25rem;
         }
 
-        /* Showcase Section */
+        /* Showcase Section - Dark Theme */
         .showcase {
           padding: 4rem 0;
           position: relative;
@@ -863,26 +882,37 @@ export default function Portfolio() {
         }
 
         .showcase-card {
-          background: linear-gradient(135deg, #10b981, #14b8a6);
+          background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(20, 184, 166, 0.1));
+          border: 1px solid rgba(16, 185, 129, 0.2);
           border-radius: 2rem;
           padding: 3rem;
           text-align: center;
-          color: white;
+          backdrop-filter: blur(10px);
         }
 
         .showcase-badge {
-          display: inline-block;
-          background: rgba(255,255,255,0.2);
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: rgba(16, 185, 129, 0.2);
           padding: 0.25rem 1rem;
           border-radius: 9999px;
           font-size: 0.75rem;
           margin-bottom: 1rem;
         }
 
+        .showcase-badge-icon {
+          font-size: 0.75rem;
+        }
+
         .showcase-title {
           font-size: 2rem;
           font-weight: 700;
           margin-bottom: 1rem;
+          background: linear-gradient(135deg, #10b981, #14b8a6);
+          background-clip: text;
+          -webkit-background-clip: text;
+          color: transparent;
         }
 
         @media (min-width: 768px) {
@@ -894,7 +924,7 @@ export default function Portfolio() {
         .showcase-description {
           max-width: 600px;
           margin: 0 auto 2rem;
-          opacity: 0.95;
+          color: #9ca3af;
         }
 
         .showcase-stats {
@@ -908,11 +938,12 @@ export default function Portfolio() {
         .showcase-stat-value {
           font-size: 1.5rem;
           font-weight: 700;
+          color: #10b981;
         }
 
         .showcase-stat-label {
           font-size: 0.75rem;
-          opacity: 0.9;
+          color: #9ca3af;
         }
 
         .showcase-buttons {
@@ -923,8 +954,8 @@ export default function Portfolio() {
         }
 
         .btn-showcase {
-          background: white;
-          color: #10b981;
+          background: #10b981;
+          color: white;
           padding: 0.75rem 1.5rem;
           border-radius: 9999px;
           text-decoration: none;
@@ -936,12 +967,13 @@ export default function Portfolio() {
         }
 
         .btn-showcase:hover {
+          background: #059669;
           transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .btn-showcase-secondary {
-          background: rgba(255,255,255,0.2);
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           color: white;
           padding: 0.75rem 1.5rem;
           border-radius: 9999px;
@@ -954,10 +986,10 @@ export default function Portfolio() {
         }
 
         .btn-showcase-secondary:hover {
-          background: rgba(255,255,255,0.3);
+          background: rgba(255, 255, 255, 0.1);
         }
 
-        /* Achievements */
+        /* Achievements - Dark Theme */
         .achievements {
           padding: 4rem 0;
           position: relative;
@@ -976,8 +1008,8 @@ export default function Portfolio() {
         }
 
         .achievement-card {
-          background: white;
-          border: 1px solid #e5e7eb;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 1rem;
           padding: 1.5rem;
           text-align: center;
@@ -999,14 +1031,15 @@ export default function Portfolio() {
           font-size: 1rem;
           font-weight: 600;
           margin-bottom: 0.25rem;
+          color: #ffffff;
         }
 
         .achievement-desc {
           font-size: 0.75rem;
-          color: #6b7280;
+          color: #9ca3af;
         }
 
-        /* Section Titles */
+        /* Section Titles - Dark Theme */
         .section-title {
           margin-bottom: 3rem;
           text-align: center;
@@ -1025,16 +1058,16 @@ export default function Portfolio() {
           font-size: clamp(1.75rem, 5vw, 2.5rem);
           font-weight: 700;
           margin-bottom: 0.75rem;
-          color: #111827;
+          color: #ffffff;
         }
 
         .section-subtitle {
-          color: #6b7280;
+          color: #9ca3af;
           max-width: 600px;
           margin: 0 auto;
         }
 
-        /* Tech */
+        /* Tech - Dark Theme */
         .tech {
           padding: 4rem 0;
           position: relative;
@@ -1049,8 +1082,8 @@ export default function Portfolio() {
         }
 
         .tech-item {
-          background: white;
-          border: 1px solid #e5e7eb;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           padding: 0.75rem 1.25rem;
           border-radius: 9999px;
           font-size: 0.875rem;
@@ -1059,14 +1092,14 @@ export default function Portfolio() {
 
         .tech-item:hover {
           border-color: #10b981;
-          background: #ecfdf5;
+          background: rgba(16, 185, 129, 0.1);
           transform: translateY(-2px);
         }
 
-        /* Services */
+        /* Services - Dark Theme */
         .services {
           padding: 4rem 0;
-          background: #f9fafb;
+          background: rgba(255, 255, 255, 0.02);
           position: relative;
           z-index: 10;
         }
@@ -1083,8 +1116,8 @@ export default function Portfolio() {
         }
 
         .service-card {
-          background: white;
-          border: 1px solid #e5e7eb;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 1rem;
           padding: 1.75rem;
           transition: all 0.3s;
@@ -1093,7 +1126,6 @@ export default function Portfolio() {
         .service-card:hover {
           transform: translateY(-5px);
           border-color: #10b981;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
         .service-icon {
@@ -1113,11 +1145,11 @@ export default function Portfolio() {
           font-size: 1.25rem;
           font-weight: 600;
           margin-bottom: 0.75rem;
-          color: #111827;
+          color: #ffffff;
         }
 
         .service-desc {
-          color: #6b7280;
+          color: #9ca3af;
           font-size: 0.875rem;
           line-height: 1.6;
           margin-bottom: 1rem;
@@ -1130,14 +1162,14 @@ export default function Portfolio() {
         }
 
         .service-tag {
-          background: #ecfdf5;
-          color: #059669;
+          background: rgba(16, 185, 129, 0.15);
+          color: #10b981;
           font-size: 0.7rem;
           padding: 0.25rem 0.75rem;
           border-radius: 9999px;
         }
 
-        /* Work */
+        /* Work - Dark Theme */
         .work {
           padding: 4rem 0;
           position: relative;
@@ -1151,8 +1183,8 @@ export default function Portfolio() {
         }
 
         .work-card {
-          background: white;
-          border: 1px solid #e5e7eb;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 1rem;
           padding: 1.75rem;
           transition: all 0.3s;
@@ -1161,7 +1193,6 @@ export default function Portfolio() {
         .work-card:hover {
           transform: translateY(-5px);
           border-color: #10b981;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
         .work-card-header {
@@ -1173,7 +1204,7 @@ export default function Portfolio() {
         }
 
         .work-meta {
-          color: #6b7280;
+          color: #9ca3af;
           font-size: 0.7rem;
           font-family: monospace;
         }
@@ -1182,7 +1213,7 @@ export default function Portfolio() {
           font-size: 1.5rem;
           font-weight: 700;
           margin-top: 0.25rem;
-          color: #111827;
+          color: #ffffff;
         }
 
         .work-links {
@@ -1191,7 +1222,7 @@ export default function Portfolio() {
         }
 
         .work-link {
-          color: #6b7280;
+          color: #9ca3af;
           transition: color 0.2s;
         }
 
@@ -1200,7 +1231,7 @@ export default function Portfolio() {
         }
 
         .work-description {
-          color: #4b5563;
+          color: #9ca3af;
           line-height: 1.6;
           margin-bottom: 1rem;
         }
@@ -1216,8 +1247,8 @@ export default function Portfolio() {
           display: inline-flex;
           align-items: center;
           gap: 0.25rem;
-          background: #ecfdf5;
-          color: #059669;
+          background: rgba(16, 185, 129, 0.1);
+          color: #10b981;
           font-size: 0.7rem;
           padding: 0.25rem 0.75rem;
           border-radius: 9999px;
@@ -1235,8 +1266,8 @@ export default function Portfolio() {
         }
 
         .work-tech-tag {
-          background: #f3f4f6;
-          color: #4b5563;
+          background: rgba(255, 255, 255, 0.05);
+          color: #9ca3af;
           font-size: 0.7rem;
           padding: 0.25rem 0.75rem;
           border-radius: 9999px;
@@ -1262,22 +1293,21 @@ export default function Portfolio() {
           gap: 0.75rem;
         }
 
-        /* Testimonial */
+        /* Testimonial - Dark Theme */
         .testimonial {
           padding: 4rem 0;
-          background: #f9fafb;
           position: relative;
           z-index: 10;
         }
 
         .testimonial-card {
-          background: white;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 1rem;
           padding: 2rem;
           text-align: center;
           max-width: 600px;
           margin: 0 auto;
-          border: 1px solid #e5e7eb;
         }
 
         .testimonial-icon {
@@ -1287,7 +1317,7 @@ export default function Portfolio() {
         }
 
         .testimonial-text {
-          color: #4b5563;
+          color: #d1d5db;
           font-style: italic;
           margin-bottom: 1.5rem;
         }
@@ -1302,7 +1332,7 @@ export default function Portfolio() {
         .testimonial-avatar {
           width: 48px;
           height: 48px;
-          background: #ecfdf5;
+          background: rgba(16, 185, 129, 0.2);
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -1313,15 +1343,15 @@ export default function Portfolio() {
 
         .testimonial-name {
           font-weight: 600;
-          color: #111827;
+          color: #ffffff;
         }
 
         .testimonial-role {
           font-size: 0.75rem;
-          color: #6b7280;
+          color: #9ca3af;
         }
 
-        /* Contact */
+        /* Contact - Dark Theme */
         .contact {
           padding: 4rem 0;
           position: relative;
@@ -1333,8 +1363,8 @@ export default function Portfolio() {
         }
 
         .contact-card {
-          background: white;
-          border: 1px solid #e5e7eb;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 1rem;
           padding: 2rem;
         }
@@ -1355,11 +1385,11 @@ export default function Portfolio() {
           font-size: 1.5rem;
           font-weight: 700;
           margin-bottom: 0.75rem;
-          color: #111827;
+          color: #ffffff;
         }
 
         .contact-text {
-          color: #6b7280;
+          color: #9ca3af;
           max-width: 400px;
           margin: 0 auto 2rem;
         }
@@ -1371,11 +1401,11 @@ export default function Portfolio() {
           gap: 1rem;
         }
 
-        /* Footer */
+        /* Footer - Dark Theme */
         .footer {
-          border-top: 1px solid #e5e7eb;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
           padding: 2rem 0;
-          background: white;
+          background: rgba(10, 10, 15, 0.95);
           position: relative;
           z-index: 10;
         }
@@ -1403,7 +1433,7 @@ export default function Portfolio() {
         .footer-link {
           background: none;
           border: none;
-          color: #6b7280;
+          color: #9ca3af;
           cursor: pointer;
           transition: color 0.2s;
         }

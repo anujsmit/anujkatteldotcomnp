@@ -13,10 +13,10 @@ import {
   Receipt,
   Download,
   Apple,
-  PlayCircle,
   AlertCircle
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
 const DigitalKhata = () => {
   const features = [
     {
@@ -161,13 +161,59 @@ const DigitalKhata = () => {
 
         .landing-page {
           min-height: 100vh;
-          background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+          background: #0a0a0f;
+        }
+
+        /* Animated Background Blobs */
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+
+        .blob {
+          position: fixed;
+          border-radius: 50%;
+          filter: blur(100px);
+          opacity: 0.15;
+          animation: blob 20s infinite;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .blob-1 {
+          width: 400px;
+          height: 400px;
+          background: #10b981;
+          top: 100px;
+          left: -100px;
+        }
+
+        .blob-2 {
+          width: 500px;
+          height: 500px;
+          background: #3b82f6;
+          bottom: 100px;
+          right: -100px;
+          animation-delay: -5s;
+        }
+
+        .blob-3 {
+          width: 450px;
+          height: 450px;
+          background: #8b5cf6;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          animation-delay: -10s;
         }
 
         /* Navigation */
         .navbar {
-          background: white;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          background: rgba(10, 10, 15, 0.9);
+          backdrop-filter: blur(12px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           position: sticky;
           top: 0;
           z-index: 50;
@@ -194,14 +240,17 @@ const DigitalKhata = () => {
         .logo-icon {
           width: 32px;
           height: 32px;
-          color: #16a34a;
+          color: #10b981;
         }
 
         .logo-text {
           margin-left: 8px;
           font-size: 1.25rem;
           font-weight: bold;
-          color: #111827;
+          background: linear-gradient(135deg, #10b981, #14b8a6);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
         }
 
         .nav-links {
@@ -216,13 +265,13 @@ const DigitalKhata = () => {
         }
 
         .nav-link {
-          color: #374151;
+          color: #9ca3af;
           text-decoration: none;
           transition: color 0.2s;
         }
 
         .nav-link:hover {
-          color: #16a34a;
+          color: #10b981;
         }
 
         .download-buttons {
@@ -243,12 +292,13 @@ const DigitalKhata = () => {
         }
 
         .btn-download-primary {
-          background-color: #16a34a;
+          background: linear-gradient(135deg, #10b981, #059669);
           color: white;
         }
 
         .btn-download-primary:hover {
-          background-color: #15803d;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
         /* Hero Section */
@@ -257,12 +307,14 @@ const DigitalKhata = () => {
           margin: 0 auto;
           padding: 5rem 1rem;
           text-align: center;
+          position: relative;
+          z-index: 10;
         }
 
         .hero-title {
           font-size: 2.5rem;
           font-weight: bold;
-          color: #111827;
+          color: #ffffff;
           margin-bottom: 1.5rem;
         }
 
@@ -273,12 +325,15 @@ const DigitalKhata = () => {
         }
 
         .hero-highlight {
-          color: #16a34a;
+          background: linear-gradient(135deg, #10b981, #14b8a6);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
         }
 
         .hero-description {
           font-size: 1.25rem;
-          color: #4b5563;
+          color: #9ca3af;
           max-width: 48rem;
           margin: 0 auto 2rem;
         }
@@ -291,7 +346,7 @@ const DigitalKhata = () => {
         }
 
         .btn-primary {
-          background-color: #16a34a;
+          background: linear-gradient(135deg, #10b981, #059669);
           color: white;
           padding: 0.75rem 1.5rem;
           border-radius: 0.5rem;
@@ -301,16 +356,17 @@ const DigitalKhata = () => {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          transition: background-color 0.2s;
+          transition: all 0.2s;
         }
 
         .btn-primary:hover {
-          background-color: #15803d;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
         .btn-secondary {
-          border: 2px solid #16a34a;
-          color: #16a34a;
+          border: 2px solid #10b981;
+          color: #10b981;
           padding: 0.75rem 1.5rem;
           border-radius: 0.5rem;
           font-weight: 500;
@@ -320,13 +376,16 @@ const DigitalKhata = () => {
         }
 
         .btn-secondary:hover {
-          background-color: #f0fdf4;
+          background: rgba(16, 185, 129, 0.1);
+          transform: translateY(-2px);
         }
 
         /* Stats Section */
         .stats-section {
-          background-color: white;
+          background: rgba(255, 255, 255, 0.02);
           padding: 3rem 0;
+          position: relative;
+          z-index: 10;
         }
 
         .stats-container {
@@ -351,7 +410,7 @@ const DigitalKhata = () => {
         .stat-number {
           font-size: 1.875rem;
           font-weight: bold;
-          color: #16a34a;
+          color: #10b981;
         }
 
         @media (min-width: 768px) {
@@ -361,13 +420,15 @@ const DigitalKhata = () => {
         }
 
         .stat-label {
-          color: #4b5563;
+          color: #9ca3af;
           margin-top: 0.5rem;
         }
 
         /* Section Styles */
         .section {
           padding: 5rem 0;
+          position: relative;
+          z-index: 10;
         }
 
         .section-container {
@@ -379,7 +440,7 @@ const DigitalKhata = () => {
         .section-title {
           font-size: 1.875rem;
           font-weight: bold;
-          color: #111827;
+          color: #ffffff;
           text-align: center;
           margin-bottom: 1rem;
         }
@@ -392,7 +453,7 @@ const DigitalKhata = () => {
 
         .section-subtitle {
           font-size: 1.25rem;
-          color: #4b5563;
+          color: #9ca3af;
           text-align: center;
           max-width: 48rem;
           margin: 0 auto 3rem;
@@ -412,17 +473,22 @@ const DigitalKhata = () => {
         }
 
         .problem-box, .solution-box {
-          background: white;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           padding: 1.5rem;
           border-radius: 0.75rem;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          backdrop-filter: blur(10px);
         }
 
         .box-title {
           font-size: 1.5rem;
           font-weight: bold;
-          color: #111827;
+          color: #ffffff;
           margin-bottom: 1rem;
+        }
+
+        .problem-item p, .solution-item p {
+          color: #d1d5db;
         }
 
         /* Features Grid */
@@ -445,36 +511,38 @@ const DigitalKhata = () => {
         }
 
         .feature-card {
-          background: white;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           padding: 1.5rem;
           border-radius: 0.75rem;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-          transition: box-shadow 0.2s;
+          transition: all 0.3s;
         }
 
         .feature-card:hover {
-          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+          transform: translateY(-4px);
+          border-color: #10b981;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
         .feature-icon {
-          color: #16a34a;
+          color: #10b981;
           margin-bottom: 1rem;
         }
 
         .feature-title {
           font-size: 1.25rem;
           font-weight: 600;
-          color: #111827;
+          color: #ffffff;
           margin-bottom: 0.5rem;
         }
 
         .feature-description {
-          color: #4b5563;
+          color: #9ca3af;
         }
 
         /* Pricing Section */
         .pricing-section {
-          background-color: #f9fafb;
+          background: rgba(255, 255, 255, 0.02);
         }
 
         .pricing-grid {
@@ -489,26 +557,28 @@ const DigitalKhata = () => {
         }
 
         .pricing-card {
-          background: white;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 0.75rem;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
           overflow: hidden;
           position: relative;
-          transition: transform 0.2s, box-shadow 0.2s;
+          transition: all 0.3s;
+          backdrop-filter: blur(10px);
         }
 
         .pricing-card:hover {
           transform: translateY(-4px);
-          box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+          border-color: #10b981;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
         .pricing-popular {
-          border: 2px solid #16a34a;
+          border: 2px solid #10b981;
           transform: scale(1.02);
         }
 
         .popular-badge {
-          background-color: #16a34a;
+          background: linear-gradient(135deg, #10b981, #059669);
           color: white;
           text-align: center;
           padding: 0.5rem;
@@ -535,7 +605,7 @@ const DigitalKhata = () => {
         .pricing-name {
           font-size: 1.5rem;
           font-weight: bold;
-          color: #111827;
+          color: #ffffff;
           margin-bottom: 0.5rem;
           display: flex;
           align-items: center;
@@ -549,15 +619,15 @@ const DigitalKhata = () => {
         .price-amount {
           font-size: 2.25rem;
           font-weight: bold;
-          color: #16a34a;
+          color: #10b981;
         }
 
         .price-period {
-          color: #6b7280;
+          color: #9ca3af;
         }
 
         .pricing-description {
-          color: #4b5563;
+          color: #9ca3af;
           margin-bottom: 1.5rem;
           font-size: 0.875rem;
         }
@@ -572,7 +642,7 @@ const DigitalKhata = () => {
           align-items: center;
           gap: 0.5rem;
           margin-bottom: 0.75rem;
-          color: #374151;
+          color: #d1d5db;
           font-size: 0.875rem;
         }
 
@@ -591,22 +661,23 @@ const DigitalKhata = () => {
         }
 
         .btn-pricing-primary {
-          background-color: #16a34a;
+          background: linear-gradient(135deg, #10b981, #059669);
           color: white;
         }
 
         .btn-pricing-primary:hover {
-          background-color: #15803d;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
         .btn-pricing-secondary {
-          border: 2px solid #16a34a;
-          color: #16a34a;
+          border: 2px solid #10b981;
+          color: #10b981;
           background: transparent;
         }
 
         .btn-pricing-secondary:hover {
-          background-color: #f0fdf4;
+          background: rgba(16, 185, 129, 0.1);
         }
 
         /* Testimonials */
@@ -622,10 +693,16 @@ const DigitalKhata = () => {
         }
 
         .testimonial-card {
-          background: white;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           padding: 1.5rem;
           border-radius: 0.75rem;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+          transform: translateY(-4px);
+          border-color: #10b981;
         }
 
         .testimonial-rating {
@@ -640,7 +717,7 @@ const DigitalKhata = () => {
         }
 
         .testimonial-content {
-          color: #4b5563;
+          color: #d1d5db;
           font-style: italic;
           margin-bottom: 1.5rem;
         }
@@ -654,28 +731,28 @@ const DigitalKhata = () => {
         .author-avatar {
           width: 2.5rem;
           height: 2.5rem;
-          background-color: #dcfce7;
+          background: rgba(16, 185, 129, 0.2);
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
           font-weight: 600;
-          color: #16a34a;
+          color: #10b981;
         }
 
         .author-name {
           font-weight: 600;
-          color: #111827;
+          color: #ffffff;
         }
 
         .author-role {
           font-size: 0.875rem;
-          color: #6b7280;
+          color: #9ca3af;
         }
 
         /* FAQ Section */
         .faq-section {
-          background-color: #f9fafb;
+          background: rgba(255, 255, 255, 0.02);
         }
 
         .faq-grid {
@@ -687,27 +764,34 @@ const DigitalKhata = () => {
         }
 
         .faq-item {
-          background: white;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           padding: 1.5rem;
           border-radius: 0.75rem;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+          border-color: #10b981;
         }
 
         .faq-question {
           font-size: 1.125rem;
           font-weight: 600;
-          color: #111827;
+          color: #ffffff;
           margin-bottom: 0.5rem;
         }
 
         .faq-answer {
-          color: #4b5563;
+          color: #9ca3af;
         }
 
         /* CTA Section */
         .cta-section {
-          background-color: #16a34a;
+          background: linear-gradient(135deg, #10b981, #059669);
           padding: 4rem 0;
+          position: relative;
+          z-index: 10;
         }
 
         .cta-container {
@@ -745,7 +829,7 @@ const DigitalKhata = () => {
 
         .btn-cta-primary {
           background-color: white;
-          color: #16a34a;
+          color: #10b981;
           padding: 0.75rem 1.5rem;
           border-radius: 0.5rem;
           font-weight: 500;
@@ -754,11 +838,12 @@ const DigitalKhata = () => {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          transition: background-color 0.2s;
+          transition: all 0.2s;
         }
 
         .btn-cta-primary:hover {
-          background-color: #f0fdf4;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         .btn-cta-secondary {
@@ -773,14 +858,18 @@ const DigitalKhata = () => {
         }
 
         .btn-cta-secondary:hover {
-          background-color: #15803d;
+          background: rgba(255, 255, 255, 0.1);
+          transform: translateY(-2px);
         }
 
         /* Footer */
         .footer {
-          background-color: #111827;
+          background: #0a0a0f;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
           color: white;
           padding: 3rem 0;
+          position: relative;
+          z-index: 10;
         }
 
         .footer-container {
@@ -817,6 +906,10 @@ const DigitalKhata = () => {
           margin-left: 0.5rem;
           font-size: 1.25rem;
           font-weight: bold;
+          background: linear-gradient(135deg, #10b981, #14b8a6);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
         }
 
         .footer-description {
@@ -827,6 +920,7 @@ const DigitalKhata = () => {
         .footer-title {
           font-weight: 600;
           margin-bottom: 1rem;
+          color: #ffffff;
         }
 
         .footer-links {
@@ -843,11 +937,11 @@ const DigitalKhata = () => {
         }
 
         .footer-link:hover {
-          color: white;
+          color: #10b981;
         }
 
         .footer-bottom {
-          border-top: 1px solid #374151;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
           padding-top: 2rem;
           text-align: center;
           color: #9ca3af;
@@ -862,7 +956,22 @@ const DigitalKhata = () => {
           gap: 0.25rem;
           margin-top: 0.5rem;
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .hero-title {
+            font-size: 2rem;
+          }
+          .section-title {
+            font-size: 1.5rem;
+          }
+        }
       `}</style>
+
+      {/* Animated Background Blobs */}
+      <div className="blob blob-1"></div>
+      <div className="blob blob-2"></div>
+      <div className="blob blob-3"></div>
 
       {/* Navigation */}
       <nav className="navbar">
@@ -1045,7 +1154,7 @@ const DigitalKhata = () => {
                     </div>
                   )}
                   {!plan.ads && plan.name !== "Free" && (
-                    <div className="warning-text" style={{ color: '#16a34a' }}>
+                    <div className="warning-text" style={{ color: '#10b981' }}>
                       <CheckCircle className="w-3 h-3" />
                       No advertisements
                     </div>
@@ -1162,7 +1271,7 @@ const DigitalKhata = () => {
               <h4 className="footer-title">Company</h4>
               <ul className="footer-links">
                 <li><a href="#" className="footer-link">About Us</a></li>
-                <li><a href="#" className="footer-link">Contact</a></li>
+                <li><a href="/" className="footer-link">Contact</a></li>
                 <li><a href="#" className="footer-link">Careers</a></li>
                 <li><a href="#" className="footer-link">Blog</a></li>
               </ul>
@@ -1176,7 +1285,7 @@ const DigitalKhata = () => {
             </div>
           </div>
           <div className="footer-bottom">
-            © 2024 Digital Khata. All rights reserved.
+            © 2026 Digital Khata. All rights reserved.
           </div>
         </div>
       </footer>
