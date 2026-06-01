@@ -1,0 +1,11 @@
+# public/robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /_next/
+Disallow: /static/
+
+# Sitemap location
+Sitemap: https://anujkattel.com.np/sitemap.xml
