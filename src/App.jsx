@@ -6,6 +6,7 @@ import NotFound from './Pages/NotFound';
 import DigitalKhata from './digitalkhata/DigialKhata';
 import PrivacyPage from './digitalkhata/Privacy';
 import TermsAndConditions from './digitalkhata/terms_and_conditions';
+import DeleteAccount from './digitalkhata/Deleteaccount';
 
 // SEO Component for dynamic meta tags
 const SEO = ({ title, description, keywords, url, image }) => {
@@ -140,6 +141,7 @@ function App() {
           <Route path="/digitalkhata/home" element={<DigitalKhataWrapper />} />
           <Route path="/digitalkhata/privacy" element={<PrivacyPageWrapper />} />
           <Route path="/digitalkhata/termsandcondition" element={<TermsAndConditions />} />
+          <Route path="/digitalkhata/deleteaccount" element={<DeleteAccount/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
