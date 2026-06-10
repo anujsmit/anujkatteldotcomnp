@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Trash2, Mail, Clock, Database, User, Building, Receipt, Settings, AlertCircle, CheckCircle, ArrowUp, Menu, X, Wallet, Home } from 'lucide-react';
+import { Trash2, Mail, Clock, Database, User, Building, Receipt, Settings, AlertCircle, ArrowUp, Menu, X, Wallet, Home } from 'lucide-react';
 
 const DeleteAccount = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -37,109 +37,102 @@ const DeleteAccount = () => {
         body {
           font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
           -webkit-font-smoothing: antialiased;
-          background: #0a0a0f;
+          background: #ffffff;
         }
 
         .delete-account-page {
           min-height: 100vh;
           display: flex;
           flex-direction: column;
-          background: #0a0a0f;
+          background: #ffffff;
         }
-
-        /* Animated Background */
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-
-        .blob {
-          position: fixed;
-          border-radius: 50%;
-          filter: blur(100px);
-          opacity: 0.15;
-          animation: blob 20s infinite;
-          pointer-events: none;
-          z-index: 0;
-        }
-
-        .blob-1 { width: 400px; height: 400px; background: #10b981; top: 100px; left: -100px; }
-        .blob-2 { width: 500px; height: 500px; background: #ef4444; bottom: 100px; right: -100px; animation-delay: -5s; }
-        .blob-3 { width: 450px; height: 450px; background: #8b5cf6; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -10s; }
 
         /* Navigation */
         .navbar {
-          background: rgba(10, 10, 15, 0.9);
-          backdrop-filter: blur(12px);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-          position: sticky;
+          position: fixed;
           top: 0;
-          z-index: 50;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(10px);
+          z-index: 1000;
+          transition: all 0.3s ease;
+          border-bottom: 1px solid #e5e7eb;
         }
 
         .nav-container {
           max-width: 1200px;
           margin: 0 auto;
-          padding: 0 1.5rem;
-        }
-
-        .nav-content {
+          padding: 1rem 2rem;
           display: flex;
           justify-content: space-between;
           align-items: center;
-          height: 64px;
         }
 
         .logo {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 0.5rem;
           cursor: pointer;
         }
 
-        .logo-icon { width: 28px; height: 28px; color: #10b981; }
+        .logo-icon {
+          color: #059669;
+        }
+
         .logo-text {
-          font-size: 1.15rem;
-          font-weight: 700;
-          background: linear-gradient(135deg, #10b981, #14b8a6);
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
+          font-size: 1.25rem;
+          font-weight: bold;
+          color: #1f2937;
+        }
+
+        .nav-links {
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+        }
+
+        .nav-links a {
+          text-decoration: none;
+          color: #4b5563;
+          transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+          color: #059669;
         }
 
         .home-link {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 8px 16px;
-          background: linear-gradient(135deg, #10b981, #059669);
-          color: white;
-          text-decoration: none;
-          border-radius: 8px;
-          font-size: 0.875rem;
-          font-weight: 500;
+          background: #059669;
+          color: white !important;
+          padding: 0.5rem 1.25rem;
+          border-radius: 0.5rem;
           transition: all 0.2s;
         }
 
         .home-link:hover {
+          background: #047857;
           transform: translateY(-1px);
-          box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
         .mobile-menu-btn {
           display: none;
-          padding: 8px;
-          background: transparent;
+          background: none;
           border: none;
+          font-size: 1.5rem;
           cursor: pointer;
-          color: #9ca3af;
+          color: #4b5563;
         }
 
         @media (max-width: 768px) {
-          .mobile-menu-btn { display: flex; }
-          .home-link { display: none; }
+          .nav-links {
+            display: none;
+          }
+          .mobile-menu-btn {
+            display: block;
+          }
+          .nav-container {
+            padding: 1rem;
+          }
         }
 
         /* Mobile Menu */
@@ -150,8 +143,8 @@ const DeleteAccount = () => {
           bottom: 0;
           width: 100%;
           max-width: 300px;
-          background: #0a0a0f;
-          border-left: 1px solid rgba(255, 255, 255, 0.05);
+          background: white;
+          border-left: 1px solid #e5e7eb;
           transform: translateX(100%);
           transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
           z-index: 200;
@@ -159,42 +152,45 @@ const DeleteAccount = () => {
           flex-direction: column;
         }
 
-        .mobile-menu.open { transform: translateX(0); }
+        .mobile-menu.open {
+          transform: translateX(0);
+        }
 
         .mobile-menu-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
           padding: 1.25rem 1.5rem;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          border-bottom: 1px solid #e5e7eb;
         }
 
         .mobile-menu-items {
           display: flex;
           flex-direction: column;
           padding: 1rem;
-          gap: 4px;
+          gap: 8px;
         }
 
         .mobile-menu-item {
           display: flex;
           align-items: center;
           gap: 10px;
-          padding: 10px 12px;
+          padding: 12px;
           border-radius: 8px;
           background: transparent;
           border: none;
           cursor: pointer;
-          color: #9ca3af;
+          color: #4b5563;
           font-weight: 500;
           font-size: 0.9rem;
           text-align: left;
           width: 100%;
+          transition: all 0.2s;
         }
 
         .mobile-menu-item:hover {
-          background: rgba(255, 255, 255, 0.05);
-          color: #ffffff;
+          background: #f3f4f6;
+          color: #059669;
         }
 
         .menu-overlay {
@@ -204,7 +200,6 @@ const DeleteAccount = () => {
           right: 0;
           bottom: 0;
           background: rgba(0, 0, 0, 0.5);
-          backdrop-filter: blur(4px);
           z-index: 199;
           opacity: 0;
           visibility: hidden;
@@ -218,43 +213,47 @@ const DeleteAccount = () => {
 
         /* Hero Section */
         .hero {
-          background: rgba(255, 255, 255, 0.02);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-          padding: 4rem 1.5rem 3.5rem;
+          padding: 8rem 2rem 4rem;
+          background: linear-gradient(135deg, #ecfdf5 0%, #ffffff 100%);
           text-align: center;
-          position: relative;
-          z-index: 10;
+        }
+
+        .hero-content {
+          max-width: 900px;
+          margin: 0 auto;
         }
 
         .hero-badge {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          padding: 5px 14px;
-          background: rgba(239, 68, 68, 0.1);
-          border: 1px solid rgba(239, 68, 68, 0.2);
-          border-radius: 9999px;
+          gap: 8px;
+          padding: 6px 16px;
+          background: #ecfdf5;
+          border: 1px solid #d1fae5;
+          border-radius: 100px;
           font-size: 0.8rem;
           font-weight: 600;
-          color: #ef4444;
+          color: #059669;
           margin-bottom: 1.5rem;
         }
 
         .hero-title {
-          font-size: 2.5rem;
-          font-weight: 800;
-          color: #ffffff;
+          font-size: 3rem;
+          font-weight: bold;
+          color: #1f2937;
           margin-bottom: 1rem;
         }
 
         @media (min-width: 768px) {
-          .hero-title { font-size: 3.5rem; }
+          .hero-title {
+            font-size: 3.75rem;
+          }
         }
 
         .hero-description {
-          font-size: 1.05rem;
-          color: #9ca3af;
-          max-width: 42rem;
+          font-size: 1.125rem;
+          color: #6b7280;
+          max-width: 600px;
           margin: 0 auto;
         }
 
@@ -262,24 +261,28 @@ const DeleteAccount = () => {
         .content-container {
           max-width: 900px;
           margin: 0 auto;
-          padding: 3rem 1.5rem;
-          position: relative;
-          z-index: 10;
+          padding: 3rem 2rem;
+        }
+
+        @media (max-width: 768px) {
+          .content-container {
+            padding: 2rem 1.5rem;
+          }
         }
 
         /* Cards */
         .info-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 20px;
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
+          border-radius: 1rem;
           padding: 2rem;
-          margin-bottom: 2rem;
+          margin-bottom: 1.5rem;
           transition: all 0.3s;
         }
 
         .info-card:hover {
-          border-color: rgba(16, 185, 129, 0.3);
-          transform: translateY(-2px);
+          border-color: #d1fae5;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .card-title {
@@ -288,25 +291,25 @@ const DeleteAccount = () => {
           gap: 12px;
           font-size: 1.5rem;
           font-weight: 700;
-          color: #ffffff;
+          color: #1f2937;
           margin-bottom: 1.5rem;
           padding-bottom: 1rem;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          border-bottom: 1px solid #e5e7eb;
         }
 
         .card-icon {
-          width: 40px;
-          height: 40px;
+          width: 44px;
+          height: 44px;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(16, 185, 129, 0.1);
+          background: #ecfdf5;
           border-radius: 12px;
-          color: #10b981;
+          color: #059669;
         }
 
         .card-content {
-          color: #9ca3af;
+          color: #6b7280;
           line-height: 1.6;
         }
 
@@ -323,24 +326,33 @@ const DeleteAccount = () => {
           align-items: center;
           gap: 12px;
           padding: 12px;
-          background: rgba(255, 255, 255, 0.03);
+          background: #f9fafb;
           border-radius: 12px;
+          transition: all 0.2s;
+        }
+
+        .step-item:hover {
+          background: #f3f4f6;
         }
 
         .step-number {
           width: 32px;
           height: 32px;
-          background: rgba(16, 185, 129, 0.2);
+          background: #ecfdf5;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
           font-weight: bold;
-          color: #10b981;
+          color: #059669;
         }
 
         .step-text {
-          color: #e5e7eb;
+          color: #4b5563;
+        }
+
+        .step-text strong {
+          color: #059669;
         }
 
         /* Data Grid */
@@ -362,11 +374,17 @@ const DeleteAccount = () => {
           align-items: center;
           gap: 12px;
           padding: 12px 14px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          background: #f9fafb;
+          border: 1px solid #e5e7eb;
           border-radius: 10px;
-          color: #9ca3af;
+          color: #4b5563;
           font-size: 0.9rem;
+          transition: all 0.2s;
+        }
+
+        .data-item:hover {
+          border-color: #d1fae5;
+          background: #ffffff;
         }
 
         .data-item svg {
@@ -379,10 +397,10 @@ const DeleteAccount = () => {
           align-items: center;
           gap: 10px;
           padding: 12px 24px;
-          background: rgba(16, 185, 129, 0.1);
-          border: 1px solid rgba(16, 185, 129, 0.2);
+          background: #ecfdf5;
+          border: 1px solid #d1fae5;
           border-radius: 12px;
-          color: #10b981;
+          color: #059669;
           text-decoration: none;
           font-weight: 500;
           margin-top: 1rem;
@@ -390,14 +408,14 @@ const DeleteAccount = () => {
         }
 
         .contact-email:hover {
-          background: rgba(16, 185, 129, 0.2);
+          background: #d1fae5;
           transform: translateY(-2px);
         }
 
         /* Warning Box */
         .warning-box {
-          background: rgba(239, 68, 68, 0.1);
-          border: 1px solid rgba(239, 68, 68, 0.2);
+          background: #fef2f2;
+          border: 1px solid #fecaca;
           border-radius: 12px;
           padding: 1rem;
           display: flex;
@@ -407,18 +425,16 @@ const DeleteAccount = () => {
         }
 
         .warning-text {
-          color: #fca5a5;
+          color: #dc2626;
           font-size: 0.875rem;
         }
 
         /* Footer */
         .footer {
-          background: #0a0a0f;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
-          padding: 3rem 1.5rem;
+          background: #111827;
+          color: white;
+          padding: 3rem 2rem;
           margin-top: auto;
-          position: relative;
-          z-index: 10;
         }
 
         .footer-container {
@@ -427,11 +443,11 @@ const DeleteAccount = () => {
         }
 
         .footer-bottom {
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          border-top: 1px solid #374151;
           padding-top: 1.5rem;
           text-align: center;
           font-size: 0.8rem;
-          color: #6b7280;
+          color: #9ca3af;
         }
 
         /* Scroll Top Button */
@@ -441,14 +457,14 @@ const DeleteAccount = () => {
           right: 2rem;
           width: 44px;
           height: 44px;
-          border-radius: 50%;
-          background: linear-gradient(135deg, #10b981, #059669);
+          border-radius: 0.5rem;
+          background: #059669;
           border: none;
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+          box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
           transition: all 0.2s;
           z-index: 100;
           opacity: 0;
@@ -463,35 +479,52 @@ const DeleteAccount = () => {
         }
 
         .scroll-top-btn:hover {
+          background: #047857;
           transform: translateY(-2px);
         }
 
+        .scroll-top-btn svg {
+          color: white;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-          .hero-title { font-size: 2rem; }
-          .card-title { font-size: 1.25rem; }
-          .content-container { padding: 2rem 1rem; }
+          .hero {
+            padding: 6rem 1rem 3rem;
+          }
+          .hero-title {
+            font-size: 2rem;
+          }
+          .card-title {
+            font-size: 1.25rem;
+          }
+          .content-container {
+            padding: 2rem 1rem;
+          }
+          .info-card {
+            padding: 1.5rem;
+          }
         }
       `}</style>
-
-      <div className="blob blob-1"></div>
-      <div className="blob blob-2"></div>
-      <div className="blob blob-3"></div>
 
       {/* Navigation */}
       <nav className="navbar">
         <div className="nav-container">
-          <div className="nav-content">
-            <div className="logo" onClick={scrollToTop}>
-              <Wallet className="logo-icon" />
-              <span className="logo-text">Digital Khata</span>
-            </div>
-            <a href="/digitalkhata/" className="home-link">
-              <Home size={16} /> Home
-            </a>
-            <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(true)}>
-              <Menu size={22} />
-            </button>
+          <div className="logo" onClick={scrollToTop}>
+            <Wallet className="logo-icon" />
+            <span className="logo-text">Digital Khata</span>
           </div>
+          <div className="nav-links">
+            <a href="/digitalkhata/">Home</a>
+            <a href="/digitalkhata/privacy">Privacy</a>
+            <a href="/digitalkhata/termsandcondition">Terms</a>
+            <a href="/digitalkhata/" className="home-link">
+              <Home size={16} /> Back to App
+            </a>
+          </div>
+          <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(true)}>
+            <Menu size={22} />
+          </button>
         </div>
       </nav>
 
@@ -524,13 +557,15 @@ const DeleteAccount = () => {
 
       {/* Hero Section */}
       <section className="hero">
-        <div className="hero-badge">
-          <Trash2 size={14} /> Account Deletion
+        <div className="hero-content">
+          <div className="hero-badge">
+            <Trash2 size={14} /> Account Deletion
+          </div>
+          <h1 className="hero-title">Delete Your Account</h1>
+          <p className="hero-description">
+            We understand that sometimes you need to say goodbye. Learn how to delete your account and what happens to your data.
+          </p>
         </div>
-        <h1 className="hero-title">Delete Your Account</h1>
-        <p className="hero-description">
-          We understand that sometimes you need to say goodbye. Learn how to delete your account and what happens to your data.
-        </p>
       </section>
 
       {/* Main Content */}
@@ -631,7 +666,7 @@ const DeleteAccount = () => {
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-bottom">
-            © {new Date().getFullYear()} Digital Khata. All rights reserved.
+            © {new Date().getFullYear()} Digital Khata. All rights reserved. | Made with ❤️ in Nepal
           </div>
         </div>
       </footer>

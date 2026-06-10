@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
-import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import { 
-  FaGlobe, 
-  FaMobileAlt, 
-  FaSearch, 
   FaGithub, 
   FaLinkedin, 
   FaEnvelope,
@@ -13,10 +8,7 @@ import {
   FaCheckCircle,
   FaCode,
   FaServer,
-  FaDatabase,
   FaCloud,
-  FaReact,
-  FaNodeJs,
   FaStar,
   FaUsers,
   FaChartLine,
@@ -25,8 +17,32 @@ import {
   FaHeart,
   FaAward,
   FaGem,
-  FaLightbulb
+  FaWhatsapp,
+  FaExternalLinkAlt,
+  FaLaptopCode,
+  FaMobileAlt,
+  FaDatabase,
+  FaLayerGroup,
+  FaTools
 } from "react-icons/fa";
+import { 
+  SiSupabase, 
+  SiFlutter, 
+  SiTailwindcss, 
+  SiNextdotjs, 
+  SiPostgresql, 
+  SiFirebase, 
+  SiDocker, 
+  SiTypescript, 
+  SiReact, 
+  SiNodedotjs 
+} from "react-icons/si";
+
+// Simple icon components
+const FaBuilding = () => <span>🏢</span>;
+const FaCalendarAlt = () => <span>📅</span>;
+const FaMapMarkerAlt = () => <span>📍</span>;
+const FaBriefcase = () => <span>💼</span>;
 
 // ─────────────────────────────────────────────────────────────
 // DATA
@@ -34,57 +50,94 @@ import {
 
 const projects = [
   {
-    id: "001",
-    slug: "digitalkhata",
+    id: "01",
     title: "Digital Khata",
+    category: "SaaS Platform",
     year: "2024",
     description: "Complete business management solution for small businesses in Nepal. Features customer management, transaction tracking, invoice generation, business analytics, and multi-business support with premium plans.",
-    tech: ["Flutter", "Node.js", "Supabase", "REST API", "Push Notifications", "Payment Gateway"],
-    accent: "#10b981",
+    tech: ["Flutter", "Node.js", "Supabase", "REST API", "Push Notifications"],
+    icon: <FaMobileAlt />,
+    gradient: "linear-gradient(135deg, #10b981, #059669)",
     github: "https://github.com/anujsmit",
     liveDemo: "/digitalkhata/",
-    features: ["10,000+ Users", "50,000+ Transactions", "4.9 Rating", "Premium Features"]
+    stats: ["10K+ Users", "50K+ Transactions", "4.9 Rating"]
   }
 ];
 
 const services = [
   {
-    num: "01",
-    title: "Full Stack Development",
-    desc: "End-to-end web and mobile applications with React, Flutter, Node.js, and modern databases. Scalable architecture ready for growth.",
-    tags: ["React", "Flutter", "Node.js", "Supabase"],
-    icon: <FaCode />
+    icon: <FaLaptopCode />,
+    title: "Web Development",
+    desc: "Modern, responsive web applications with React, Next.js, and Tailwind CSS.",
+    features: ["SPA & SSR", "Responsive Design", "SEO Optimized"]
   },
   {
-    num: "02",
+    icon: <FaMobileAlt />,
+    title: "Mobile Development",
+    desc: "Cross-platform mobile apps with Flutter for iOS and Android.",
+    features: ["Native Performance", "Custom UI/UX", "App Store Ready"]
+  },
+  {
+    icon: <FaServer />,
+    title: "Backend Development",
+    desc: "Scalable APIs and microservices with Node.js and Supabase.",
+    features: ["RESTful APIs", "Real-time Data", "Authentication"]
+  },
+  {
+    icon: <FaDatabase />,
+    title: "Database Design",
+    desc: "Efficient database architecture with PostgreSQL and Firebase.",
+    features: ["Data Modeling", "Optimization", "Security"]
+  },
+  {
+    icon: <FaLayerGroup />,
     title: "SaaS Development",
-    desc: "Build subscription-based platforms with payment integration, user management, analytics, and multi-tenancy support.",
-    tags: ["SaaS", "Payments", "Analytics", "Multi-tenant"],
-    icon: <FaCloud />
+    desc: "Subscription-based platforms with payment integration.",
+    features: ["Payment Gateway", "Multi-tenancy", "Analytics"]
   },
   {
-    num: "03",
-    title: "API & Backend",
-    desc: "Robust RESTful APIs, microservices, database design, authentication, and real-time features with Supabase/Firebase.",
-    tags: ["REST API", "Supabase", "Auth", "Real-time"],
-    icon: <FaServer />
+    icon: <FaTools />,
+    title: "Technical Consulting",
+    desc: "Expert advice on tech stack, architecture, and best practices.",
+    features: ["Code Review", "Architecture", "Performance"]
   }
 ];
 
-const techStack = ["React", "Flutter", "Node.js", "Supabase", "PostgreSQL", "Firebase", "Docker", "TypeScript", "Tailwind", "Next.js"];
-
-const stats = [
-  { value: 10000, suffix: "+", label: "Active Users", icon: <FaUsers /> },
-  { value: 50000, suffix: "+", label: "Transactions", icon: <FaChartLine /> },
-  { value: 4.9, suffix: "/5", label: "User Rating", icon: <FaStar /> },
-  { value: 100, suffix: "%", label: "Data Security", icon: <FaShieldAlt /> }
+const techStack = [
+  { name: "React", icon: <SiReact />, color: "#61dafb" },
+  { name: "Flutter", icon: <SiFlutter />, color: "#02569b" },
+  { name: "Node.js", icon: <SiNodedotjs />, color: "#339933" },
+  { name: "Supabase", icon: <SiSupabase />, color: "#3ecf8e" },
+  { name: "PostgreSQL", icon: <SiPostgresql />, color: "#4169e1" },
+  { name: "Firebase", icon: <SiFirebase />, color: "#ffca28" },
+  { name: "Docker", icon: <SiDocker />, color: "#2496ed" },
+  { name: "TypeScript", icon: <SiTypescript />, color: "#3178c6" },
+  { name: "Tailwind", icon: <SiTailwindcss />, color: "#06b6d4" },
+  { name: "Next.js", icon: <SiNextdotjs />, color: "#000000" }
 ];
 
-const achievements = [
-  { icon: <FaRocket />, title: "Fast Performance", desc: "< 2s load time" },
-  { icon: <FaShieldAlt />, title: "Secure", desc: "Bank-level encryption" },
-  { icon: <FaHeart />, title: "User Love", desc: "99% satisfaction" },
-  { icon: <FaAward />, title: "Top Rated", desc: "4.9/5 stars" }
+const stats = [
+  { value: 10000, suffix: "+", label: "Active Users", icon: <FaUsers />, color: "#10b981" },
+  { value: 50000, suffix: "+", label: "Transactions", icon: <FaChartLine />, color: "#3b82f6" },
+  { value: 4.9, suffix: "/5", label: "User Rating", icon: <FaStar />, color: "#f59e0b" },
+  { value: 100, suffix: "%", label: "Data Security", icon: <FaShieldAlt />, color: "#ef4444" }
+];
+
+const experiences = [
+  {
+    title: "Founder & Lead Developer",
+    company: "Digital Khata",
+    period: "2023 - Present",
+    location: "Jhapa, Nepal",
+    description: "Building Nepal's leading business management platform serving 10,000+ users."
+  },
+  {
+    title: "Full Stack Developer",
+    company: "Freelance",
+    period: "2021 - Present",
+    location: "Remote",
+    description: "Delivered 20+ web and mobile applications for clients worldwide."
+  }
 ];
 
 // ─────────────────────────────────────────────────────────────
@@ -123,19 +176,11 @@ const CountUp = ({ target, suffix = "", duration = 1500 }) => {
 
   return (
     <span ref={ref}>
-      {count}
+      {count.toLocaleString()}
       {suffix}
     </span>
   );
 };
-
-const SectionTitle = ({ label, title, subtitle }) => (
-  <div className="section-title">
-    <p className="section-label">{label}</p>
-    <h2 className="section-heading">{title}</h2>
-    {subtitle && <p className="section-subtitle">{subtitle}</p>}
-  </div>
-);
 
 // ─────────────────────────────────────────────────────────────
 // MAIN PORTFOLIO COMPONENT
@@ -144,11 +189,24 @@ const SectionTitle = ({ label, title, subtitle }) => (
 export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+      
+      const sections = ["home", "work", "services", "contact"];
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 150 && rect.bottom >= 100) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -156,7 +214,7 @@ export default function Portfolio() {
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
       setMobileMenuOpen(false);
     }
   };
@@ -165,172 +223,1081 @@ export default function Portfolio() {
     <>
       <Helmet>
         <title>Anuj Kattel | Full Stack Developer – Creator of Digital Khata</title>
-        <meta name="description" content="I'm Anuj Kattel, the creator of Digital Khata. I build high-performance web and mobile applications with React, Flutter, Node.js, and Supabase." />
-        <meta name="keywords" content="Anuj Kattel, Digital Khata, Full Stack Developer, React Developer, Flutter Developer, Node.js, Supabase" />
-        <meta property="og:title" content="Anuj Kattel | Full Stack Developer & Creator of Digital Khata" />
-        <meta property="og:description" content="Building Digital Khata - Nepal's leading business management app. Available for freelance work." />
-        <meta property="og:image" content="https://anujkattel.com.np/og-image.jpg" />
-        <meta property="og:url" content="https://anujkattel.com.np" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://anujkattel.com.np" />
+        <meta name="description" content="I'm Anuj Kattel, creator of Digital Khata. I build high-performance web and mobile applications." />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Helmet>
 
       <div className="portfolio">
-        {/* Animated Background Blobs - Dark Theme */}
-        <div className="blob blob-1"></div>
-        <div className="blob blob-2"></div>
-        <div className="blob blob-3"></div>
-        <div className="blob blob-4"></div>
+        <style>{`
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
 
-        {/* Progress Bar */}
-        <motion.div className="progress-bar" style={{ scaleX, transformOrigin: "0%" }} />
+          body {
+            background: #ffffff;
+          }
 
-        {/* Header Navigation */}
-        <header className={`header ${scrolled ? "header-scrolled" : ""}`}>
-          <div className="container header-container">
-            <button onClick={() => scrollToSection("hero")} className="logo">
-              Anuj<span className="logo-accent">.</span>
-            </button>
-            
-            <nav className="desktop-nav">
-              {["Work", "Services", "Contact"].map((item) => (
-                <button key={item} onClick={() => scrollToSection(item.toLowerCase())} className="nav-link">
-                  {item}
-                </button>
-              ))}
-              <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }} className="btn-hire">
-                Hire Me
-              </a>
-            </nav>
+          .portfolio {
+            background: #ffffff;
+            color: #1f2937;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+          }
 
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="mobile-menu-btn" aria-label="Menu">
-              <span className={`menu-line ${mobileMenuOpen ? "open" : ""}`}></span>
-              <span className={`menu-line ${mobileMenuOpen ? "open" : ""}`}></span>
-              <span className={`menu-line ${mobileMenuOpen ? "open" : ""}`}></span>
-            </button>
+          ::selection {
+            background: #10b981;
+            color: #ffffff;
+          }
+
+          .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+          }
+
+          @media (max-width: 768px) {
+            .container {
+              padding: 0 1.5rem;
+            }
+          }
+
+          /* Header */
+          .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+          }
+
+          .header.scrolled {
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            padding: 0.75rem 0;
+          }
+
+          .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+
+          .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+          }
+
+          .logo-mark {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: white;
+          }
+
+          .logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+          }
+
+          .desktop-nav {
+            display: none;
+            gap: 2rem;
+            align-items: center;
+          }
+
+          @media (min-width: 768px) {
+            .desktop-nav {
+              display: flex;
+            }
+          }
+
+          .nav-link {
+            background: none;
+            border: none;
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 0.5rem 0;
+          }
+
+          .nav-link:hover, .nav-link.active {
+            color: #10b981;
+          }
+
+          .btn-hire {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #10b981;
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+          }
+
+          .btn-hire:hover {
+            background: #059669;
+            transform: translateY(-2px);
+          }
+
+          .mobile-menu-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          @media (min-width: 768px) {
+            .mobile-menu-btn {
+              display: none;
+            }
+          }
+
+          .hamburger {
+            width: 24px;
+            height: 2px;
+            background: #1f2937;
+            position: relative;
+            transition: all 0.3s;
+          }
+
+          .hamburger::before,
+          .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: #1f2937;
+            transition: all 0.3s;
+          }
+
+          .hamburger::before {
+            transform: translateY(-8px);
+          }
+
+          .hamburger::after {
+            transform: translateY(8px);
+          }
+
+          .hamburger.open {
+            background: transparent;
+          }
+
+          .hamburger.open::before {
+            transform: rotate(45deg);
+          }
+
+          .hamburger.open::after {
+            transform: rotate(-45deg);
+          }
+
+          .mobile-nav {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+          }
+
+          .mobile-nav-inner {
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            gap: 1rem;
+          }
+
+          .mobile-nav-link {
+            background: none;
+            border: none;
+            color: #4b5563;
+            font-size: 1rem;
+            text-align: left;
+            padding: 0.5rem 0;
+            cursor: pointer;
+          }
+
+          .btn-hire-mobile {
+            background: #10b981;
+            color: white;
+            text-align: center;
+            padding: 0.75rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 0.5rem;
+          }
+
+          /* Hero Section */
+          .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 0 4rem;
+          }
+
+          .hero-grid {
+            display: grid;
+            gap: 3rem;
+          }
+
+          @media (min-width: 1024px) {
+            .hero-grid {
+              grid-template-columns: 1fr 1fr;
+              align-items: center;
+            }
+          }
+
+          .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #ecfdf5;
+            border: 1px solid #d1fae5;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            color: #059669;
+          }
+
+          .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+          }
+
+          @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+          }
+
+          .hero-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+          }
+
+          .gradient-text {
+            background: linear-gradient(135deg, #10b981, #059669);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+          }
+
+          .hero-description {
+            font-size: 1.125rem;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+          }
+
+          .hero-description .highlight {
+            color: #10b981;
+          }
+
+          .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+          }
+
+          .btn-primary, .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.75rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+          }
+
+          .btn-primary {
+            background: #10b981;
+            color: white;
+            border: none;
+          }
+
+          .btn-primary:hover {
+            background: #059669;
+            transform: translateY(-2px);
+          }
+
+          .btn-outline {
+            background: transparent;
+            border: 1px solid #d1d5db;
+            color: #4b5563;
+          }
+
+          .btn-outline:hover {
+            background: #f9fafb;
+            border-color: #10b981;
+            color: #10b981;
+          }
+
+          .hero-social {
+            display: flex;
+            gap: 1rem;
+          }
+
+          .hero-social a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3f4f6;
+            border-radius: 50%;
+            color: #6b7280;
+            transition: all 0.2s;
+          }
+
+          .hero-social a:hover {
+            background: #10b981;
+            color: white;
+            transform: translateY(-2px);
+          }
+
+          .stats-grid-hero {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+          }
+
+          .stat-card-hero {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+          }
+
+          .stat-card-hero:hover {
+            transform: translateY(-4px);
+            border-color: #10b981;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+          }
+
+          .stat-icon-hero {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1rem;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+          }
+
+          .stat-number-hero {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+          }
+
+          .stat-label-hero {
+            color: #6b7280;
+            font-size: 0.75rem;
+          }
+
+          /* Showcase */
+          .showcase {
+            padding: 4rem 0;
+          }
+
+          .showcase-card {
+            background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+            border: 1px solid #d1fae5;
+            border-radius: 2rem;
+            padding: 3rem;
+            text-align: center;
+          }
+
+          .showcase-icon {
+            width: 60px;
+            height: 60px;
+            background: #d1fae5;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #10b981;
+            margin: 0 auto 1rem;
+          }
+
+          .showcase-badge {
+            display: inline-block;
+            background: #d1fae5;
+            color: #059669;
+            padding: 0.25rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+          }
+
+          .showcase-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1f2937;
+          }
+
+          @media (min-width: 768px) {
+            .showcase-title {
+              font-size: 2.5rem;
+            }
+          }
+
+          .showcase-description {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: #6b7280;
+          }
+
+          .showcase-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+          }
+
+          .showcase-stat-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #10b981;
+          }
+
+          .showcase-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+          }
+
+          .btn-showcase, .btn-showcase-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+          }
+
+          .btn-showcase {
+            background: #10b981;
+            color: white;
+          }
+
+          .btn-showcase:hover {
+            background: #059669;
+            transform: translateY(-2px);
+          }
+
+          .btn-showcase-secondary {
+            background: white;
+            border: 1px solid #d1fae5;
+            color: #059669;
+          }
+
+          .btn-showcase-secondary:hover {
+            background: #f0fdf4;
+            transform: translateY(-2px);
+          }
+
+          /* Section Header */
+          .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+          }
+
+          .section-tag {
+            color: #10b981;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+          }
+
+          .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1f2937;
+          }
+
+          .section-subtitle {
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto;
+          }
+
+          /* Tech Stack */
+          .tech {
+            padding: 4rem 0;
+          }
+
+          .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+          }
+
+          .tech-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem 1.25rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+            color: #4b5563;
+          }
+
+          .tech-card:hover {
+            border-color: #10b981;
+            transform: translateY(-2px);
+            background: #ecfdf5;
+          }
+
+          .tech-icon {
+            font-size: 1.25rem;
+          }
+
+          .tech-name {
+            font-size: 0.875rem;
+          }
+
+          /* Services */
+          .services {
+            padding: 4rem 0;
+            background: #f9fafb;
+          }
+
+          .services-grid {
+            display: grid;
+            gap: 1.5rem;
+          }
+
+          @media (min-width: 768px) {
+            .services-grid {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+
+          @media (min-width: 1024px) {
+            .services-grid {
+              grid-template-columns: repeat(3, 1fr);
+            }
+          }
+
+          .service-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s;
+          }
+
+          .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #10b981;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+          }
+
+          .service-icon {
+            font-size: 2.5rem;
+            color: #10b981;
+            margin-bottom: 1rem;
+          }
+
+          .service-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #1f2937;
+          }
+
+          .service-desc {
+            color: #6b7280;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+          }
+
+          .service-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+          }
+
+          .service-feature {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.7rem;
+            color: #10b981;
+            background: #ecfdf5;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+          }
+
+          /* Experience */
+          .experience {
+            padding: 4rem 0;
+          }
+
+          .experience-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+          }
+
+          .experience-card {
+            display: flex;
+            gap: 1rem;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s;
+          }
+
+          .experience-card:hover {
+            border-color: #10b981;
+          }
+
+          .experience-icon {
+            font-size: 1.5rem;
+            color: #10b981;
+          }
+
+          .experience-content h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+          }
+
+          .experience-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.75rem;
+            color: #6b7280;
+          }
+
+          .experience-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+          }
+
+          .experience-content p {
+            color: #6b7280;
+            font-size: 0.875rem;
+            line-height: 1.6;
+          }
+
+          /* Work Section */
+          .work {
+            padding: 4rem 0;
+            background: #f9fafb;
+          }
+
+          .work-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+          }
+
+          .work-card {
+            display: grid;
+            gap: 1.5rem;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            transition: all 0.3s;
+          }
+
+          @media (min-width: 768px) {
+            .work-card {
+              grid-template-columns: auto 1fr;
+            }
+          }
+
+          .work-card:hover {
+            border-color: #10b981;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+          }
+
+          .work-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+          }
+
+          .work-links {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+          }
+
+          .work-links a {
+            color: #6b7280;
+            transition: color 0.2s;
+          }
+
+          .work-links a:hover {
+            color: #10b981;
+          }
+
+          .work-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+          }
+
+          .work-category {
+            font-size: 0.7rem;
+            color: #10b981;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+          }
+
+          .work-year {
+            font-size: 0.7rem;
+            color: #6b7280;
+          }
+
+          .work-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #1f2937;
+          }
+
+          .work-description {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+          }
+
+          .work-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+          }
+
+          .work-tech-tag {
+            background: #f3f4f6;
+            color: #4b5563;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+          }
+
+          .work-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #10b981;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: gap 0.2s;
+          }
+
+          .work-link-btn:hover {
+            gap: 0.75rem;
+          }
+
+          /* Contact Section */
+          .contact {
+            padding: 4rem 0;
+          }
+
+          .contact-card {
+            background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+            border: 1px solid #d1fae5;
+            border-radius: 2rem;
+            padding: 3rem;
+            text-align: center;
+          }
+
+          .contact-badge {
+            display: inline-block;
+            background: #d1fae5;
+            color: #059669;
+            padding: 0.25rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+          }
+
+          .contact-title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1f2937;
+          }
+
+          .contact-text {
+            color: #6b7280;
+            margin-bottom: 2rem;
+          }
+
+          .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+          }
+
+          /* Footer */
+          .footer {
+            border-top: 1px solid #e5e7eb;
+            padding: 2rem 0;
+            background: white;
+          }
+
+          .footer-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            text-align: center;
+          }
+
+          @media (min-width: 768px) {
+            .footer-inner {
+              flex-direction: row;
+              justify-content: space-between;
+            }
+          }
+
+          .footer-inner p {
+            color: #6b7280;
+            font-size: 0.875rem;
+          }
+
+          .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+          }
+
+          .footer-links button, .footer-links a {
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            transition: color 0.2s;
+            text-decoration: none;
+            font-size: 0.875rem;
+          }
+
+          .footer-links button:hover, .footer-links a:hover {
+            color: #10b981;
+          }
+        `}</style>
+
+        {/* Header */}
+        <header className={`header ${scrolled ? "scrolled" : ""}`}>
+          <div className="container">
+            <div className="header-inner">
+              <button onClick={() => scrollToSection("home")} className="logo">
+                <span className="logo-mark">A</span>
+                <span className="logo-text">nuj Kattel</span>
+              </button>
+              
+              <nav className="desktop-nav">
+                {["home", "work", "services", "contact"].map((item) => (
+                  <button 
+                    key={item} 
+                    onClick={() => scrollToSection(item)} 
+                    className={`nav-link ${activeSection === item ? "active" : ""}`}
+                  >
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </button>
+                ))}
+                <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }} className="btn-hire">
+                  Hire Me <FaArrowRight />
+                </a>
+              </nav>
+
+              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="mobile-menu-btn">
+                <span className={`hamburger ${mobileMenuOpen ? "open" : ""}`}></span>
+              </button>
+            </div>
           </div>
 
-          <AnimatePresence>
-            {mobileMenuOpen && (
-              <motion.div 
-                initial={{ opacity: 0, height: 0 }} 
-                animate={{ opacity: 1, height: "auto" }} 
-                exit={{ opacity: 0, height: 0 }} 
-                className="mobile-nav"
-              >
-                <div className="mobile-nav-inner">
-                  {["Work", "Services", "Contact"].map((item) => (
-                    <button key={item} onClick={() => scrollToSection(item.toLowerCase())} className="mobile-nav-link">
-                      {item}
-                    </button>
-                  ))}
-                  <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }} className="btn-hire-mobile">Contact Me</a>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {mobileMenuOpen && (
+            <div className="mobile-nav">
+              <div className="mobile-nav-inner">
+                {["home", "work", "services", "contact"].map((item) => (
+                  <button key={item} onClick={() => scrollToSection(item)} className="mobile-nav-link">
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </button>
+                ))}
+                <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }} className="btn-hire-mobile">
+                  Hire Me
+                </a>
+              </div>
+            </div>
+          )}
         </header>
 
         <main>
           {/* Hero Section */}
-          <section id="hero" className="hero">
-            <div className="container hero-container">
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-                <div className="hero-badge">
-                  <span className="hero-badge-dot"></span>
-                  <span>Creator of Digital Khata</span>
-                </div>
-                <h1 className="hero-title">
-                  Hi, I'm <span className="hero-title-accent">Anuj Kattel</span>
-                </h1>
-                <p className="hero-description">
-                  Full-stack developer and creator of <strong className="highlight">Digital Khata</strong> - Nepal's leading business management app with 10,000+ users. I build scalable applications that solve real business problems.
-                </p>
-                <div className="hero-buttons">
-                  <button onClick={() => scrollToSection("work")} className="btn-primary">
-                    View Digital Khata <FaArrowRight />
-                  </button>
-                  <button onClick={() => scrollToSection("contact")} className="btn-secondary">
-                    Let's Talk
-                  </button>
-                </div>
-              </motion.div>
-            </div>
-          </section>
-
-          {/* Stats Section with Icons */}
-          <section className="stats">
-            <div className="container stats-grid">
-              {stats.map((stat, idx) => (
-                <div key={idx} className="stat-card">
-                  <div className="stat-icon">{stat.icon}</div>
-                  <div className="stat-value">
-                    <CountUp target={stat.value} suffix={stat.suffix} />
+          <section id="home" className="hero">
+            <div className="container">
+              <div className="hero-grid">
+                <div className="hero-content">
+                  <div className="hero-badge">
+                    <span className="badge-dot"></span>
+                    Available for work
                   </div>
-                  <p className="stat-label">{stat.label}</p>
+                  <h1 className="hero-title">
+                    Building digital<br />
+                    <span className="gradient-text">experiences that matter</span>
+                  </h1>
+                  <p className="hero-description">
+                    I'm <strong>Anuj Kattel</strong>, creator of <strong className="highlight">Digital Khata</strong> - Nepal's leading business management app with 10,000+ users. I specialize in building scalable web and mobile applications.
+                  </p>
+                  <div className="hero-buttons">
+                    <button onClick={() => scrollToSection("work")} className="btn-primary">
+                      View My Work <FaArrowRight />
+                    </button>
+                    <button onClick={() => scrollToSection("contact")} className="btn-outline">
+                      Let's Connect
+                    </button>
+                  </div>
+                  <div className="hero-social">
+                    <a href="https://github.com/anujsmit" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+                    <a href="https://linkedin.com/in/anujkattel" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+                    <a href="https://wa.me/9779825995421" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a>
+                    <a href="mailto:anujkattel62@gmail.com"><FaEnvelope /></a>
+                  </div>
                 </div>
-              ))}
+
+                <div className="hero-stats">
+                  <div className="stats-grid-hero">
+                    {stats.map((stat, idx) => (
+                      <div key={idx} className="stat-card-hero">
+                        <div className="stat-icon-hero" style={{ background: stat.color }}>{stat.icon}</div>
+                        <div className="stat-number-hero"><CountUp target={stat.value} suffix={stat.suffix} /></div>
+                        <div className="stat-label-hero">{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
 
-          {/* Digital Khata Showcase - Special Section */}
+          {/* Digital Khata Showcase */}
           <section className="showcase">
             <div className="container">
               <div className="showcase-card">
-                <div className="showcase-badge">
-                  <FaGem className="showcase-badge-icon" /> Featured Project
+                <div className="showcase-icon">
+                  <FaGem />
                 </div>
+                <span className="showcase-badge">Featured Project</span>
                 <h2 className="showcase-title">Digital Khata</h2>
                 <p className="showcase-description">
-                  Nepal's premier business management application helping thousands of small businesses digitize their operations.
+                  Nepal's premier business management application helping thousands of small businesses digitize their operations with ease and security.
                 </p>
                 <div className="showcase-stats">
-                  <div className="showcase-stat">
-                    <div className="showcase-stat-value">10,000+</div>
-                    <div className="showcase-stat-label">Active Users</div>
-                  </div>
-                  <div className="showcase-stat">
-                    <div className="showcase-stat-value">50K+</div>
-                    <div className="showcase-stat-label">Transactions</div>
-                  </div>
-                  <div className="showcase-stat">
-                    <div className="showcase-stat-value">4.9</div>
-                    <div className="showcase-stat-label">⭐ Rating</div>
-                  </div>
+                  {projects[0].stats.map((stat, idx) => (
+                    <div key={idx} className="showcase-stat">
+                      <div className="showcase-stat-value">{stat}</div>
+                    </div>
+                  ))}
                 </div>
                 <div className="showcase-buttons">
                   <a href="/digitalkhata/" className="btn-showcase">
-                    Explore Digital Khata <FaArrowRight />
+                    Explore Digital Khata <FaExternalLinkAlt />
                   </a>
                   <a href="https://github.com/anujsmit" target="_blank" rel="noopener noreferrer" className="btn-showcase-secondary">
-                    <FaGithub /> GitHub
+                    <FaGithub /> View on GitHub
                   </a>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* Achievements */}
-          <section className="achievements">
-            <div className="container achievements-grid">
-              {achievements.map((item, idx) => (
-                <div key={idx} className="achievement-card">
-                  <div className="achievement-icon">{item.icon}</div>
-                  <h3 className="achievement-title">{item.title}</h3>
-                  <p className="achievement-desc">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
           {/* Tech Stack */}
           <section className="tech">
             <div className="container">
-              <SectionTitle label="Expertise" title="Technologies I Master" subtitle="Modern tools that power Digital Khata and other scalable applications." />
+              <div className="section-header">
+                <span className="section-tag">Tech Stack</span>
+                <h2 className="section-title">Technologies I <span className="gradient-text">Master</span></h2>
+                <p className="section-subtitle">Modern tools that power Digital Khata and other scalable applications</p>
+              </div>
               <div className="tech-grid">
                 {techStack.map((tech) => (
-                  <div key={tech} className="tech-item">
-                    {tech}
+                  <div key={tech.name} className="tech-card">
+                    <div className="tech-icon" style={{ color: tech.color }}>{tech.icon}</div>
+                    <span className="tech-name">{tech.name}</span>
                   </div>
                 ))}
               </div>
@@ -340,17 +1307,22 @@ export default function Portfolio() {
           {/* Services Section */}
           <section id="services" className="services">
             <div className="container">
-              <SectionTitle label="What I Do" title="Core Capabilities" subtitle="End-to-end development services tailored to your business needs." />
+              <div className="section-header">
+                <span className="section-tag">What I Do</span>
+                <h2 className="section-title">Services I <span className="gradient-text">Provide</span></h2>
+                <p className="section-subtitle">End-to-end development services tailored to your business needs</p>
+              </div>
               <div className="services-grid">
-                {services.map((service) => (
-                  <div key={service.num} className="service-card">
+                {services.map((service, idx) => (
+                  <div key={idx} className="service-card">
                     <div className="service-icon">{service.icon}</div>
-                    <div className="service-num">{service.num}</div>
                     <h3 className="service-title">{service.title}</h3>
                     <p className="service-desc">{service.desc}</p>
-                    <div className="service-tags">
-                      {service.tags.map((tag) => (
-                        <span key={tag} className="service-tag">{tag}</span>
+                    <div className="service-features">
+                      {service.features.map((feature, i) => (
+                        <span key={i} className="service-feature">
+                          <FaCheckCircle /> {feature}
+                        </span>
                       ))}
                     </div>
                   </div>
@@ -359,40 +1331,60 @@ export default function Portfolio() {
             </div>
           </section>
 
-          {/* Work Section - Digital Khata Featured */}
+          {/* Experience Section */}
+          <section className="experience">
+            <div className="container">
+              <div className="section-header">
+                <span className="section-tag">Experience</span>
+                <h2 className="section-title">Work <span className="gradient-text">Journey</span></h2>
+              </div>
+              <div className="experience-grid">
+                {experiences.map((exp, idx) => (
+                  <div key={idx} className="experience-card">
+                    <div className="experience-icon"><FaBriefcase /></div>
+                    <div className="experience-content">
+                      <h3>{exp.title}</h3>
+                      <div className="experience-meta">
+                        <span><FaBuilding /> {exp.company}</span>
+                        <span><FaCalendarAlt /> {exp.period}</span>
+                        <span><FaMapMarkerAlt /> {exp.location}</span>
+                      </div>
+                      <p>{exp.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Work Section */}
           <section id="work" className="work">
             <div className="container">
-              <SectionTitle label="Portfolio" title="Featured Project" subtitle="Digital Khata - A complete business management solution." />
+              <div className="section-header">
+                <span className="section-tag">Portfolio</span>
+                <h2 className="section-title">Featured <span className="gradient-text">Project</span></h2>
+              </div>
               <div className="work-grid">
                 {projects.map((project) => (
                   <div key={project.id} className="work-card">
-                    <div className="work-card-header">
-                      <div>
-                        <span className="work-meta">{project.id} · {project.year}</span>
-                        <h3 className="work-title">{project.title}</h3>
-                      </div>
+                    <div className="work-icon" style={{ background: project.gradient }}>{project.icon}</div>
+                    <div className="work-info">
                       <div className="work-links">
-                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="work-link">
-                          <FaGithub />
-                        </a>
+                        <a href={project.github} target="_blank" rel="noopener noreferrer"><FaGithub /></a>
                       </div>
-                    </div>
-                    <p className="work-description">{project.description}</p>
-                    <div className="work-features">
-                      {project.features.map((feature, idx) => (
-                        <span key={idx} className="work-feature-tag">
-                          <FaCheckCircle className="feature-icon" /> {feature}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="work-tech">
-                      {project.tech.map((t) => (
-                        <span key={t} className="work-tech-tag">{t}</span>
-                      ))}
-                    </div>
-                    <div className="work-buttons">
-                      <a href={project.liveDemo} className="work-case-link">
-                        Explore Digital Khata <FaArrowRight />
+                      <div className="work-meta">
+                        <span className="work-category">{project.category}</span>
+                        <span className="work-year">{project.year}</span>
+                      </div>
+                      <h3 className="work-title">{project.title}</h3>
+                      <p className="work-description">{project.description}</p>
+                      <div className="work-tech">
+                        {project.tech.map((t) => (
+                          <span key={t} className="work-tech-tag">{t}</span>
+                        ))}
+                      </div>
+                      <a href={project.liveDemo} className="work-link-btn">
+                        View Project <FaArrowRight />
                       </a>
                     </div>
                   </div>
@@ -401,42 +1393,19 @@ export default function Portfolio() {
             </div>
           </section>
 
-          {/* Testimonial Section */}
-          <section className="testimonial">
-            <div className="container">
-              <div className="testimonial-card">
-                <FaHeart className="testimonial-icon" />
-                <p className="testimonial-text">
-                  "Digital Khata has transformed how I manage my business. The app is intuitive, secure, and saves me hours every week."
-                </p>
-                <div className="testimonial-author">
-                  <div className="testimonial-avatar">R</div>
-                  <div>
-                    <div className="testimonial-name">Ram Shrestha</div>
-                    <div className="testimonial-role">Store Owner, Kathmandu</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
           {/* Contact Section */}
           <section id="contact" className="contact">
-            <div className="container contact-container">
-              <SectionTitle label="Get in Touch" title="Start Your Next Project" subtitle="Have an idea? Let's turn it into reality." />
+            <div className="container">
               <div className="contact-card">
-                <FaEnvelope className="contact-icon" />
-                <h3 className="contact-title">Let's Build Something Great</h3>
-                <p className="contact-text">Reach out for a free consultation. I typically respond within 24 hours.</p>
+                <span className="contact-badge">Get in Touch</span>
+                <h2 className="contact-title">Let's work <span className="gradient-text">together</span></h2>
+                <p className="contact-text">Have a project in mind? I'd love to hear about it.</p>
                 <div className="contact-buttons">
                   <a href="mailto:anujkattel62@gmail.com" className="btn-primary">
-                    anujkattel62@gmail.com <FaArrowRight />
+                    <FaEnvelope /> anujkattel62@gmail.com
                   </a>
-                  <a href="https://github.com/anujsmit" target="_blank" rel="noopener noreferrer" className="btn-social">
-                    <FaGithub /> GitHub
-                  </a>
-                  <a href="https://linkedin.com/in/anujkattel" target="_blank" rel="noopener noreferrer" className="btn-social">
-                    <FaLinkedin /> LinkedIn
+                  <a href="https://wa.me/9779825995421" target="_blank" rel="noopener noreferrer" className="btn-outline">
+                    <FaWhatsapp /> WhatsApp
                   </a>
                 </div>
               </div>
@@ -446,1002 +1415,20 @@ export default function Portfolio() {
 
         {/* Footer */}
         <footer className="footer">
-          <div className="container footer-container">
-            <p>© 2026 Anuj Kattel — Creator of Digital Khata</p>
-            <div className="footer-links">
-              <button onClick={() => scrollToSection("hero")} className="footer-link">Home</button>
-              <button onClick={() => scrollToSection("work")} className="footer-link">Projects</button>
-              <button onClick={() => scrollToSection("contact")} className="footer-link">Contact</button>
+          <div className="container">
+            <div className="footer-inner">
+              <p>© 2024 Anuj Kattel — Creator of Digital Khata</p>
+              <div className="footer-links">
+                <button onClick={() => scrollToSection("home")}>Home</button>
+                <button onClick={() => scrollToSection("work")}>Work</button>
+                <button onClick={() => scrollToSection("contact")}>Contact</button>
+                <a href="/digitalkhata/privacy">Privacy</a>
+                <a href="/digitalkhata/deleteaccount">Delete Account</a>
+              </div>
             </div>
           </div>
         </footer>
       </div>
-
-      <style jsx>{`
-        /* Reset & Base - Dark Theme */
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
-
-        .portfolio {
-          background: #0a0a0f;
-          color: #ffffff;
-          font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
-          min-height: 100vh;
-          overflow-x: hidden;
-          position: relative;
-        }
-
-        ::selection {
-          background: #10b981;
-          color: #0a0a0f;
-        }
-
-        .container {
-          max-width: 1280px;
-          margin: 0 auto;
-          padding: 0 1.5rem;
-        }
-
-        /* Animated Background Blobs - Dark Theme */
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-
-        .blob {
-          position: fixed;
-          border-radius: 50%;
-          filter: blur(100px);
-          opacity: 0.15;
-          animation: blob 20s infinite;
-          pointer-events: none;
-          z-index: 0;
-        }
-
-        .blob-1 {
-          width: 400px;
-          height: 400px;
-          background: #10b981;
-          top: 100px;
-          left: -100px;
-        }
-
-        .blob-2 {
-          width: 500px;
-          height: 500px;
-          background: #3b82f6;
-          bottom: 100px;
-          right: -100px;
-          animation-delay: -5s;
-        }
-
-        .blob-3 {
-          width: 450px;
-          height: 450px;
-          background: #8b5cf6;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          animation-delay: -10s;
-        }
-
-        .blob-4 {
-          width: 300px;
-          height: 300px;
-          background: #ec4899;
-          top: 70%;
-          right: 10%;
-          animation-delay: -15s;
-        }
-
-        /* Progress Bar */
-        .progress-bar {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 3px;
-          background: linear-gradient(90deg, #10b981, #14b8a6, #06b6d4);
-          z-index: 9999;
-        }
-
-        /* Header - Dark Theme */
-        .header {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          z-index: 100;
-          transition: all 0.3s ease;
-          background: rgba(10, 10, 15, 0.9);
-          backdrop-filter: blur(12px);
-        }
-
-        .header-scrolled {
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-          box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-
-        .header-container {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 1rem 1.5rem;
-          max-width: 1280px;
-          margin: 0 auto;
-        }
-
-        .logo {
-          font-size: 1.5rem;
-          font-weight: 700;
-          background: none;
-          border: none;
-          color: #ffffff;
-          cursor: pointer;
-        }
-
-        .logo-accent {
-          color: #10b981;
-        }
-
-        .desktop-nav {
-          display: none;
-          gap: 2rem;
-          align-items: center;
-        }
-
-        @media (min-width: 768px) {
-          .desktop-nav {
-            display: flex;
-          }
-          .mobile-menu-btn {
-            display: none;
-          }
-        }
-
-        .nav-link {
-          background: none;
-          border: none;
-          color: #9ca3af;
-          font-size: 0.875rem;
-          font-weight: 500;
-          cursor: pointer;
-          transition: color 0.2s;
-        }
-
-        .nav-link:hover {
-          color: #10b981;
-        }
-
-        .btn-hire {
-          background: #10b981;
-          padding: 0.5rem 1.25rem;
-          border-radius: 9999px;
-          font-size: 0.875rem;
-          color: white;
-          text-decoration: none;
-          transition: all 0.2s;
-        }
-
-        .btn-hire:hover {
-          background: #059669;
-          transform: translateY(-1px);
-        }
-
-        .mobile-menu-btn {
-          background: none;
-          border: none;
-          cursor: pointer;
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-          padding: 8px;
-        }
-
-        .menu-line {
-          width: 24px;
-          height: 2px;
-          background: #ffffff;
-          transition: all 0.3s;
-        }
-
-        .menu-line.open:nth-child(1) {
-          transform: rotate(45deg) translate(6px, 6px);
-        }
-        .menu-line.open:nth-child(2) {
-          opacity: 0;
-        }
-        .menu-line.open:nth-child(3) {
-          transform: rotate(-45deg) translate(6px, -6px);
-        }
-
-        .mobile-nav {
-          background: rgba(10, 10, 15, 0.95);
-          backdrop-filter: blur(12px);
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .mobile-nav-inner {
-          display: flex;
-          flex-direction: column;
-          padding: 1.5rem;
-          gap: 1rem;
-        }
-
-        .mobile-nav-link {
-          background: none;
-          border: none;
-          color: #d1d5db;
-          font-size: 1rem;
-          text-align: left;
-          padding: 0.5rem 0;
-          cursor: pointer;
-        }
-
-        .btn-hire-mobile {
-          background: #10b981;
-          color: white;
-          text-align: center;
-          padding: 0.75rem;
-          border-radius: 9999px;
-          text-decoration: none;
-          font-weight: 500;
-          margin-top: 0.5rem;
-        }
-
-        /* Hero Section - Dark Theme */
-        .hero {
-          min-height: 100vh;
-          display: flex;
-          align-items: center;
-          padding: 6rem 0 4rem;
-          position: relative;
-          z-index: 10;
-        }
-
-        .hero-container {
-          width: 100%;
-        }
-
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: rgba(16, 185, 129, 0.1);
-          border: 1px solid rgba(16, 185, 129, 0.2);
-          padding: 0.5rem 1rem;
-          border-radius: 9999px;
-          margin-bottom: 2rem;
-        }
-
-        .hero-badge-dot {
-          width: 8px;
-          height: 8px;
-          background: #10b981;
-          border-radius: 50%;
-          animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
-        }
-
-        .hero-badge span:last-child {
-          font-size: 0.75rem;
-          color: #10b981;
-          font-weight: 500;
-        }
-
-        .hero-title {
-          font-size: clamp(2.5rem, 8vw, 5rem);
-          font-weight: 800;
-          line-height: 1.1;
-          margin-bottom: 1rem;
-          color: #ffffff;
-        }
-
-        .hero-title-accent {
-          background: linear-gradient(135deg, #10b981, #14b8a6);
-          background-clip: text;
-          -webkit-background-clip: text;
-          color: transparent;
-        }
-
-        .hero-description {
-          font-size: clamp(1rem, 2vw, 1.25rem);
-          color: #9ca3af;
-          max-width: 600px;
-          line-height: 1.6;
-          margin-bottom: 2rem;
-        }
-
-        .hero-description .highlight {
-          color: #10b981;
-        }
-
-        .hero-buttons {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1rem;
-        }
-
-        .btn-primary, .btn-secondary, .btn-social {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.75rem 1.75rem;
-          border-radius: 9999px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.2s;
-          text-decoration: none;
-        }
-
-        .btn-primary {
-          background: #10b981;
-          color: white;
-          border: none;
-        }
-
-        .btn-primary:hover {
-          background: #059669;
-          transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-          background: transparent;
-          border: 1px solid #374151;
-          color: #d1d5db;
-        }
-
-        .btn-secondary:hover {
-          background: rgba(255, 255, 255, 0.05);
-          border-color: #10b981;
-        }
-
-        .btn-social {
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid #374151;
-          color: #d1d5db;
-        }
-
-        .btn-social:hover {
-          background: rgba(255, 255, 255, 0.1);
-          border-color: #10b981;
-        }
-
-        /* Stats Section - Dark Theme */
-        .stats {
-          padding: 4rem 0;
-          position: relative;
-          z-index: 10;
-        }
-
-        .stats-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1rem;
-        }
-
-        @media (min-width: 768px) {
-          .stats-grid {
-            grid-template-columns: repeat(4, 1fr);
-          }
-        }
-
-        .stat-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 1rem;
-          padding: 1.5rem;
-          text-align: center;
-          transition: all 0.3s;
-        }
-
-        .stat-card:hover {
-          transform: translateY(-4px);
-          border-color: #10b981;
-          background: rgba(16, 185, 129, 0.05);
-        }
-
-        .stat-icon {
-          font-size: 2rem;
-          color: #10b981;
-          margin-bottom: 0.5rem;
-        }
-
-        .stat-value {
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: #ffffff;
-        }
-
-        @media (min-width: 768px) {
-          .stat-value {
-            font-size: 2rem;
-          }
-        }
-
-        .stat-label {
-          color: #9ca3af;
-          font-size: 0.875rem;
-          margin-top: 0.25rem;
-        }
-
-        /* Showcase Section - Dark Theme */
-        .showcase {
-          padding: 4rem 0;
-          position: relative;
-          z-index: 10;
-        }
-
-        .showcase-card {
-          background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(20, 184, 166, 0.1));
-          border: 1px solid rgba(16, 185, 129, 0.2);
-          border-radius: 2rem;
-          padding: 3rem;
-          text-align: center;
-          backdrop-filter: blur(10px);
-        }
-
-        .showcase-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: rgba(16, 185, 129, 0.2);
-          padding: 0.25rem 1rem;
-          border-radius: 9999px;
-          font-size: 0.75rem;
-          margin-bottom: 1rem;
-        }
-
-        .showcase-badge-icon {
-          font-size: 0.75rem;
-        }
-
-        .showcase-title {
-          font-size: 2rem;
-          font-weight: 700;
-          margin-bottom: 1rem;
-          background: linear-gradient(135deg, #10b981, #14b8a6);
-          background-clip: text;
-          -webkit-background-clip: text;
-          color: transparent;
-        }
-
-        @media (min-width: 768px) {
-          .showcase-title {
-            font-size: 2.5rem;
-          }
-        }
-
-        .showcase-description {
-          max-width: 600px;
-          margin: 0 auto 2rem;
-          color: #9ca3af;
-        }
-
-        .showcase-stats {
-          display: flex;
-          justify-content: center;
-          gap: 2rem;
-          margin-bottom: 2rem;
-          flex-wrap: wrap;
-        }
-
-        .showcase-stat-value {
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: #10b981;
-        }
-
-        .showcase-stat-label {
-          font-size: 0.75rem;
-          color: #9ca3af;
-        }
-
-        .showcase-buttons {
-          display: flex;
-          justify-content: center;
-          gap: 1rem;
-          flex-wrap: wrap;
-        }
-
-        .btn-showcase {
-          background: #10b981;
-          color: white;
-          padding: 0.75rem 1.5rem;
-          border-radius: 9999px;
-          text-decoration: none;
-          font-weight: 600;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          transition: all 0.2s;
-        }
-
-        .btn-showcase:hover {
-          background: #059669;
-          transform: translateY(-2px);
-        }
-
-        .btn-showcase-secondary {
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          color: white;
-          padding: 0.75rem 1.5rem;
-          border-radius: 9999px;
-          text-decoration: none;
-          font-weight: 600;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          transition: all 0.2s;
-        }
-
-        .btn-showcase-secondary:hover {
-          background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Achievements - Dark Theme */
-        .achievements {
-          padding: 4rem 0;
-          position: relative;
-          z-index: 10;
-        }
-
-        .achievements-grid {
-          display: grid;
-          gap: 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-          .achievements-grid {
-            grid-template-columns: repeat(4, 1fr);
-          }
-        }
-
-        .achievement-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 1rem;
-          padding: 1.5rem;
-          text-align: center;
-          transition: all 0.3s;
-        }
-
-        .achievement-card:hover {
-          transform: translateY(-4px);
-          border-color: #10b981;
-        }
-
-        .achievement-icon {
-          font-size: 2rem;
-          color: #10b981;
-          margin-bottom: 0.75rem;
-        }
-
-        .achievement-title {
-          font-size: 1rem;
-          font-weight: 600;
-          margin-bottom: 0.25rem;
-          color: #ffffff;
-        }
-
-        .achievement-desc {
-          font-size: 0.75rem;
-          color: #9ca3af;
-        }
-
-        /* Section Titles - Dark Theme */
-        .section-title {
-          margin-bottom: 3rem;
-          text-align: center;
-        }
-
-        .section-label {
-          color: #10b981;
-          text-transform: uppercase;
-          letter-spacing: 0.2em;
-          font-size: 0.7rem;
-          font-weight: 600;
-          margin-bottom: 1rem;
-        }
-
-        .section-heading {
-          font-size: clamp(1.75rem, 5vw, 2.5rem);
-          font-weight: 700;
-          margin-bottom: 0.75rem;
-          color: #ffffff;
-        }
-
-        .section-subtitle {
-          color: #9ca3af;
-          max-width: 600px;
-          margin: 0 auto;
-        }
-
-        /* Tech - Dark Theme */
-        .tech {
-          padding: 4rem 0;
-          position: relative;
-          z-index: 10;
-        }
-
-        .tech-grid {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 0.75rem;
-        }
-
-        .tech-item {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          padding: 0.75rem 1.25rem;
-          border-radius: 9999px;
-          font-size: 0.875rem;
-          transition: all 0.2s;
-        }
-
-        .tech-item:hover {
-          border-color: #10b981;
-          background: rgba(16, 185, 129, 0.1);
-          transform: translateY(-2px);
-        }
-
-        /* Services - Dark Theme */
-        .services {
-          padding: 4rem 0;
-          background: rgba(255, 255, 255, 0.02);
-          position: relative;
-          z-index: 10;
-        }
-
-        .services-grid {
-          display: grid;
-          gap: 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-          .services-grid {
-            grid-template-columns: repeat(3, 1fr);
-          }
-        }
-
-        .service-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 1rem;
-          padding: 1.75rem;
-          transition: all 0.3s;
-        }
-
-        .service-card:hover {
-          transform: translateY(-5px);
-          border-color: #10b981;
-        }
-
-        .service-icon {
-          font-size: 2rem;
-          color: #10b981;
-          margin-bottom: 1rem;
-        }
-
-        .service-num {
-          color: #10b981;
-          font-family: monospace;
-          font-size: 0.75rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .service-title {
-          font-size: 1.25rem;
-          font-weight: 600;
-          margin-bottom: 0.75rem;
-          color: #ffffff;
-        }
-
-        .service-desc {
-          color: #9ca3af;
-          font-size: 0.875rem;
-          line-height: 1.6;
-          margin-bottom: 1rem;
-        }
-
-        .service-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-        }
-
-        .service-tag {
-          background: rgba(16, 185, 129, 0.15);
-          color: #10b981;
-          font-size: 0.7rem;
-          padding: 0.25rem 0.75rem;
-          border-radius: 9999px;
-        }
-
-        /* Work - Dark Theme */
-        .work {
-          padding: 4rem 0;
-          position: relative;
-          z-index: 10;
-        }
-
-        .work-grid {
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-        }
-
-        .work-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 1rem;
-          padding: 1.75rem;
-          transition: all 0.3s;
-        }
-
-        .work-card:hover {
-          transform: translateY(-5px);
-          border-color: #10b981;
-        }
-
-        .work-card-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          flex-wrap: wrap;
-          margin-bottom: 1rem;
-        }
-
-        .work-meta {
-          color: #9ca3af;
-          font-size: 0.7rem;
-          font-family: monospace;
-        }
-
-        .work-title {
-          font-size: 1.5rem;
-          font-weight: 700;
-          margin-top: 0.25rem;
-          color: #ffffff;
-        }
-
-        .work-links {
-          display: flex;
-          gap: 0.75rem;
-        }
-
-        .work-link {
-          color: #9ca3af;
-          transition: color 0.2s;
-        }
-
-        .work-link:hover {
-          color: #10b981;
-        }
-
-        .work-description {
-          color: #9ca3af;
-          line-height: 1.6;
-          margin-bottom: 1rem;
-        }
-
-        .work-features {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.75rem;
-          margin-bottom: 1rem;
-        }
-
-        .work-feature-tag {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.25rem;
-          background: rgba(16, 185, 129, 0.1);
-          color: #10b981;
-          font-size: 0.7rem;
-          padding: 0.25rem 0.75rem;
-          border-radius: 9999px;
-        }
-
-        .feature-icon {
-          font-size: 0.6rem;
-        }
-
-        .work-tech {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-          margin-bottom: 1.25rem;
-        }
-
-        .work-tech-tag {
-          background: rgba(255, 255, 255, 0.05);
-          color: #9ca3af;
-          font-size: 0.7rem;
-          padding: 0.25rem 0.75rem;
-          border-radius: 9999px;
-        }
-
-        .work-buttons {
-          display: flex;
-          gap: 1rem;
-        }
-
-        .work-case-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          color: #10b981;
-          text-decoration: none;
-          font-size: 0.875rem;
-          font-weight: 500;
-          transition: gap 0.2s;
-        }
-
-        .work-case-link:hover {
-          gap: 0.75rem;
-        }
-
-        /* Testimonial - Dark Theme */
-        .testimonial {
-          padding: 4rem 0;
-          position: relative;
-          z-index: 10;
-        }
-
-        .testimonial-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 1rem;
-          padding: 2rem;
-          text-align: center;
-          max-width: 600px;
-          margin: 0 auto;
-        }
-
-        .testimonial-icon {
-          font-size: 2rem;
-          color: #10b981;
-          margin-bottom: 1rem;
-        }
-
-        .testimonial-text {
-          color: #d1d5db;
-          font-style: italic;
-          margin-bottom: 1.5rem;
-        }
-
-        .testimonial-author {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.75rem;
-        }
-
-        .testimonial-avatar {
-          width: 48px;
-          height: 48px;
-          background: rgba(16, 185, 129, 0.2);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: 600;
-          color: #10b981;
-        }
-
-        .testimonial-name {
-          font-weight: 600;
-          color: #ffffff;
-        }
-
-        .testimonial-role {
-          font-size: 0.75rem;
-          color: #9ca3af;
-        }
-
-        /* Contact - Dark Theme */
-        .contact {
-          padding: 4rem 0;
-          position: relative;
-          z-index: 10;
-        }
-
-        .contact-container {
-          text-align: center;
-        }
-
-        .contact-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 1rem;
-          padding: 2rem;
-        }
-
-        @media (min-width: 768px) {
-          .contact-card {
-            padding: 3rem;
-          }
-        }
-
-        .contact-icon {
-          font-size: 3rem;
-          color: #10b981;
-          margin-bottom: 1.5rem;
-        }
-
-        .contact-title {
-          font-size: 1.5rem;
-          font-weight: 700;
-          margin-bottom: 0.75rem;
-          color: #ffffff;
-        }
-
-        .contact-text {
-          color: #9ca3af;
-          max-width: 400px;
-          margin: 0 auto 2rem;
-        }
-
-        .contact-buttons {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 1rem;
-        }
-
-        /* Footer - Dark Theme */
-        .footer {
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
-          padding: 2rem 0;
-          background: rgba(10, 10, 15, 0.95);
-          position: relative;
-          z-index: 10;
-        }
-
-        .footer-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 1rem;
-          text-align: center;
-        }
-
-        @media (min-width: 768px) {
-          .footer-container {
-            flex-direction: row;
-            justify-content: space-between;
-          }
-        }
-
-        .footer-links {
-          display: flex;
-          gap: 1.5rem;
-        }
-
-        .footer-link {
-          background: none;
-          border: none;
-          color: #9ca3af;
-          cursor: pointer;
-          transition: color 0.2s;
-        }
-
-        .footer-link:hover {
-          color: #10b981;
-        }
-      `}</style>
     </>
   );
 }
