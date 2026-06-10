@@ -1,0 +1,7 @@
+# Security Policy for anujkattel.com.np
+
+Contact: mailto:anujkattel62@gmail.com
+Contact: https://wa.me/9779825995421
+Expires: 2025-01-01T00:00:00.000Z
+Preferred-Languages: en, ne
+Canonical: https://anujkattel.com.np/.well-known/security.txt

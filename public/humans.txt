@@ -1,0 +1,18 @@
+# Humans.txt for Anuj Kattel Portfolio
+
+/* TEAM */
+Developer: Anuj Kattel
+Location: Jhapa, Nepal
+Email: anujkattel62@gmail.com
+GitHub: https://github.com/anujsmit
+LinkedIn: https://linkedin.com/in/anuj-kattel
+
+/* THANKS */
+Framework: React
+Styling: Tailwind CSS
+Icons: Font Awesome, Lucide React
+Hosting: Vercel / Netlify
+
+/* SITE */
+Last update: 2024-06-01
+Standards: HTML5, CSS3, ES6+
