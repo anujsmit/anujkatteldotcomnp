@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const APK_URL = "https://github.com/anujsmit/digitalkhataapp/releases/download/digitalkhata/app-release.apk";
+const APK_URL = "https://github.com/anujsmit/digitalkhataapp/releases/download/digitalkhata/Digital_khata.apk";
 
 const DigitalKhata = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
