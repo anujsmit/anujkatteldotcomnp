@@ -12,8 +12,8 @@ import DeleteAccount from './digitalkhata/Deleteaccount';
 const SEO = ({ title, description, keywords, url, image }) => {
   const siteTitle = 'Digital Khata - Smart Business Management App';
   const siteDescription = 'Digital Khata is a business management app for small businesses in Nepal. Track customers, manage transactions, and grow your business with ease.';
-  const siteUrl = 'https://digitalkhata.com';
-  const defaultImage = 'https://digitalkhata.com/og-image.jpg';
+  const siteUrl = 'https://anujkattel.com.np';
+  const defaultImage = 'https://anujkattel.com.np/og-image.jpg';
 
   return (
     <Helmet>
@@ -109,7 +109,7 @@ const DigitalKhataWrapper = () => {
         title="Digital Khata - Smart Business Management App"
         description="Digital Khata is the ultimate business management app for small businesses in Nepal. Track customers, manage transactions, create invoices, and get business insights. Download now for free!"
         keywords="digital khata, business management, customer management, transaction tracking, invoice management, business app, nepal business, small business, khata app, digital ledger, business analytics, nepali business app"
-        url="https://digitalkhata.com"
+        url="https://anujkattel.com.np"
       />
       <DigitalKhata />
     </>
@@ -124,7 +124,7 @@ const PrivacyPageWrapper = () => {
         title="Privacy Policy - Digital Khata"
         description="Read Digital Khata's privacy policy to understand how we collect, use, and protect your personal information. Your privacy and data security are our top priorities."
         keywords="privacy policy, data privacy, data security, digital khata privacy, gdpr compliant, data protection, personal information security"
-        url="https://digitalkhata.com/privacy"
+        url="https://anujkattel.com.np/privacy"
       />
       <PrivacyPage />
     </>
