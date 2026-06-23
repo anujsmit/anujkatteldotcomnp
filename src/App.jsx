@@ -7,6 +7,9 @@ import DigitalKhata from './digitalkhata/DigialKhata';
 import PrivacyPage from './digitalkhata/Privacy';
 import TermsAndConditions from './digitalkhata/terms_and_conditions';
 import DeleteAccount from './digitalkhata/Deleteaccount';
+import PrivacyPolicy from "./servex/Privacypolicy";
+import TermsOfUse from "./servex/TermsOfUse";
+import ServeX from "./servex/ServeX"; 
 
 // SEO Component for dynamic meta tags
 const SEO = ({ title, description, keywords, url, image }) => {
@@ -142,6 +145,12 @@ function App() {
           <Route path="/digitalkhata/privacy" element={<PrivacyPageWrapper />} />
           <Route path="/digitalkhata/termsandcondition" element={<TermsAndConditions />} />
           <Route path="/digitalkhata/deleteaccount" element={<DeleteAccount/>} />
+          {/* servex */}
+          {/* ServeX Routes */}
+          <Route path="/servex/" element={<ServeX />} />
+          <Route path="/servex/home" element={<ServeX />} />  
+          <Route path="/servex/privacypolicy" element={<PrivacyPolicy/>} />
+          <Route path="/servex/termsofuse" element={<TermsOfUse/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
