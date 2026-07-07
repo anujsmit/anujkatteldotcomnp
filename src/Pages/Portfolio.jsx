@@ -1422,7 +1422,7 @@ export default function Portfolio() {
                 <button onClick={() => scrollToSection("home")}>Home</button>
                 <button onClick={() => scrollToSection("work")}>Work</button>
                 <button onClick={() => scrollToSection("contact")}>Contact</button>
-                <a href="/digitalkhata/privacy">Privacy</a>
+                <a href="/digitalkhata/privacy">Privacy page</a>
                 <a href="/digitalkhata/deleteaccount">Delete Account</a>
               </div>
             </div>
