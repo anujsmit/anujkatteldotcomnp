@@ -1005,9 +1005,6 @@ export default function CV() {
 
       {/* ─── FLOATING ACTION BUTTONS ─── */}
       <div className={`fab-group ${showFab ? "visible" : ""}`}>
-        <button onClick={() => window.print()} className="fab-btn fab-print" title="Print / Save as PDF">
-          <FaPrint />
-        </button>
         <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="fab-btn fab-top" title="Back to top">
           <FaArrowUp />
         </button>
