@@ -126,13 +126,6 @@ const languages = [
 
 const interests = ["Open Source", "AI / ML", "Startup Culture", "Tech Blogging", "Cloud Architecture"];
 
-const stats = [
-  { value: 10000, suffix: "+", label: "Active Users", icon: <FaUsers />, color: "#10b981" },
-  { value: 50000, suffix: "+", label: "Transactions", icon: <FaChartLine />, color: "#3b82f6" },
-  { value: 4.9, suffix: "/5", label: "User Rating", icon: <FaStar />, color: "#f59e0b" },
-  { value: 20, suffix: "+", label: "Projects", icon: <FaCode />, color: "#8b5cf6" }
-];
-
 // ─── ANIMATED NUMBER ───────────────────────────────────
 
 function AnimatedNumber({ value, suffix, duration = 2000 }) {
@@ -425,36 +418,6 @@ export default function CV() {
           opacity: 0.8;
         }
 
-        .skill-group { margin-bottom: 0.9rem; }
-        .skill-group-label {
-          font-size: 0.62rem;
-          color: #4a5a6a;
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          margin-bottom: 0.35rem;
-          font-weight: 600;
-        }
-
-        .skill-tag {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.35rem;
-          background: rgba(16,185,129,0.08);
-          color: #34d399;
-          padding: 0.22rem 0.65rem;
-          border-radius: 6px;
-          font-size: 0.68rem;
-          margin: 0 0.2rem 0.25rem 0;
-          border: 1px solid rgba(16,185,129,0.1);
-          font-weight: 500;
-          transition: all 0.2s;
-        }
-        .skill-tag:hover {
-          background: rgba(16,185,129,0.15);
-          border-color: rgba(16,185,129,0.25);
-        }
-        .skill-tag svg { font-size: 0.72rem; }
-
         .lang-row {
           display: flex;
           align-items: center;
@@ -584,69 +547,49 @@ export default function CV() {
           background: linear-gradient(90deg, #e2e8f0, transparent);
         }
 
-        /* Stats */
-        .stats-grid {
+        /* Skills in Main Content */
+        .skills-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 0.75rem;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.5rem;
           margin-bottom: 0.5rem;
         }
 
-        .stat-card {
+        .skill-category {
           background: #f8fafb;
           border: 1px solid #eef2f6;
           border-radius: 12px;
-          padding: 1rem 0.6rem;
-          text-align: center;
-          transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
-          position: relative;
-          overflow: hidden;
+          padding: 1.2rem;
         }
 
-        .stat-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 2px;
-          opacity: 0;
-          transition: opacity 0.3s;
-        }
-
-        .stat-card:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-        }
-        .stat-card:hover::before { opacity: 1; }
-
-        .stat-icon-wrap {
-          width: 34px;
-          height: 34px;
-          border-radius: 10px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 auto 0.5rem;
-          font-size: 0.85rem;
-        }
-
-        .stat-number {
-          font-size: 1.3rem;
-          font-weight: 800;
-          color: #1a2332;
-          letter-spacing: -0.03em;
-          line-height: 1.2;
-        }
-
-        .stat-label {
-          font-size: 0.62rem;
-          color: #7a8a9a;
-          font-weight: 600;
+        .skill-category-title {
+          font-size: 0.7rem;
+          font-weight: 700;
+          color: #10b981;
           text-transform: uppercase;
-          letter-spacing: 0.04em;
-          margin-top: 0.15rem;
+          letter-spacing: 0.08em;
+          margin-bottom: 0.8rem;
         }
+
+        .skill-item {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          background: #fff;
+          padding: 0.3rem 0.7rem;
+          border-radius: 6px;
+          font-size: 0.72rem;
+          font-weight: 500;
+          color: #1a2332;
+          margin: 0 0.25rem 0.35rem 0;
+          border: 1px solid #e8ecf0;
+          transition: all 0.2s;
+        }
+        .skill-item:hover {
+          border-color: #10b981;
+          background: #f0fdf4;
+        }
+        .skill-item svg { font-size: 0.8rem; }
 
         /* Experience */
         .exp-item {
@@ -903,12 +846,12 @@ export default function CV() {
             border-radius: 0;
             max-width: 100%;
           }
-          .sidebar, .stat-card, .project-card, .edu-card, .skill-tag,
+          .sidebar, .skill-category, .project-card, .edu-card, .skill-item,
           .lang-level, .section-icon, .exp-type, .profile-image {
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
           }
-          .stat-card:hover, .project-card:hover { transform: none; box-shadow: none; }
+          .project-card:hover { transform: none; box-shadow: none; }
           .exp-item::after { display: none; }
         }
 
@@ -920,7 +863,7 @@ export default function CV() {
           }
           .sidebar { padding: 2rem 1.5rem; }
           .main-content { padding: 2rem 1.5rem; }
-          .stats-grid { grid-template-columns: repeat(2, 1fr); }
+          .skills-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 550px) {
@@ -928,11 +871,9 @@ export default function CV() {
           .cv-container { border-radius: 10px; }
           .top-bar { margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem; }
           .btn-action span.btn-label { display: none; }
-          .stats-grid { gap: 0.5rem; }
-          .stat-card { padding: 0.75rem 0.4rem; }
-          .stat-number { font-size: 1.1rem; }
           .main-content { padding: 1.5rem 1.2rem; }
           .edu-card { flex-direction: column; }
+          .skills-grid { grid-template-columns: 1fr; gap: 0.75rem; }
         }
       `}</style>
 
@@ -982,7 +923,7 @@ export default function CV() {
               </div>
               <div className="contact-item">
                 <FaWhatsapp className="ci-icon" />
-                <span>WhatsApp Available</span>
+                <span>+977 9825995421</span>
               </div>
               <div className="contact-item">
                 <FaMapMarkerAlt className="ci-icon" />
@@ -994,22 +935,6 @@ export default function CV() {
                   {profile.github}
                 </a>
               </div>
-            </div>
-
-            {/* Skills */}
-            <div className="sidebar-section">
-              <div className="sidebar-section-title"><FaCode /> Skills</div>
-              {Object.entries(skills).map(([group, items]) => (
-                <div key={group} className="skill-group">
-                  <div className="skill-group-label">{group}</div>
-                  {items.map(skill => (
-                    <span key={skill} className="skill-tag">
-                      {techIconMap[skill]}
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              ))}
             </div>
 
             {/* Languages */}
@@ -1059,25 +984,25 @@ export default function CV() {
           {/* ══════ MAIN CONTENT ══════ */}
           <div className="main-content">
 
-            {/* Stats */}
+            {/* Skills - Moved to Main Content */}
             <Reveal>
-              <div className="stats-grid">
-                {stats.map((stat, i) => (
-                  <div key={i} className="stat-card" style={{
-                    "--c": stat.color
-                  }}>
-                    <div style={{
-                      position: "absolute", top: 0, left: 0, right: 0, height: "2px",
-                      background: `linear-gradient(90deg, ${stat.color}, transparent)`,
-                      opacity: 0, transition: "opacity 0.3s"
-                    }} className="stat-top-line" />
-                    <div className="stat-icon-wrap" style={{ background: `${stat.color}12`, color: stat.color }}>
-                      {stat.icon}
-                    </div>
-                    <div className="stat-number">
-                      <AnimatedNumber value={stat.value} suffix={stat.suffix} />
-                    </div>
-                    <div className="stat-label">{stat.label}</div>
+              <div className="section-header">
+                <div className="section-icon" style={{ background: "linear-gradient(135deg, #8b5cf6, #7c3aed)" }}>
+                  <FaCode />
+                </div>
+                <span className="section-title-text">Skills</span>
+                <div className="section-line" />
+              </div>
+              <div className="skills-grid">
+                {Object.entries(skills).map(([category, items]) => (
+                  <div key={category} className="skill-category">
+                    <div className="skill-category-title">{category}</div>
+                    {items.map(skill => (
+                      <span key={skill} className="skill-item">
+                        {techIconMap[skill]}
+                        {skill}
+                      </span>
+                    ))}
                   </div>
                 ))}
               </div>
@@ -1168,48 +1093,6 @@ export default function CV() {
                 </div>
               </Reveal>
             ))}
-
-            {/* Strengths */}
-            <Reveal delay={100}>
-              <div className="section-header">
-                <div className="section-icon" style={{ background: "linear-gradient(135deg, #f59e0b, #d97706)" }}>
-                  <FaShieldAlt />
-                </div>
-                <span className="section-title-text">Core Strengths</span>
-                <div className="section-line" />
-              </div>
-            </Reveal>
-
-            <Reveal delay={150}>
-              <div style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-                gap: "0.5rem"
-              }}>
-                {[
-                  "System Architecture",
-                  "API Design & Integration",
-                  "Performance Optimization",
-                  "Cross-Platform Development",
-                  "Database Design",
-                  "Agile & Scrum",
-                  "Technical Leadership",
-                  "Product Thinking"
-                ].map((s, i) => (
-                  <div key={i} style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    fontSize: "0.78rem",
-                    color: "#4a5a6e",
-                    padding: "0.4rem 0"
-                  }}>
-                    <FaCheckCircle style={{ color: "#10b981", fontSize: "0.7rem", flexShrink: 0 }} />
-                    {s}
-                  </div>
-                ))}
-              </div>
-            </Reveal>
 
           </div>
         </div>
