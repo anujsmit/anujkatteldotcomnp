@@ -126,41 +126,6 @@ const languages = [
 
 const interests = ["Open Source", "AI / ML", "Startup Culture", "Tech Blogging", "Cloud Architecture"];
 
-// ─── ANIMATED NUMBER ───────────────────────────────────
-
-function AnimatedNumber({ value, suffix, duration = 2000 }) {
-  const [display, setDisplay] = useState(0);
-  const ref = useRef(null);
-  const started = useRef(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true;
-          const isFloat = !Number.isInteger(value);
-          const start = performance.now();
-          const step = (now) => {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const current = eased * value;
-            setDisplay(isFloat ? parseFloat(current.toFixed(1)) : Math.floor(current));
-            if (progress < 1) requestAnimationFrame(step);
-          };
-          requestAnimationFrame(step);
-        }
-      },
-      { threshold: 0.3 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [value, duration]);
-
-  return <span ref={ref}>{display.toLocaleString()}{suffix}</span>;
-}
-
 // ─── REVEAL ON SCROLL ──────────────────────────────────
 
 function Reveal({ children, delay = 0 }) {
@@ -228,49 +193,6 @@ export default function CV() {
           flex-direction: column;
           align-items: center;
         }
-
-        /* ─── TOP BAR ─── */
-        .top-bar {
-          width: 100%;
-          max-width: 1060px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 1.5rem;
-          padding: 0 0.25rem;
-        }
-        .top-bar-logo {
-          font-size: 1.15rem;
-          font-weight: 800;
-          color: #fff;
-          letter-spacing: -0.03em;
-        }
-        .top-bar-logo span { color: #10b981; }
-        .top-bar-actions { display: flex; gap: 0.6rem; }
-        .btn-action {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.45rem;
-          padding: 0.5rem 1.1rem;
-          border-radius: 9999px;
-          font-size: 0.75rem;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.25s;
-          border: none;
-          font-family: inherit;
-        }
-        .btn-outline {
-          background: rgba(255,255,255,0.06);
-          color: #c8d6e5;
-          border: 1px solid rgba(255,255,255,0.1);
-        }
-        .btn-outline:hover { background: rgba(255,255,255,0.12); color: #fff; }
-        .btn-primary {
-          background: #10b981;
-          color: #fff;
-        }
-        .btn-primary:hover { background: #059669; transform: translateY(-1px); }
 
         /* ─── CV CONTAINER ─── */
         .cv-container {
@@ -840,7 +762,7 @@ export default function CV() {
           }
           
           .cv-page { padding: 0; }
-          .top-bar, .fab-group { display: none !important; }
+          .fab-group { display: none !important; }
           .cv-container {
             box-shadow: none;
             border-radius: 0;
@@ -869,8 +791,6 @@ export default function CV() {
         @media (max-width: 550px) {
           .cv-page { padding: 0.75rem; }
           .cv-container { border-radius: 10px; }
-          .top-bar { margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem; }
-          .btn-action span.btn-label { display: none; }
           .main-content { padding: 1.5rem 1.2rem; }
           .edu-card { flex-direction: column; }
           .skills-grid { grid-template-columns: 1fr; gap: 0.75rem; }
@@ -878,21 +798,6 @@ export default function CV() {
       `}</style>
 
       <div className="cv-page">
-        {/* ─── TOP BAR ─── */}
-        <div className="top-bar">
-          <div className="top-bar-logo">anuj<span>kattel</span></div>
-          <div className="top-bar-actions">
-            <button onClick={() => window.print()} className="btn-action btn-outline">
-              <FaPrint />
-              <span className="btn-label">Print / Save as PDF</span>
-            </button>
-            <button onClick={() => window.print()} className="btn-action btn-primary">
-              <FaDownload />
-              <span className="btn-label">Save PDF</span>
-            </button>
-          </div>
-        </div>
-
         {/* ─── CV CONTAINER ─── */}
         <div className="cv-container">
 
