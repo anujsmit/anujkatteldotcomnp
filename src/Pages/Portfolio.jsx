@@ -12,6 +12,7 @@ import {
   SiPostgresql, SiFirebase, SiDocker, SiTypescript,
   SiSupabase, SiFlutter, SiExpo
 } from "react-icons/si";
+import profileImg from "../assets/profile.png";
 
 // ─── DATA ───────────────────────────────────────────────
 
@@ -23,7 +24,8 @@ const profile = {
   github: "github.com/anujsmit",
   linkedin: "linkedin.com/in/anujkattel",
   location: "Jhapa, Nepal",
-  bio: "Full Stack Developer with 4+ years of experience building web and mobile applications."
+  bio: "Full Stack Developer with 4+ years of experience building web and mobile applications.",
+  image: profileImg
 };
 
 const techIconMap = {
@@ -242,17 +244,20 @@ export default function CV() {
           width: 100px;
           height: 100px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
           margin: 0 auto 1.2rem;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 2.2rem;
-          font-weight: 800;
-          color: white;
-          box-shadow: 0 0 0 3px rgba(16,185,129,0.25), 0 8px 24px rgba(16,185,129,0.2);
           position: relative;
           z-index: 1;
+          overflow: hidden;
+          box-shadow: 0 0 0 3px rgba(16,185,129,0.25), 0 8px 24px rgba(16,185,129,0.2);
+        }
+
+        .profile-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
 
         .sidebar-name {
@@ -738,11 +743,6 @@ export default function CV() {
           transition: all 0.25s;
           box-shadow: 0 4px 16px rgba(0,0,0,0.2);
         }
-        .fab-print {
-          background: #fff;
-          color: #1a2332;
-        }
-        .fab-print:hover { background: #f0f0f0; transform: scale(1.05); }
         .fab-top {
           background: #10b981;
           color: #fff;
@@ -803,7 +803,9 @@ export default function CV() {
 
           {/* ══════ SIDEBAR ══════ */}
           <div className="sidebar">
-            <div className="profile-image">AK</div>
+            <div className="profile-image">
+              <img src={profile.image} alt={profile.name} />
+            </div>
             <div className="sidebar-name">{profile.name}</div>
             <div className="sidebar-title">{profile.title}</div>
             <div className="sidebar-tagline">Building products that scale</div>
