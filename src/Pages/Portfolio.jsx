@@ -45,7 +45,7 @@ const techIconMap = {
 
 const workExperience = [
   {
-    title: "Founder & Lead Developer",
+    title: "Co-founder & Lead Developer",
     company: "ServeX",
     period: "2026",
     location: "Jhapa, Nepal",
