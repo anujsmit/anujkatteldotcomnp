@@ -1,15 +1,5 @@
 User-agent: *
+
 Allow: /
-Allow: /digitalkhata/
-Allow: /digitalkhata/privacy
-Allow: /digitalkhata/termsandcondition
-Allow: /digitalkhata/deleteaccount
-Disallow: /api/
-Disallow: /private/
+
 Sitemap: https://anujkattel.com.np/sitemap.xml
-
-# Crawl delay for slower crawlers
-Crawl-delay: 1
-
-# Specify host
-Host: https://anujkattel.com.np
