@@ -206,7 +206,7 @@ const styles = {
     fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
     background: "linear-gradient(135deg, #fafcfa 0%, #f0f7f3 100%)",
     color: "#1a1a1a",
-    // minHeight: "100vh",
+    minHeight: "100vh",
   },
 
   hero: {
