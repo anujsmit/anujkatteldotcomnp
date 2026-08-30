@@ -1,425 +1,128 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#10b981" />
 
-    <!-- ========== PRIMARY TITLE (Optimized for SEO) ========== -->
-    <title>Anuj Kattel - Full Stack Developer </title>
-    
-    <!-- ========== META DESCRIPTION (Increased CTR) ========== -->
-    <meta name="description" content="Anuj Kattel is a full stack developer & creator of Digital Khata, Nepal's #1 business management app serving 10,000+ businesses. Specializing in React, Flutter, Node.js, and SaaS development. Available for freelance projects." />
-    
-    <!-- ========== KEYWORDS (Expanded & Targeted) ========== -->
-    <meta name="keywords" content="Anuj Kattel, anujkattel, Digital Khata, Full Stack Developer, React Developer, Flutter Developer, Node.js Developer, Web Developer Nepal, Software Engineer, SaaS Developer, Mobile App Developer, Freelance Developer, Nepal Developer, MERN Stack, Digital Khata Nepal" />
-    
-    <meta name="author" content="Anuj Kattel" />
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow" />
-    <meta name="bingbot" content="index, follow" />
-    
-    <!-- ========== CANONICAL URL ========== -->
-    <link rel="canonical" href="https://anujkattel.com.np" />
-    
-    <!-- ========== OPEN GRAPH (Enhanced) ========== -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://anujkattel.com.np" />
-    <meta property="og:title" content="Anuj Kattel - Full Stack Developer | Creator of Digital Khata" />
-    <meta property="og:description" content="Creator of Digital Khata serving 10,000+ businesses. Full stack developer specializing in React, Flutter, Node.js, and SaaS applications. Available for freelance work." />
-    <meta property="og:image" content="https://anujkattel.com.np/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Anuj Kattel - Full Stack Developer Portfolio" />
-    <meta property="og:site_name" content="Anuj Kattel Portfolio" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:locale:alternate" content="ne_NP" />
-    
-    <!-- ========== TWITTER CARD (Enhanced) ========== -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@anujkattel" />
-    <meta name="twitter:creator" content="@anujkattel" />
-    <meta name="twitter:title" content="Anuj Kattel - Full Stack Developer | Creator of Digital Khata" />
-    <meta name="twitter:description" content="Creator of Digital Khata serving 10,000+ businesses. Full stack developer specializing in React, Flutter, Node.js." />
-    <meta name="twitter:image" content="https://anujkattel.com.np/twitter-image.jpg" />
-    <meta name="twitter:image:alt" content="Anuj Kattel - Full Stack Developer" />
-    
-    <!-- ========== GEO TAGS ========== -->
-    <meta name="geo.region" content="NP" />
-    <meta name="geo.placename" content="Jhapa" />
-    <meta name="geo.position" content="26.5735;88.0348" />
-    <meta name="ICBM" content="26.5735, 88.0348" />
-    
-    <!-- ========== SCHEMA MARKUP (Enhanced & Expanded) ========== -->
-    
-    <!-- Person Schema (Enhanced) -->
-    <script type="application/ld+json">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#10b981" />
+  <!-- ========== FAVICON ========== -->
+  <link rel="icon" type="image/x-icon" href="/src/assets/favicon.ico" />
+  <link rel="shortcut icon" href="/src/assets/favicon.ico" />
+  <link rel="apple-touch-icon" href="/src/assets/favicon.ico" />
+  <!-- ========== PRIMARY TITLE ========== -->
+  <title>Anuj Kattel - Full Stack Developer</title>
+
+  <!-- ========== META DESCRIPTION ========== -->
+  <meta name="description"
+    content="Anuj Kattel is a Full Stack Developer and creator of Digital Khata, Nepal's #1 business management app serving 10,000+ businesses. Specializing in React, Flutter, Node.js, and SaaS development." />
+
+  <!-- ========== KEYWORDS ========== -->
+  <meta name="keywords"
+    content="Anuj Kattel, Full Stack Developer, React Developer, Digital Khata, Node.js Developer, Web Developer Nepal, Software Engineer, MERN Stack, Flutter Developer" />
+
+  <meta name="author" content="Anuj Kattel" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- ========== CANONICAL URL ========== -->
+  <link rel="canonical" href="https://anujkattel.com.np" />
+
+  <!-- ========== OPEN GRAPH ========== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://anujkattel.com.np" />
+  <meta property="og:title" content="Anuj Kattel - Full Stack Developer" />
+  <meta property="og:description"
+    content="Full Stack Developer and creator of Digital Khata serving 10,000+ businesses. Specializing in React, Flutter, Node.js, and SaaS applications." />
+  <meta property="og:image" content="https://anujkattel.com.np/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Anuj Kattel Portfolio" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- ========== TWITTER CARD ========== -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Anuj Kattel - Full Stack Developer" />
+  <meta name="twitter:description"
+    content="Full Stack Developer and creator of Digital Khata serving 10,000+ businesses." />
+  <meta name="twitter:image" content="https://anujkattel.com.np/twitter-image.jpg" />
+
+  <!-- ========== SCHEMA MARKUP ========== -->
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Anuj Kattel",
-        "givenName": "Anuj",
-        "familyName": "Kattel",
-        "alternateName": ["Anuj", "AK", "anujsmit"],
         "url": "https://anujkattel.com.np",
         "sameAs": [
           "https://github.com/anujsmit",
-          "https://linkedin.com/in/anuj-kattel",
-          "https://twitter.com/anujkattel",
-          "https://instagram.com/anujkattel",
-          "https://facebook.com/anujkattel",
-          "https://youtube.com/@anujkattel"
+          "https://linkedin.com/in/anuj-kattel"
         ],
         "email": "anujkattel62@gmail.com",
-        "telephone": "+9779825995421",
-        "jobTitle": "Full Stack Developer & SaaS Creator",
+        "jobTitle": "Full Stack Developer",
         "worksFor": {
           "@type": "Organization",
-          "name": "Self-Employed / Freelance"
+          "name": "Freelance"
         },
         "homeLocation": {
           "@type": "Place",
           "address": {
             "@type": "PostalAddress",
             "addressLocality": "Jhapa",
-            "addressRegion": "Province 1",
             "addressCountry": "Nepal"
           }
-        },
-        "nationality": {
-          "@type": "Country",
-          "name": "Nepal"
-        },
-        "knowsAbout": [
-          "Full Stack Web Development",
-          "Mobile Application Development",
-          "SaaS Development",
-          "UI/UX Design",
-          "Database Architecture",
-          "Cloud Computing",
-          "DevOps",
-          "API Development",
-          "E-commerce Development"
-        ],
-        "knowsLanguage": [
-          { "@type": "Language", "name": "JavaScript" },
-          { "@type": "Language", "name": "TypeScript" },
-          { "@type": "Language", "name": "Dart" },
-          { "@type": "Language", "name": "Python" },
-          { "@type": "Language", "name": "SQL" },
-          { "@type": "Language", "name": "Nepali" },
-          { "@type": "Language", "name": "English" }
-        ],
-        "hasCredential": {
-          "@type": "EducationalOccupationalCredential",
-          "credentialCategory": "Professional Certification",
-          "name": "Full Stack Development",
-          "recognizedBy": {
-            "@type": "Organization",
-            "name": "Self-Taught & Industry Experience"
-          }
-        },
-        "makesOffer": {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Full Stack Development Services",
-            "description": "Professional web and mobile application development services",
-            "serviceType": "Software Development",
-            "areaServed": {
-              "@type": "Country",
-              "name": ["Nepal", "United States", "United Kingdom", "Canada", "Australia"]
-            }
-          }
         }
       }
     </script>
 
-    <!-- ProfilePage Schema (Enhanced) -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfilePage",
-        "dateCreated": "2024-01-01T00:00:00+05:45",
-        "dateModified": "2024-06-01T00:00:00+05:45",
-        "about": {
-          "@type": "Person",
-          "name": "Anuj Kattel"
-        },
-        "mainEntity": {
-          "@type": "Person",
-          "name": "Anuj Kattel"
-        },
-        "primaryImageOfPage": {
-          "@type": "ImageObject",
-          "url": "https://anujkattel.com.np/profile.jpg"
-        }
-      }
-    </script>
-
-    <!-- Digital Khata SoftwareApplication Schema -->
-    <script type="application/ld+json">
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Digital Khata",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": ["Android", "iOS", "Web"],
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "NPR",
-          "description": "Free plan with essential features, Premium at Rs. 100/month"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.9",
-          "ratingCount": "10000",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
-        "description": "Digital Khata is Nepal's #1 business management app helping 10,000+ businesses track customers, manage transactions, create invoices, and grow their business.",
-        "keywords": "digital khata, business management, customer tracking, transaction management, invoice app, Nepal business",
+        "description": "Digital Khata is Nepal's #1 business management app helping 10,000+ businesses track customers, manage transactions, and create invoices.",
         "author": {
           "@type": "Person",
           "name": "Anuj Kattel"
         },
-        "downloadUrl": "https://anujkattel.com.np/digitalkhata",
-        "screenshot": "https://anujkattel.com.np/digitalkhata-screenshot.jpg",
-        "softwareVersion": "3.0.0",
-        "datePublished": "2022-01-15"
-      }
-    </script>
-
-    <!-- BreadcrumbList Schema (Enhanced with more items) -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://anujkattel.com.np"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "About",
-            "item": "https://anujkattel.com.np/#about"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Skills",
-            "item": "https://anujkattel.com.np/#skills"
-          },
-          {
-            "@type": "ListItem",
-            "position": 4,
-            "name": "Projects",
-            "item": "https://anujkattel.com.np/#projects"
-          },
-          {
-            "@type": "ListItem",
-            "position": 5,
-            "name": "Digital Khata",
-            "item": "https://anujkattel.com.np/digitalkhata"
-          },
-          {
-            "@type": "ListItem",
-            "position": 6,
-            "name": "Contact",
-            "item": "https://anujkattel.com.np/#contact"
-          }
-        ]
-      }
-    </script>
-
-    <!-- WebSite Schema (Enhanced) -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Anuj Kattel - Full Stack Developer Portfolio",
-        "url": "https://anujkattel.com.np",
-        "description": "Portfolio of Anuj Kattel - Full Stack Developer and Creator of Digital Khata serving 10,000+ businesses",
-        "inLanguage": ["en-US", "ne-NP"],
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": "https://anujkattel.com.np/search?q={search_term_string}"
-          },
-          "query-input": "required name=search_term_string"
-        },
-        "mainEntity": {
-          "@type": "Person",
-          "name": "Anuj Kattel"
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "ratingCount": "10000"
         }
       }
     </script>
 
-    <!-- Organization Schema (Enhanced) -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Anuj Kattel",
-        "url": "https://anujkattel.com.np",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://anujkattel.com.np/logo.png",
-          "width": "512",
-          "height": "512"
-        },
-        "description": "Full Stack Developer and Creator of Digital Khata - Nepal's #1 business management app",
-        "email": "anujkattel62@gmail.com",
-        "telephone": "+9779825995421",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Jhapa",
-          "addressRegion": "Province 1",
-          "addressCountry": "Nepal"
-        },
-        "sameAs": [
-          "https://github.com/anujsmit",
-          "https://linkedin.com/in/anuj-kattel",
-          "https://twitter.com/anujkattel",
-          "https://instagram.com/anujkattel",
-          "https://facebook.com/anujkattel",
-          "https://youtube.com/@anujkattel"
-        ],
-        "foundingDate": "2022",
-        "founder": {
-          "@type": "Person",
-          "name": "Anuj Kattel"
-        },
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+9779825995421",
-          "contactType": "Business",
-          "availableLanguage": ["English", "Nepali"]
-        }
-      }
-    </script>
+  <!-- ========== FAVICON ========== -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="src/assets/profile.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Service Schema for Development Services -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "serviceType": "Full Stack Development",
-        "provider": {
-          "@type": "Person",
-          "name": "Anuj Kattel"
-        },
-        "areaServed": {
-          "@type": "Country",
-          "name": ["Nepal", "United States", "United Kingdom", "Canada", "Australia"]
-        },
-        "availableChannel": {
-          "@type": "ServiceChannel",
-          "serviceUrl": "https://anujkattel.com.np",
-          "availableLanguage": ["English", "Nepali"]
-        },
-        "description": "Professional full stack web and mobile application development services specializing in React, Flutter, Node.js, and SaaS applications.",
-        "offers": {
-          "@type": "Offer",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "price": "Custom pricing based on project scope",
-            "priceCurrency": "USD"
-          }
-        }
-      }
-    </script>
+  <!-- ========== FONTS ========== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
 
-    <!-- ========== FAVICON (Complete Set) ========== -->
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="src/assets/profile.png" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#10b981" />
+  <!-- ========== FONT AWESOME ========== -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <!-- ========== PRELOAD CRITICAL RESOURCES ========== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-    
-    <!-- ========== GOOGLE FONTS (Optimized Loading) ========== -->
-    <link 
-      rel="preload" 
-      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" 
-      as="style"
-    />
-    <link 
-      rel="stylesheet" 
-      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" 
-      media="print" 
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link 
-        rel="stylesheet" 
-        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" 
-      />
-    </noscript>
+  <!-- ========== PERFORMANCE ========== -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="//fonts.gstatic.com" />
 
-    <!-- ========== FONT AWESOME (Optimized) ========== -->
-    <link 
-      rel="preload" 
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-      as="style"
-    />
-    <link 
-      rel="stylesheet" 
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-      media="print" 
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link 
-        rel="stylesheet" 
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-      />
-    </noscript>
+  <!-- ========== SECURITY ========== -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+</head>
 
-    <!-- ========== PRELOAD KEY ASSETS ========== -->
-    <link rel="preload" as="image" href="/og-image.jpg" />
-    <link rel="preload" as="image" href="/profile.jpg" />
-
-    <!-- ========== SECURITY HEADERS ========== -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-
-    <!-- ========== PERFORMANCE OPTIMIZATIONS ========== -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
-    <link rel="preconnect" href="https://api.github.com" />
-
-    <!-- ========== VERIFICATION CODES ========== -->
-    <!-- Google Search Console -->
-    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
-    <!-- Bing Webmaster Tools -->
-    <meta name="msvalidate.01" content="YOUR_BING_CODE" />
-    <!-- Pinterest Verification -->
-    <meta name="p:domain_verify" content="YOUR_PINTEREST_CODE" />
-
-    <!-- ========== ADDITIONAL META TAGS ========== -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="format-detection" content="telephone=yes" />
-  </head>
-  <body>
-    <!-- ========== NOSCRIPT FALLBACK (Enhanced) ========== -->
-    <noscript>
-      <div style="
+<body>
+  <!-- ========== NOSCRIPT FALLBACK ========== -->
+  <noscript>
+    <div style="
         display: flex;
         align-items: center;
         justify-content: center;
@@ -430,73 +133,62 @@
         background: #ffffff;
         color: #1f2937;
       ">
-        <div style="max-width: 500px;">
-          <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Anuj Kattel</h1>
-          <h2 style="font-size: 1.25rem; color: #10b981; margin-bottom: 1rem; font-weight: 500;">
-            Full Stack Developer & Creator of Digital Khata
-          </h2>
-          <p style="color: #6b7280; margin-bottom: 1.5rem; line-height: 1.6;">
-            Helping 10,000+ businesses in Nepal manage their operations with Digital Khata.
-            Specializing in React, Flutter, Node.js, and SaaS development.
-          </p>
-          <p style="color: #9ca3af; font-size: 0.875rem; margin-bottom: 1.5rem;">
-            Please enable JavaScript to view the full portfolio experience.
-          </p>
-          <div style="display: flex; flex-direction: column; gap: 0.75rem; align-items: center;">
-            <a 
-              href="mailto:anujkattel62@gmail.com" 
-              style="
+      <div style="max-width: 500px;">
+        <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Anuj Kattel</h1>
+        <h2 style="font-size: 1.25rem; color: #10b981; margin-bottom: 1rem; font-weight: 500;">
+          Full Stack Developer
+        </h2>
+        <p style="color: #6b7280; margin-bottom: 1.5rem; line-height: 1.6;">
+          Creator of Digital Khata serving 10,000+ businesses in Nepal.
+          Specializing in React, Flutter, Node.js, and SaaS development.
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; align-items: center;">
+          <a href="mailto:anujkattel62@gmail.com" style="
                 display: inline-block;
                 padding: 0.75rem 2rem;
                 background: #10b981;
                 color: white;
-                border-radius: 9999px;
+                border-radius: 8px;
                 text-decoration: none;
                 font-weight: 500;
                 width: 200px;
-              "
-            >
-              <i class="fas fa-envelope"></i> Email Me
-            </a>
-            <a 
-              href="https://linkedin.com/in/anuj-kattel" 
-              style="
+              ">
+            <i class="fas fa-envelope"></i> Email Me
+          </a>
+          <a href="https://linkedin.com/in/anuj-kattel" style="
                 display: inline-block;
                 padding: 0.75rem 2rem;
                 background: #0A66C2;
                 color: white;
-                border-radius: 9999px;
+                border-radius: 8px;
                 text-decoration: none;
                 font-weight: 500;
                 width: 200px;
-              "
-            >
-              <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-            <a 
-              href="https://github.com/anujsmit" 
-              style="
+              ">
+            <i class="fab fa-linkedin"></i> LinkedIn
+          </a>
+          <a href="https://github.com/anujsmit" style="
                 display: inline-block;
                 padding: 0.75rem 2rem;
                 background: #24292e;
                 color: white;
-                border-radius: 9999px;
+                border-radius: 8px;
                 text-decoration: none;
                 font-weight: 500;
                 width: 200px;
-              "
-            >
-              <i class="fab fa-github"></i> GitHub
-            </a>
-          </div>
+              ">
+            <i class="fab fa-github"></i> GitHub
+          </a>
         </div>
       </div>
-    </noscript>
+    </div>
+  </noscript>
 
-    <!-- ========== ROOT ELEMENT ========== -->
-    <div id="root"></div>
+  <!-- ========== ROOT ELEMENT ========== -->
+  <div id="root"></div>
 
-    <!-- ========== APP SCRIPT (Optimized) ========== -->
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+  <!-- ========== APP SCRIPT ========== -->
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>

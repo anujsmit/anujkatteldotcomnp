@@ -21,6 +21,12 @@ import Projects from "./Pages/Projects";
 import Contact from "./Pages/Contact";
 import NotFound from "./Pages/NotFound";
 
+
+/* 
+blog
+*/
+
+
 /* =========================================================
    DIGITAL KHATA
 ========================================================= */

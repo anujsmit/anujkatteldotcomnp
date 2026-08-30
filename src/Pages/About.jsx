@@ -6,7 +6,10 @@ import {
   FaCode,
   FaGraduationCap,
   FaMapMarkerAlt,
-  FaStar,
+  FaEnvelope,
+  FaGithub,
+  FaLinkedin,
+  FaWhatsapp,
 } from "react-icons/fa";
 
 import {
@@ -18,12 +21,12 @@ import {
   SiSupabase,
   SiTailwindcss,
   SiTypescript,
+  SiMongodb,
+  SiGraphql,
+  SiPrisma,
+  SiRedux,
+  SiFirebase,
 } from "react-icons/si";
-
-
-/* =========================================================
-   EXPERIENCE
-========================================================= */
 
 const experience = [
   {
@@ -32,41 +35,19 @@ const experience = [
     company: "ServeX",
     location: "Jhapa, Nepal",
     type: "Startup",
-
     description:
-      "Leading the technical development of ServeX, a service marketplace connecting customers with verified professionals.",
-
-    points: [
-      "Built a service marketplace connecting customers with verified professionals.",
-      "Architected the product with React Native, Node.js, Supabase, and PostgreSQL.",
-      "Implemented real-time analytics and multi-business support.",
-      "Managed the product lifecycle from ideation through deployment.",
-    ],
+      "Leading the technical development of ServeX, a service marketplace connecting customers with verified professionals. Building the platform from scratch using modern technologies.",
   },
-
   {
     year: "2021 — Present",
     role: "Full Stack Developer",
     company: "Freelance",
     location: "Remote",
     type: "Contract",
-
     description:
-      "Developing web and mobile applications for clients across different projects and industries.",
-
-    points: [
-      "Delivered web and mobile applications for clients across multiple countries.",
-      "Optimized application performance and reduced page-load times.",
-      "Integrated authentication, REST APIs, and payment gateways.",
-      "Provided architecture planning, code review, and technical consulting.",
-    ],
+      "Developing web and mobile applications for clients across different projects and industries. Specializing in React, Next.js, and Node.js ecosystems.",
   },
 ];
-
-
-/* =========================================================
-   EDUCATION
-========================================================= */
 
 const education = [
   {
@@ -74,1984 +55,890 @@ const education = [
     degree: "Bachelor of Computer Application (BCA)",
     school: "Sikkim Manipal Institute of Technology",
     location: "India",
-    type: "Bachelor's Degree",
   },
-
   {
     year: "2020 — 2022",
     degree: "SEE",
     school: "Nidi Education & Indreni Campus",
     location: "Nepal",
-    type: "Secondary Education",
   },
 ];
-
-
-/* =========================================================
-   TECHNOLOGIES
-========================================================= */
 
 const technologies = [
-  {
-    name: "React",
-    icon: <SiReact />,
-  },
-
-  {
-    name: "Next.js",
-    icon: <SiNextdotjs />,
-  },
-
-  {
-    name: "TypeScript",
-    icon: <SiTypescript />,
-  },
-
-  {
-    name: "Node.js",
-    icon: <SiNodedotjs />,
-  },
-
-  {
-    name: "PostgreSQL",
-    icon: <SiPostgresql />,
-  },
-
-  {
-    name: "Supabase",
-    icon: <SiSupabase />,
-  },
-
-  {
-    name: "Tailwind CSS",
-    icon: <SiTailwindcss />,
-  },
-
-  {
-    name: "Docker",
-    icon: <SiDocker />,
-  },
+  { name: "React", icon: <SiReact />, color: "#61DAFB" },
+  { name: "Next.js", icon: <SiNextdotjs />, color: "#000000" },
+  { name: "TypeScript", icon: <SiTypescript />, color: "#3178C6" },
+  { name: "Node.js", icon: <SiNodedotjs />, color: "#339933" },
+  { name: "PostgreSQL", icon: <SiPostgresql />, color: "#4169E1" },
+  { name: "MongoDB", icon: <SiMongodb />, color: "#47A248" },
+  { name: "Supabase", icon: <SiSupabase />, color: "#3ECF8E" },
+  { name: "GraphQL", icon: <SiGraphql />, color: "#E10098" },
+  { name: "Prisma", icon: <SiPrisma />, color: "#2D3748" },
+  { name: "Redux", icon: <SiRedux />, color: "#764ABC" },
+  { name: "Firebase", icon: <SiFirebase />, color: "#FFCA28" },
+  { name: "Docker", icon: <SiDocker />, color: "#2496ED" },
 ];
 
-
-/* =========================================================
-   STRENGTHS
-========================================================= */
-
-const strengths = [
-  {
-    number: "01",
-    title: "Problem Solving",
-    text:
-      "Breaking complex problems into simple, practical and scalable solutions.",
-  },
-
-  {
-    number: "02",
-    title: "Product Thinking",
-    text:
-      "Thinking beyond code and focusing on how technology creates real value.",
-  },
-
-  {
-    number: "03",
-    title: "Clean Development",
-    text:
-      "Building maintainable architecture, readable code and reliable systems.",
-  },
-
-  {
-    number: "04",
-    title: "Continuous Learning",
-    text:
-      "Exploring new technologies and continuously improving my development workflow.",
-  },
-];
-
-
-/* =========================================================
-   SECTION HEADER
-========================================================= */
-
-function SectionHeader({
-  number,
-  eyebrow,
-  title,
-  description,
-}) {
-  return (
-    <div className="about-section-header">
-
-      <div className="about-section-number">
-        {number}
-      </div>
-
-      <div>
-
-        <span className="about-section-eyebrow">
-          {eyebrow}
-        </span>
-
-        <h2>
-          {title}
-        </h2>
-
-        {description && (
-          <p>
-            {description}
-          </p>
-        )}
-
-      </div>
-
-    </div>
-  );
-}
-
-
-/* =========================================================
-   ABOUT PAGE
-========================================================= */
+const profile = {
+  name: "Anuj Kattel",
+  email: "anujkattel62@gmail.com",
+  github: "https://github.com/anujsmit",
+  linkedin: "https://linkedin.com/in/anujkattel",
+  whatsapp: "https://wa.me/9779825995421",
+};
 
 function About() {
   return (
     <>
       <style>{`
-
-        /* =====================================================
-           ROOT
-        ===================================================== */
+        /* Import Inter font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
         .about-page {
-          --about-green: #08794f;
-          --about-green-dark: #056440;
-          --about-green-soft: #ecfdf5;
-
-          --about-black: #101828;
-          --about-text: #344054;
-          --about-muted: #667085;
-
-          --about-line: #e4e7ec;
-          --about-soft: #f8fafc;
-
-          --about-width: 1180px;
+          --green: #0a7a4f;
+          --green-light: #10b981;
+          --green-dark: #056440;
+          --green-soft: #ecfdf5;
+          --black: #1a1a1a;
+          --text: #374151;
+          --muted: #6b7280;
+          --line: #e5e7eb;
+          --soft: #fafcfa;
+          --white: #ffffff;
 
           min-height: 100vh;
-
-          background: #ffffff;
-
-          color: var(--about-black);
-
-          font-family:
-            "Manrope",
-            "Inter",
-            system-ui,
-            -apple-system,
-            BlinkMacSystemFont,
-            "Segoe UI",
-            sans-serif;
-
-          overflow: hidden;
+          background: var(--white);
+          color: var(--black);
+          font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
-
-
-        /* =====================================================
-           CONTAINER
-        ===================================================== */
 
         .about-container {
-          width:
-            min(
-              var(--about-width),
-              calc(100% - 48px)
-            );
-
+          max-width: 1200px;
           margin: 0 auto;
+          padding: 0 24px;
         }
 
-
-        /* =====================================================
-           HERO
-        ===================================================== */
+        /* =========================
+           HERO SECTION
+        ========================= */
 
         .about-hero {
+          padding: 80px 0 60px;
           position: relative;
-
-          padding:
-            105px 0 95px;
-
-          border-bottom:
-            1px solid var(--about-line);
-
-          background:
-            radial-gradient(
-              circle at 82% 15%,
-              rgba(16, 185, 129, 0.08),
-              transparent 26rem
-            ),
-
-            linear-gradient(
-              180deg,
-              #ffffff,
-              #fbfdfc
-            );
         }
 
-
-        .about-hero-grid {
-          display: grid;
-
-          grid-template-columns:
-            minmax(0, 1.2fr)
-            minmax(280px, 0.8fr);
-
-          gap: 100px;
-
-          align-items: end;
+        .about-hero::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80%;
+          height: 1px;
+          background: var(--line);
         }
 
-
-        /* =====================================================
-           HERO COPY
-        ===================================================== */
-
-        .about-hero-eyebrow {
+        .about-badge {
           display: inline-flex;
-
           align-items: center;
-
-          gap: 9px;
-
-          color:
-            var(--about-green);
-
-          font-size: 11px;
-
-          font-weight: 800;
-
-          letter-spacing:
-            0.15em;
-
-          text-transform:
-            uppercase;
+          gap: 8px;
+          background: rgba(16, 185, 129, 0.1);
+          color: var(--green);
+          padding: 6px 16px 6px 12px;
+          border-radius: 20px;
+          font-size: 13px;
+          font-weight: 600;
+          border: 1px solid rgba(16, 185, 129, 0.2);
+          margin-bottom: 20px;
         }
 
-
-        .about-hero-eyebrow::before {
-          content: "";
-
+        .about-badge-dot {
           width: 8px;
           height: 8px;
-
           border-radius: 50%;
-
-          background:
-            var(--about-green);
-
-          box-shadow:
-            0 0 0 5px
-            rgba(16, 185, 129, 0.10);
+          background: var(--green-light);
+          display: inline-block;
+          animation: pulse 2s infinite;
         }
 
-
-        .about-hero-title {
-          max-width: 800px;
-
-          margin:
-            23px 0 24px;
-
-          font-size:
-            clamp(
-              50px,
-              7vw,
-              82px
-            );
-
-          line-height:
-            0.96;
-
-          letter-spacing:
-            -0.075em;
-
-          font-weight:
-            800;
+        .about-hero h1 {
+          font-size: clamp(48px, 7vw, 72px);
+          font-weight: 900;
+          line-height: 1.05;
+          letter-spacing: -0.04em;
+          margin: 0 0 16px;
         }
 
-
-        .about-hero-title span {
-          color:
-            var(--about-green);
+        .about-hero h1 span {
+          background: linear-gradient(135deg, var(--green), var(--green-light));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
-
-        .about-hero-description {
-          max-width: 650px;
-
-          margin: 0;
-
-          color:
-            var(--about-muted);
-
-          font-size: 16px;
-
-          line-height: 1.85;
+        .about-hero-text {
+          max-width: 600px;
+          font-size: 18px;
+          line-height: 1.7;
+          color: var(--muted);
+          margin: 0 0 28px;
         }
 
-
-        /* =====================================================
-           HERO SIDE
-        ===================================================== */
-
-        .about-hero-side {
-          padding-left: 30px;
-
-          border-left:
-            1px solid #dce5e0;
-        }
-
-
-        .about-hero-side-label {
-          display: block;
-
-          margin-bottom: 12px;
-
-          color:
-            var(--about-black);
-
-          font-size: 11px;
-
-          font-weight: 800;
-
-          text-transform:
-            uppercase;
-
-          letter-spacing:
-            0.1em;
-        }
-
-
-        .about-hero-side p {
-          margin: 0;
-
-          color:
-            var(--about-muted);
-
-          font-size: 13px;
-
-          line-height: 1.8;
-        }
-
-
-        /* =====================================================
-           QUICK INFO
-        ===================================================== */
-
-        .about-quick-info {
+        .about-info {
           display: flex;
-
           flex-wrap: wrap;
+          gap: 12px;
+        }
 
+        .about-info-item {
+          display: inline-flex;
+          align-items: center;
           gap: 8px;
+          padding: 10px 18px;
+          background: var(--white);
+          border: 1px solid var(--line);
+          border-radius: 10px;
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--text);
+          transition: all 0.3s ease;
+        }
 
+        .about-info-item:hover {
+          border-color: var(--green);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .about-info-item svg {
+          color: var(--green);
+        }
+
+        .about-socials {
+          display: flex;
+          gap: 12px;
           margin-top: 28px;
         }
 
-
-        .about-quick-item {
-          display: inline-flex;
-
+        .about-social-link {
+          width: 48px;
+          height: 48px;
+          display: flex;
           align-items: center;
-
-          gap: 7px;
-
-          padding:
-            8px 10px;
-
-          border:
-            1px solid var(--about-line);
-
-          border-radius: 7px;
-
-          color:
-            var(--about-text);
-
-          background:
-            #ffffff;
-
-          font-size: 10px;
-
-          font-weight: 700;
+          justify-content: center;
+          background: var(--white);
+          border-radius: 12px;
+          color: var(--muted);
+          border: 1px solid var(--line);
+          transition: all 0.3s ease;
+          text-decoration: none;
+          font-size: 20px;
         }
 
-
-        .about-quick-item svg {
-          color:
-            var(--about-green);
-
-          font-size: 10px;
+        .about-social-link:hover {
+          transform: translateY(-3px);
+          border-color: var(--green);
+          color: var(--green);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
-
-        /* =====================================================
+        /* =========================
            GENERAL SECTION
-        ===================================================== */
+        ========================= */
 
         .about-section {
-          padding:
-            105px 0;
+          padding: 80px 0;
         }
-
 
         .about-section.soft {
-          background:
-            var(--about-soft);
+          background: var(--soft);
         }
 
-
-        /* =====================================================
-           SECTION HEADER
-        ===================================================== */
-
-        .about-section-header {
-          display: grid;
-
-          grid-template-columns:
-            60px 1fr;
-
-          gap: 25px;
-
-          margin-bottom:
-            55px;
+        .section-header {
+          margin-bottom: 48px;
         }
 
+        .section-number {
+          display: inline-block;
+          font-size: 13px;
+          font-weight: 700;
+          color: var(--green);
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          margin-bottom: 8px;
+        }
 
-        .about-section-number {
-          color:
-            var(--about-green);
-
-          font-size: 11px;
-
+        .section-header h2 {
+          font-size: clamp(36px, 4vw, 48px);
           font-weight: 800;
-
-          letter-spacing:
-            0.08em;
+          letter-spacing: -0.04em;
+          line-height: 1.1;
+          margin: 0 0 12px;
         }
 
-
-        .about-section-eyebrow {
-          display: block;
-
-          margin-bottom: 10px;
-
-          color:
-            var(--about-green);
-
-          font-size: 10px;
-
-          font-weight: 800;
-
-          text-transform:
-            uppercase;
-
-          letter-spacing:
-            0.13em;
-        }
-
-
-        .about-section-header h2 {
-          max-width: 700px;
-
+        .section-header p {
+          max-width: 600px;
+          font-size: 18px;
+          color: var(--muted);
+          line-height: 1.7;
           margin: 0;
-
-          font-size:
-            clamp(
-              34px,
-              4vw,
-              52px
-            );
-
-          line-height:
-            1.02;
-
-          letter-spacing:
-            -0.06em;
-
-          font-weight:
-            800;
         }
 
-
-        .about-section-header p {
-          max-width: 650px;
-
-          margin:
-            15px 0 0;
-
-          color:
-            var(--about-muted);
-
-          font-size: 13px;
-
-          line-height: 1.8;
-        }
-
-
-        /* =====================================================
+        /* =========================
            ABOUT CONTENT
-        ===================================================== */
+        ========================= */
 
-        .about-intro-grid {
+        .about-grid {
           display: grid;
-
-          grid-template-columns:
-            0.95fr 1.05fr;
-
-          gap: 90px;
-
-          align-items: start;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
         }
 
-
-        .about-intro-heading {
-          margin: 0 0 20px;
-
+        .about-grid h3 {
           font-size: 28px;
-
+          font-weight: 800;
+          letter-spacing: -0.03em;
+          margin: 0 0 16px;
           line-height: 1.2;
-
-          letter-spacing:
-            -0.045em;
         }
 
-
-        .about-intro-copy p {
-          margin: 0 0 17px;
-
-          color:
-            var(--about-muted);
-
-          font-size: 13px;
-
-          line-height: 1.85;
+        .about-grid p {
+          font-size: 16px;
+          line-height: 1.8;
+          color: var(--muted);
+          margin: 0 0 16px;
         }
 
-
-        /* =====================================================
-           CHECK LIST
-        ===================================================== */
-
-        .about-check-list {
+        .about-values {
           display: grid;
-
-          gap: 11px;
-
-          margin: 28px 0 0;
-
+          gap: 12px;
+          margin-top: 24px;
           padding: 0;
-
           list-style: none;
         }
 
-
-        .about-check-list li {
+        .about-values li {
           display: flex;
-
           align-items: center;
-
-          gap: 10px;
-
-          color:
-            var(--about-text);
-
-          font-size: 12px;
-
+          gap: 12px;
+          font-size: 15px;
           font-weight: 600;
+          color: var(--text);
+          padding: 12px 16px;
+          background: var(--white);
+          border-radius: 10px;
+          border: 1px solid var(--line);
+          transition: all 0.3s ease;
         }
 
+        .about-values li:hover {
+          border-color: var(--green);
+          transform: translateX(4px);
+        }
 
-        .about-check-list svg {
+        .about-values li svg {
+          color: var(--green);
+          font-size: 14px;
           flex-shrink: 0;
-
-          color:
-            var(--about-green);
-
-          font-size: 11px;
         }
 
+        /* =========================
+           SKILLS
+        ========================= */
 
-        /* =====================================================
-           STRENGTHS
-        ===================================================== */
-
-        .about-strengths {
+        .skills-grid {
           display: grid;
-
-          grid-template-columns:
-            repeat(2, 1fr);
-
-          gap: 1px;
-
-          overflow: hidden;
-
-          border:
-            1px solid var(--about-line);
-
-          border-radius: 15px;
-
-          background:
-            var(--about-line);
+          grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+          gap: 12px;
         }
 
-
-        .about-strength {
-          min-height: 185px;
-
-          padding: 26px;
-
-          background:
-            #ffffff;
-
-          transition:
-            background 0.2s ease;
-        }
-
-
-        .about-strength:hover {
-          background:
-            #f9fcfa;
-        }
-
-
-        .about-strength-number {
-          display: block;
-
-          margin-bottom: 30px;
-
-          color:
-            #98a2b3;
-
-          font-size: 10px;
-
-          font-weight: 800;
-        }
-
-
-        .about-strength h3 {
-          margin: 0 0 9px;
-
-          font-size: 15px;
-
-          letter-spacing:
-            -0.02em;
-        }
-
-
-        .about-strength p {
-          margin: 0;
-
-          color:
-            var(--about-muted);
-
-          font-size: 11px;
-
-          line-height: 1.7;
-        }
-
-
-        /* =====================================================
-           TECHNOLOGIES
-        ===================================================== */
-
-        .about-tech {
+        .skill-card {
           display: flex;
-
-          flex-wrap: wrap;
-
-          gap: 9px;
-        }
-
-
-        .about-tech-item {
-          display: inline-flex;
-
           align-items: center;
-
-          gap: 8px;
-
-          padding:
-            10px 12px;
-
-          border:
-            1px solid var(--about-line);
-
-          border-radius: 8px;
-
-          color:
-            var(--about-text);
-
-          background:
-            #ffffff;
-
-          font-size: 10px;
-
-          font-weight: 700;
-
-          transition:
-            border-color 0.2s ease,
-            color 0.2s ease,
-            background 0.2s ease;
+          gap: 10px;
+          padding: 16px 20px;
+          background: var(--white);
+          border: 1px solid var(--line);
+          border-radius: 12px;
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--text);
+          transition: all 0.3s ease;
+          cursor: default;
         }
 
-
-        .about-tech-item svg {
-          color:
-            #667085;
-
-          font-size: 15px;
+        .skill-card:hover {
+          transform: translateY(-4px);
+          border-color: var(--green);
+          box-shadow: 0 8px 24px rgba(0,0,0,0.06);
         }
 
-
-        .about-tech-item:hover {
-          border-color:
-            #b7dfcf;
-
-          background:
-            var(--about-green-soft);
-
-          color:
-            var(--about-green-dark);
+        .skill-card svg {
+          font-size: 24px;
+          flex-shrink: 0;
         }
 
-
-        .about-tech-item:hover svg {
-          color:
-            var(--about-green);
-        }
-
-
-        /* =====================================================
+        /* =========================
            EXPERIENCE
-        ===================================================== */
+        ========================= */
 
-        .about-experience {
-          position: relative;
-
-          margin-left: 60px;
-
-          border-left:
-            1px solid #d8e3de;
-        }
-
-
-        .about-experience-item {
-          position: relative;
-
+        .experience-list {
           display: grid;
-
-          grid-template-columns:
-            125px 1fr;
-
-          gap: 50px;
-
-          padding:
-            0 0 70px 45px;
+          gap: 40px;
         }
 
+        .experience-item {
+          display: grid;
+          grid-template-columns: 140px 1fr;
+          gap: 40px;
+          padding-bottom: 40px;
+          border-bottom: 1px solid var(--line);
+        }
 
-        .about-experience-item:last-child {
+        .experience-item:last-child {
+          border-bottom: none;
           padding-bottom: 0;
         }
 
-
-        .about-experience-item::before {
-          content: "";
-
-          position: absolute;
-
-          left: -5px;
-
-          top: 2px;
-
-          width: 9px;
-          height: 9px;
-
-          border-radius: 50%;
-
-          background:
-            var(--about-green);
-
-          box-shadow:
-            0 0 0 5px
-            #eaf8f1;
+        .experience-year {
+          font-size: 14px;
+          font-weight: 700;
+          color: var(--green);
+          padding-top: 4px;
         }
 
-
-        .about-experience-year {
-          color:
-            #475467;
-
-          font-size: 11px;
-
-          font-weight: 800;
-
-          line-height: 1.6;
-        }
-
-
-        .about-experience-content {
-          max-width: 760px;
-        }
-
-
-        .about-experience-top {
+        .experience-content {
           display: flex;
-
-          align-items: center;
-
-          justify-content:
-            space-between;
-
-          gap: 20px;
-
-          margin-bottom: 10px;
+          flex-direction: column;
+          gap: 8px;
         }
 
-
-        .about-experience-role {
-          margin: 0;
-
-          font-size: 23px;
-
-          line-height: 1.2;
-
-          letter-spacing:
-            -0.04em;
+        .experience-header {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 16px;
+          flex-wrap: wrap;
         }
 
-
-        .about-experience-type {
-          padding:
-            6px 9px;
-
-          border-radius: 6px;
-
-          background:
-            var(--about-green-soft);
-
-          color:
-            var(--about-green-dark);
-
-          font-size: 9px;
-
+        .experience-header h3 {
+          font-size: 22px;
           font-weight: 800;
+          letter-spacing: -0.02em;
+          margin: 0;
+        }
 
+        .experience-type {
+          padding: 4px 12px;
+          background: var(--green-soft);
+          color: var(--green-dark);
+          border-radius: 6px;
+          font-size: 12px;
+          font-weight: 700;
           white-space: nowrap;
         }
 
-
-        .about-experience-company {
+        .experience-meta {
           display: flex;
-
           align-items: center;
-
-          flex-wrap: wrap;
-
-          gap: 7px;
-
-          color:
-            var(--about-green);
-
-          font-size: 11px;
-
-          font-weight: 800;
-        }
-
-
-        .about-experience-location {
-          display: inline-flex;
-
-          align-items: center;
-
-          gap: 5px;
-
-          margin-left: 7px;
-
-          color:
-            var(--about-muted);
-
-          font-weight: 500;
-        }
-
-
-        .about-experience-description {
-          max-width: 700px;
-
-          margin:
-            16px 0;
-
-          color:
-            var(--about-muted);
-
-          font-size: 12px;
-
-          line-height: 1.8;
-        }
-
-
-        .about-experience-points {
-          display: grid;
-
-          gap: 9px;
-
-          margin: 0;
-
-          padding: 0;
-
-          list-style: none;
-        }
-
-
-        .about-experience-points li {
-          display: flex;
-
-          gap: 9px;
-
-          color:
-            #475467;
-
-          font-size: 11px;
-
-          line-height: 1.6;
-        }
-
-
-        .about-experience-points svg {
-          flex-shrink: 0;
-
-          margin-top: 3px;
-
-          color:
-            var(--about-green);
-
-          font-size: 9px;
-        }
-
-
-        /* =====================================================
-           EDUCATION
-        ===================================================== */
-
-        .about-education {
-          display: grid;
-
-          grid-template-columns:
-            repeat(2, 1fr);
-
           gap: 16px;
+          flex-wrap: wrap;
         }
 
-
-        .about-education-card {
-          position: relative;
-
-          padding: 28px;
-
-          border:
-            1px solid var(--about-line);
-
-          border-radius: 14px;
-
-          background:
-            #ffffff;
-
-          transition:
-            transform 0.2s ease,
-            box-shadow 0.2s ease,
-            border-color 0.2s ease;
-        }
-
-
-        .about-education-card:hover {
-          transform:
-            translateY(-3px);
-
-          border-color:
-            #cdd9d4;
-
-          box-shadow:
-            0 18px 45px
-            rgba(15, 23, 42, 0.07);
-        }
-
-
-        .about-education-top {
+        .experience-company {
           display: flex;
-
           align-items: center;
-
-          justify-content:
-            space-between;
-
-          gap: 15px;
-
-          margin-bottom: 28px;
-        }
-
-
-        .about-education-icon {
-          width: 42px;
-          height: 42px;
-
-          display: grid;
-
-          place-items: center;
-
-          border-radius: 10px;
-
-          background:
-            var(--about-green-soft);
-
-          color:
-            var(--about-green);
-
+          gap: 6px;
           font-size: 14px;
+          font-weight: 600;
+          color: var(--green);
         }
 
-
-        .about-education-type {
-          color:
-            var(--about-muted);
-
-          font-size: 9px;
-
-          font-weight: 700;
-
-          padding:
-            6px 8px;
-
-          background:
-            var(--about-soft);
-
-          border-radius: 6px;
-        }
-
-
-        .about-education-year {
-          color:
-            var(--about-green);
-
-          font-size: 10px;
-
-          font-weight: 800;
-        }
-
-
-        .about-education-card h3 {
-          margin:
-            9px 0 8px;
-
-          font-size: 19px;
-
-          line-height: 1.25;
-
-          letter-spacing:
-            -0.035em;
-        }
-
-
-        .about-education-school {
-          color:
-            var(--about-text);
-
-          font-size: 11px;
-
-          font-weight: 700;
-        }
-
-
-        .about-education-location {
+        .experience-location {
           display: flex;
-
           align-items: center;
-
-          gap: 5px;
-
-          margin-top: 8px;
-
-          color:
-            var(--about-muted);
-
-          font-size: 10px;
+          gap: 6px;
+          font-size: 13px;
+          color: var(--muted);
         }
 
+        .experience-description {
+          font-size: 15px;
+          line-height: 1.7;
+          color: var(--muted);
+          margin: 4px 0 0;
+        }
 
-        /* =====================================================
+        /* =========================
+           EDUCATION
+        ========================= */
+
+        .education-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 20px;
+        }
+
+        .education-card {
+          padding: 28px;
+          background: var(--white);
+          border: 1px solid var(--line);
+          border-radius: 16px;
+          transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+          transform: translateY(-4px);
+          border-color: var(--green);
+          box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+
+        .education-year {
+          font-size: 13px;
+          font-weight: 700;
+          color: var(--green);
+          display: block;
+          margin-bottom: 8px;
+        }
+
+        .education-card h3 {
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          margin: 0 0 8px;
+          line-height: 1.3;
+        }
+
+        .education-school {
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--text);
+          margin-bottom: 8px;
+        }
+
+        .education-location {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 13px;
+          color: var(--muted);
+        }
+
+        /* =========================
            CTA
-        ===================================================== */
+        ========================= */
 
         .about-cta {
-          position: relative;
-
-          overflow: hidden;
-
           display: flex;
-
           align-items: center;
-
-          justify-content:
-            space-between;
-
+          justify-content: space-between;
           gap: 40px;
-
-          padding:
-            55px;
-
-          border:
-            1px solid #d9ebe2;
-
+          padding: 48px;
+          background: linear-gradient(135deg, var(--green-soft), var(--white));
+          border: 1px solid rgba(16, 185, 129, 0.2);
           border-radius: 20px;
-
-          background:
-            radial-gradient(
-              circle at 90% 15%,
-              rgba(16, 185, 129, 0.13),
-              transparent 18rem
-            ),
-
-            linear-gradient(
-              135deg,
-              #f4fbf7,
-              #ffffff
-            );
         }
-
-
-        .about-cta::after {
-          content: "";
-
-          position: absolute;
-
-          width: 180px;
-          height: 180px;
-
-          right: -90px;
-          bottom: -100px;
-
-          border:
-            1px solid
-            rgba(8, 121, 79, 0.10);
-
-          border-radius: 50%;
-        }
-
 
         .about-cta-content {
-          position: relative;
-
-          z-index: 1;
+          flex: 1;
         }
 
-
-        .about-cta-label {
-          display: inline-flex;
-
-          align-items: center;
-
-          gap: 7px;
-
-          color:
-            var(--about-green);
-
-          font-size: 10px;
-
-          font-weight: 800;
-
-          text-transform:
-            uppercase;
-
-          letter-spacing:
-            0.12em;
+        .about-cta .section-number {
+          margin-bottom: 4px;
         }
-
-
-        .about-cta-label svg {
-          font-size: 9px;
-        }
-
 
         .about-cta h2 {
-          margin:
-            10px 0 12px;
-
-          font-size:
-            clamp(
-              30px,
-              4vw,
-              44px
-            );
-
-          line-height:
-            1;
-
-          letter-spacing:
-            -0.06em;
+          font-size: clamp(32px, 3.5vw, 42px);
+          font-weight: 800;
+          letter-spacing: -0.04em;
+          line-height: 1.1;
+          margin: 0 0 8px;
         }
-
 
         .about-cta p {
-          max-width: 570px;
-
+          font-size: 16px;
+          color: var(--muted);
           margin: 0;
-
-          color:
-            var(--about-muted);
-
-          font-size: 12px;
-
-          line-height: 1.7;
+          max-width: 500px;
         }
-
 
         .about-cta-button {
-          position: relative;
-
-          z-index: 2;
-
-          flex-shrink: 0;
-
           display: inline-flex;
-
           align-items: center;
-
-          gap: 9px;
-
-          min-height: 46px;
-
-          padding:
-            0 17px;
-
-          border-radius: 9px;
-
-          background:
-            var(--about-green);
-
-          color:
-            #ffffff;
-
+          gap: 10px;
+          padding: 14px 32px;
+          background: linear-gradient(135deg, var(--green), var(--green-light));
+          color: var(--white);
+          border: none;
+          border-radius: 12px;
+          font-size: 16px;
+          font-weight: 700;
           text-decoration: none;
-
-          font-size: 11px;
-
-          font-weight: 800;
-
-          transition:
-            transform 0.2s ease,
-            background 0.2s ease,
-            box-shadow 0.2s ease;
+          transition: all 0.3s ease;
+          flex-shrink: 0;
+          box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
         }
-
 
         .about-cta-button:hover {
-          background:
-            var(--about-green-dark);
-
-          transform:
-            translateY(-2px);
-
-          box-shadow:
-            0 12px 25px
-            rgba(8, 121, 79, 0.18);
+          transform: translateY(-3px);
+          box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
         }
 
+        .about-cta-button svg {
+          transition: transform 0.3s ease;
+        }
 
-        /* =====================================================
+        .about-cta-button:hover svg {
+          transform: translateX(4px);
+        }
+
+        /* =========================
+           ANIMATIONS
+        ========================= */
+
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+
+        /* =========================
            RESPONSIVE
-        ===================================================== */
+        ========================= */
 
-        @media (max-width: 900px) {
-
-          .about-hero-grid {
-            grid-template-columns: 1fr;
-
+        @media (max-width: 1024px) {
+          .about-grid {
             gap: 40px;
           }
-
-
-          .about-hero-side {
-            max-width: 650px;
-
-            padding:
-              24px 0 0;
-
-            border-left: 0;
-
-            border-top:
-              1px solid #dce5e0;
-          }
-
-
-          .about-intro-grid {
-            grid-template-columns: 1fr;
-
-            gap: 55px;
-          }
-
-
-          .about-experience {
-            margin-left: 20px;
-          }
-
-
-          .about-experience-item {
-            grid-template-columns:
-              100px 1fr;
-
-            gap: 30px;
-          }
         }
 
-
-        @media (max-width: 700px) {
-
-          .about-container {
-            width:
-              calc(100% - 28px);
-          }
-
-
+        @media (max-width: 768px) {
           .about-hero {
-            padding:
-              75px 0 65px;
+            padding: 60px 0 40px;
           }
 
-
-          .about-section {
-            padding:
-              75px 0;
+          .about-hero h1 {
+            font-size: 42px;
           }
 
-
-          .about-section-header {
-            grid-template-columns:
-              45px 1fr;
-
-            gap: 15px;
-
-            margin-bottom:
-              40px;
+          .about-hero-text {
+            font-size: 16px;
           }
 
-
-          .about-section-header h2 {
-            font-size:
-              36px;
+          .about-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
           }
 
-
-          .about-strengths {
-            grid-template-columns:
-              1fr;
+          .experience-item {
+            grid-template-columns: 1fr;
+            gap: 12px;
+            padding-bottom: 32px;
           }
 
-
-          .about-strength {
-            min-height:
-              auto;
-          }
-
-
-          .about-education {
-            grid-template-columns:
-              1fr;
-          }
-
-
-          .about-experience {
-            margin-left: 8px;
-          }
-
-
-          .about-experience-item {
-            display: block;
-
-            padding:
-              0 0 55px 30px;
-          }
-
-
-          .about-experience-year {
-            margin-bottom:
-              10px;
-          }
-
-
-          .about-experience-top {
-            align-items:
-              flex-start;
-
-            flex-direction:
-              column;
-
+          .experience-header {
+            flex-direction: column;
             gap: 8px;
           }
 
-
-          .about-experience-role {
-            font-size:
-              20px;
+          .experience-header h3 {
+            font-size: 20px;
           }
 
+          .skills-grid {
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+          }
+
+          .education-grid {
+            grid-template-columns: 1fr;
+          }
 
           .about-cta {
-            align-items:
-              flex-start;
+            flex-direction: column;
+            text-align: center;
+            padding: 32px;
+          }
 
-            flex-direction:
-              column;
+          .about-cta p {
+            max-width: 100%;
+          }
 
-            padding:
-              35px 28px;
+          .about-section {
+            padding: 60px 0;
+          }
 
-            gap: 25px;
+          .section-header h2 {
+            font-size: 32px;
+          }
+
+          .section-header p {
+            font-size: 16px;
           }
         }
 
-
-        @media (max-width: 500px) {
-
-          .about-hero-title {
-            font-size:
-              48px;
+        @media (max-width: 480px) {
+          .about-container {
+            padding: 0 16px;
           }
 
-
-          .about-hero-description {
-            font-size:
-              14px;
+          .about-hero h1 {
+            font-size: 34px;
           }
 
-
-          .about-quick-info {
-            display:
-              grid;
-
-            grid-template-columns:
-              1fr 1fr;
+          .about-info-item {
+            font-size: 12px;
+            padding: 8px 14px;
           }
 
-
-          .about-quick-item {
-            justify-content:
-              center;
+          .skills-grid {
+            grid-template-columns: repeat(2, 1fr);
           }
 
-
-          .about-section-header {
-            grid-template-columns:
-              1fr;
-
-            gap: 8px;
+          .about-cta {
+            padding: 24px;
           }
 
-
-          .about-section-number {
-            margin-bottom:
-              5px;
-          }
-
-
-          .about-intro-heading {
-            font-size:
-              24px;
-          }
-
-
-          .about-tech {
-            display:
-              grid;
-
-            grid-template-columns:
-              1fr 1fr;
-          }
-
-
-          .about-tech-item {
-            justify-content:
-              center;
+          .about-cta-button {
+            width: 100%;
+            justify-content: center;
           }
         }
-
-
-        @media (prefers-reduced-motion: reduce) {
-
-          .about-page *,
-          .about-page *::before,
-          .about-page *::after {
-            animation:
-              none !important;
-
-            transition:
-              none !important;
-          }
-        }
-
       `}</style>
-
 
       <main className="about-page">
 
-
-        {/* =====================================================
-            HERO
-        ===================================================== */}
-
+        {/* HERO SECTION */}
         <section className="about-hero">
-
           <div className="about-container">
-
-            <div className="about-hero-grid">
-
-              <div>
-
-                <span className="about-hero-eyebrow">
-                  About Me
-                </span>
-
-
-                <h1 className="about-hero-title">
-                  Developer who
-                  <br />
-                  <span>
-                    builds with purpose.
-                  </span>
-                </h1>
-
-
-                <p className="about-hero-description">
-                  I'm a Full Stack Developer who enjoys
-                  turning ideas into useful, scalable and
-                  user-focused digital products.
-                </p>
-
-
-                <div className="about-quick-info">
-
-                  <span className="about-quick-item">
-                    <FaCode />
-                    Full Stack Development
-                  </span>
-
-                  <span className="about-quick-item">
-                    <FaMapMarkerAlt />
-                    Nepal
-                  </span>
-
-                  <span className="about-quick-item">
-                    <FaBriefcase />
-                    Open to opportunities
-                  </span>
-
-                </div>
-
-              </div>
-
-
-              <div className="about-hero-side">
-
-                <span className="about-hero-side-label">
-                  What I do
-                </span>
-
-                <p>
-                  My work covers frontend development,
-                  backend systems, mobile applications,
-                  databases and deployment. I enjoy
-                  working across the entire product
-                  lifecycle — from an initial idea to a
-                  production-ready application.
-                </p>
-
-              </div>
-
+            <div className="about-badge">
+              <span className="about-badge-dot"></span>
+              About Me
             </div>
 
-          </div>
+            <h1>
+              I build things
+              <br />
+              <span>with purpose.</span>
+            </h1>
 
+            <p className="about-hero-text">
+              Full Stack Developer passionate about creating 
+              scalable, user-focused digital products. I turn 
+              ideas into clean, maintainable code.
+            </p>
+
+            <div className="about-info">
+              <span className="about-info-item">
+                <FaCode />
+                Full Stack Developer
+              </span>
+
+              <span className="about-info-item">
+                <FaMapMarkerAlt />
+                Nepal
+              </span>
+
+              <span className="about-info-item">
+                <FaBriefcase />
+                Open to opportunities
+              </span>
+            </div>
+
+            <div className="about-socials">
+              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="about-social-link">
+                <FaGithub />
+              </a>
+              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="about-social-link">
+                <FaLinkedin />
+              </a>
+              <a href={`mailto:${profile.email}`} className="about-social-link">
+                <FaEnvelope />
+              </a>
+              <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" className="about-social-link">
+                <FaWhatsapp />
+              </a>
+            </div>
+          </div>
         </section>
 
-
-        {/* =====================================================
-            ABOUT
-        ===================================================== */}
-
-        <section className="about-section">
-
+        {/* ABOUT SECTION */}
+        <section className="about-section soft">
           <div className="about-container">
+            <div className="section-header">
+              <span className="section-number">01 — About</span>
+              <h2>More than just code.</h2>
+              <p>I enjoy solving real-world problems through practical software solutions.</p>
+            </div>
 
-            <SectionHeader
-              number="01"
-              eyebrow="About"
-              title="More than just writing code."
-              description="I enjoy solving problems and creating products that have a real purpose."
-            />
-
-
-            <div className="about-intro-grid">
-
-
-              {/* LEFT */}
-
-              <div className="about-intro-copy">
-
-                <h3 className="about-intro-heading">
+            <div className="about-grid">
+              <div>
+                <h3>
                   Clean code.
                   <br />
                   Real products.
-                  <br />
-                  Meaningful impact.
                 </h3>
 
-
                 <p>
-                  I enjoy solving real-world problems
-                  through software, from frontend
-                  interfaces to backend systems and
-                  mobile applications.
+                  I work across frontend development, backend systems, 
+                  mobile applications, databases, and deployment. My 
+                  focus is on building software that is simple to use, 
+                  reliable in production, and easy to maintain.
                 </p>
 
-
-                <p>
-                  I believe good software should be
-                  simple to use, reliable in production
-                  and easy to maintain as the product
-                  grows.
-                </p>
-
-
-                <ul className="about-check-list">
-
+                <ul className="about-values">
                   <li>
                     <FaCheck />
-                    Clean, maintainable and scalable code
+                    Clean and maintainable code
                   </li>
 
                   <li>
                     <FaCheck />
-                    User-experience focused development
+                    User-focused development
                   </li>
 
                   <li>
                     <FaCheck />
-                    Performance and security conscious
+                    Performance conscious
                   </li>
 
                   <li>
                     <FaCheck />
-                    Always learning and exploring new technology
+                    Continuous learning
                   </li>
-
                 </ul>
-
               </div>
 
+              <div>
+                <h3>How I work</h3>
 
-              {/* RIGHT */}
+                <p>
+                  I believe in understanding the problem first, then 
+                  choosing the right technology and architecture to 
+                  solve it effectively.
+                </p>
 
-              <div className="about-strengths">
+                <p>
+                  From an initial idea to a production-ready application, 
+                  I enjoy working across the entire product lifecycle — 
+                  planning, building, testing, and deploying.
+                </p>
 
-                {strengths.map((item) => (
-
-                  <article
-                    className="about-strength"
-                    key={item.number}
-                  >
-
-                    <span className="about-strength-number">
-                      {item.number}
-                    </span>
-
-                    <h3>
-                      {item.title}
-                    </h3>
-
-                    <p>
-                      {item.text}
-                    </p>
-
-                  </article>
-
-                ))}
-
+                <p>
+                  My approach combines technical excellence with clear 
+                  communication, ensuring that the final product not 
+                  only works well but also meets the user's needs.
+                </p>
               </div>
-
             </div>
-
           </div>
-
         </section>
 
-
-        {/* =====================================================
-            TECHNOLOGIES
-        ===================================================== */}
-
-        <section className="about-section soft">
-
+        {/* SKILLS SECTION */}
+        <section className="about-section">
           <div className="about-container">
+            <div className="section-header">
+              <span className="section-number">02 — Toolkit</span>
+              <h2>Technologies I use.</h2>
+              <p>A practical stack for building modern web, mobile, and backend products.</p>
+            </div>
 
-            <SectionHeader
-              number="02"
-              eyebrow="Toolkit"
-              title="Technologies I work with."
-              description="A practical stack for building modern web, mobile and backend products."
-            />
-
-
-            <div className="about-tech">
-
-              {technologies.map((technology) => (
-
-                <span
-                  key={technology.name}
-                  className="about-tech-item"
-                >
-
-                  {technology.icon}
-
-                  {technology.name}
-
-                </span>
-
+            <div className="skills-grid">
+              {technologies.map((tech) => (
+                <div className="skill-card" key={tech.name}>
+                  <span style={{ color: tech.color }}>{tech.icon}</span>
+                  {tech.name}
+                </div>
               ))}
-
             </div>
-
           </div>
-
         </section>
 
-
-        {/* =====================================================
-            EXPERIENCE
-        ===================================================== */}
-
-        <section
-          className="about-section"
-          id="experience"
-        >
-
+        {/* EXPERIENCE SECTION */}
+        <section className="about-section soft">
           <div className="about-container">
+            <div className="section-header">
+              <span className="section-number">03 — Experience</span>
+              <h2>Where I've worked.</h2>
+            </div>
 
-            <SectionHeader
-              number="03"
-              eyebrow="Experience"
-              title="My professional journey."
-              description="The work and experiences that have shaped how I approach software development."
-            />
-
-
-            <div className="about-experience">
-
+            <div className="experience-list">
               {experience.map((item) => (
+                <article className="experience-item" key={`${item.company}-${item.role}`}>
+                  <div className="experience-year">{item.year}</div>
 
-                <article
-                  className="about-experience-item"
-                  key={`${item.company}-${item.role}`}
-                >
-
-                  <div className="about-experience-year">
-                    {item.year}
-                  </div>
-
-
-                  <div className="about-experience-content">
-
-                    <div className="about-experience-top">
-
-                      <h3 className="about-experience-role">
-                        {item.role}
-                      </h3>
-
-                      <span className="about-experience-type">
-                        {item.type}
-                      </span>
-
+                  <div className="experience-content">
+                    <div className="experience-header">
+                      <h3>{item.role}</h3>
+                      <span className="experience-type">{item.type}</span>
                     </div>
 
+                    <div className="experience-meta">
+                      <span className="experience-company">
+                        <FaBriefcase />
+                        {item.company}
+                      </span>
 
-                    <div className="about-experience-company">
-
-                      <FaBriefcase />
-
-                      {item.company}
-
-                      <span className="about-experience-location">
+                      <span className="experience-location">
                         <FaMapMarkerAlt />
                         {item.location}
                       </span>
-
                     </div>
 
-
-                    <p className="about-experience-description">
-                      {item.description}
-                    </p>
-
-
-                    <ul className="about-experience-points">
-
-                      {item.points.map((point) => (
-
-                        <li key={point}>
-
-                          <FaCheck />
-
-                          {point}
-
-                        </li>
-
-                      ))}
-
-                    </ul>
-
+                    <p className="experience-description">{item.description}</p>
                   </div>
-
                 </article>
-
               ))}
-
             </div>
-
           </div>
-
         </section>
 
-
-        {/* =====================================================
-            EDUCATION
-        ===================================================== */}
-
-        <section
-          className="about-section soft"
-          id="education"
-        >
-
-          <div className="about-container">
-
-            <SectionHeader
-              number="04"
-              eyebrow="Education"
-              title="Academic background."
-              description="The academic foundation behind my technical journey."
-            />
-
-
-            <div className="about-education">
-
-              {education.map((item) => (
-
-                <article
-                  className="about-education-card"
-                  key={item.degree}
-                >
-
-                  <div className="about-education-top">
-
-                    <div className="about-education-icon">
-                      <FaGraduationCap />
-                    </div>
-
-                    <span className="about-education-type">
-                      {item.type}
-                    </span>
-
-                  </div>
-
-
-                  <span className="about-education-year">
-                    {item.year}
-                  </span>
-
-
-                  <h3>
-                    {item.degree}
-                  </h3>
-
-
-                  <div className="about-education-school">
-                    {item.school}
-                  </div>
-
-
-                  <div className="about-education-location">
-
-                    <FaMapMarkerAlt />
-
-                    {item.location}
-
-                  </div>
-
-                </article>
-
-              ))}
-
-            </div>
-
-          </div>
-
-        </section>
-
-
-        {/* =====================================================
-            CTA
-        ===================================================== */}
-
+        {/* EDUCATION SECTION */}
         <section className="about-section">
-
           <div className="about-container">
+            <div className="section-header">
+              <span className="section-number">04 — Education</span>
+              <h2>Academic background.</h2>
+            </div>
 
+            <div className="education-grid">
+              {education.map((item) => (
+                <article className="education-card" key={item.degree}>
+                  <span className="education-year">{item.year}</span>
+                  <h3>{item.degree}</h3>
+                  <div className="education-school">{item.school}</div>
+                  <div className="education-location">
+                    <FaGraduationCap />
+                    {item.location}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA SECTION */}
+        <section className="about-section soft">
+          <div className="about-container">
             <div className="about-cta">
-
               <div className="about-cta-content">
-
-                <span className="about-cta-label">
-                  <FaStar />
-                  Let's work together
-                </span>
-
-
+                <span className="section-number">Let's Work Together</span>
                 <h2>
                   Have an idea?
                   <br />
                   Let's build it.
                 </h2>
-
-
                 <p>
-                  I'm open to interesting projects,
-                  collaborations and opportunities where
-                  technology can make a real difference.
+                  I'm open to interesting projects, collaborations, 
+                  and opportunities. Let's create something amazing together.
                 </p>
-
               </div>
 
-
-              <a
-                href="/contact"
-                className="about-cta-button"
-              >
+              <a href="/contact" className="about-cta-button">
                 Get In Touch
-
                 <FaArrowRight />
-
               </a>
-
             </div>
-
           </div>
-
         </section>
-
 
       </main>
     </>
