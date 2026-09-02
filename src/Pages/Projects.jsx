@@ -3,6 +3,7 @@ import React from "react";
 import { FaArrowUpRightFromSquare, FaBookOpen } from "react-icons/fa6";
 import servexImage from "../assets/servex.png";
 import instagram from "../assets/instagram.png";
+import location from "../assets/locationfetch.png";
 
 const projects = [
   {
@@ -11,8 +12,6 @@ const projects = [
     category: "Service Marketplace",
     image: servexImage,
     link: "https://play.google.com/store/apps/details?id=com.laayo.servexapp&hl=en_IN",
-    bloglink:
-      "https://play.google.com/store/apps/details?id=com.laayo.servexapp&hl=en_IN",
   },
   {
     id: 2,
@@ -20,8 +19,13 @@ const projects = [
     category: "Web Application",
     image: instagram,
     link: "https://instagram.anujkattel.com.np",
-    bloglink:
-      "https://instagram.anujkattel.com.np",
+  },
+  {
+    id: 3,
+    name: "Location fetch",
+    category: "Web Application",
+    image: location,
+    link: "/projects/location",
   },
 ];
 
