@@ -2,7 +2,6 @@
 // Location.jsx
 import React, { useEffect, useState } from "react";
 import "./Location.css";
-import locationimg from "../../assets/Location.png";
 
 function Location() {
     const [location, setLocation] = useState(null);
@@ -166,12 +165,6 @@ function Location() {
                 <header className="header">
                     <div className="header-content">
                         <div className="header-title-row">
-                            <div className="header-icon">
-                                <img
-                                    src={locationimg}
-                                    alt="Location"
-                                />
-                            </div>
 
                             <div>
                                 <h1>My Location</h1>
