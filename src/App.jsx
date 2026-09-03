@@ -17,7 +17,7 @@ import TermsOfUse from "./servex/TermsOfUse";
 import ServeX from "./servex/ServeX";
 
 import Navbar from "./components/Navbar";
-import LocationFetch from "./Pages/projects/Locationfetch";
+import LocationFetch from "./Pages/projects/Locationfetch.jsx";
 function App() {
   return (
     <Router>
