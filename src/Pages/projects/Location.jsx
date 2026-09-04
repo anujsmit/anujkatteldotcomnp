@@ -1,7 +1,6 @@
 
 // Location.jsx
 import React, { useEffect, useState } from "react";
-import "./Location.css";
 
 function Location() {
     const [location, setLocation] = useState(null);
