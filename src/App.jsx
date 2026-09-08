@@ -8,7 +8,7 @@ import About from "./Pages/About";
 import Projects from "./Pages/Projects";
 import Contact from "./Pages/Contact";
 import NotFound from "./Pages/NotFound";
-
+import Random from "./Pages/Random";
 
 import PrivacyPolicy from "./servex/Privacypolicy";
 import TermsOfUse from "./servex/TermsOfUse";
@@ -31,6 +31,7 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/packages" element={<Packages />} />
+        <Route path="/random" element={<Random />} />
 
         <Route path="/servex/" element={<ServeX />} />
         <Route path="/servex/home" element={<ServeX />} />
