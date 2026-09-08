@@ -5,6 +5,7 @@ const API_URL =
 
 function Random() {
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         let mounted = true;
@@ -34,13 +35,12 @@ function Random() {
                     return;
                 }
 
-                if (mounted) {
-                    setLoading(false);
-                }
-            } catch (error) {
-                console.error("Failed to get smart link:", error);
+                throw new Error("Invalid backend response");
+            } catch (err) {
+                console.error("Failed to get smart link:", err);
 
                 if (mounted) {
+                    setError(true);
                     setLoading(false);
                 }
             }
@@ -55,292 +55,270 @@ function Random() {
 
     return (
         <div style={styles.page}>
-            <style>
-                {`
-                    * {
-                        box-sizing: border-box;
-                        margin: 0;
-                        padding: 0;
+            <style>{`
+                * {
+                    box-sizing: border-box;
+                }
+
+                html {
+                    scroll-behavior: smooth;
+                }
+
+                body {
+                    margin: 0;
+                    font-family: Inter, -apple-system, BlinkMacSystemFont,
+                        "Segoe UI", Arial, sans-serif;
+                    background: #f6f7fb;
+                }
+
+                a {
+                    text-decoration: none;
+                    color: inherit;
+                }
+
+                @keyframes spin {
+                    from {
+                        transform: rotate(0deg);
                     }
 
-                    html {
-                        scroll-behavior: smooth;
+                    to {
+                        transform: rotate(360deg);
+                    }
+                }
+
+                @keyframes fadeIn {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
                     }
 
-                    body {
-                        margin: 0;
-                        font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
                     }
+                }
 
-                    a {
-                        text-decoration: none;
-                        color: inherit;
-                    }
+                .web-flow {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                    padding: 28px 15px;
+                    margin: 30px 0;
+                    background: #f8fafc;
+                    border: 1px solid #e5e7eb;
+                    border-radius: 15px;
+                }
 
-                    @keyframes spin {
-                        from {
-                            transform: rotate(0deg);
-                        }
-                        to {
-                            transform: rotate(360deg);
-                        }
-                    }
+                .web-flow-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding: 11px 14px;
+                    background: #fff;
+                    border: 1px solid #e5e7eb;
+                    border-radius: 10px;
+                    font-size: 13px;
+                    font-weight: 600;
+                }
 
-                    @keyframes fadeIn {
-                        from {
-                            opacity: 0;
-                            transform: translateY(20px);
-                        }
-                        to {
-                            opacity: 1;
-                            transform: translateY(0);
-                        }
-                    }
+                .web-flow-arrow {
+                    color: #6366f1;
+                    font-size: 22px;
+                    font-weight: 700;
+                }
 
-                    .web-nav {
-                        display: flex;
-                        gap: 30px;
-                    }
+                .web-hero-inner {
+                    max-width: 1000px;
+                    margin: 0 auto;
+                    padding: 105px 22px 95px;
+                    animation: fadeIn 0.8s ease-out;
+                }
 
-                    .web-nav a {
-                        color: #4b5563;
-                        font-size: 14px;
-                        font-weight: 500;
-                        transition: color 0.2s;
-                    }
+                .web-hero-title {
+                    margin: 25px 0 20px;
+                    font-size: clamp(48px, 8vw, 82px);
+                    line-height: 1;
+                    letter-spacing: -5px;
+                    max-width: 850px;
+                }
 
-                    .web-nav a:hover {
-                        color: #4f46e5;
-                    }
+                .web-article-section {
+                    max-width: 1050px;
+                    margin: 0 auto;
+                    padding: 65px 20px;
+                }
 
-                    .web-flow-item {
-                        display: flex;
-                        align-items: center;
-                        gap: 8px;
-                        padding: 11px 14px;
-                        background: #fff;
-                        border: 1px solid #e5e7eb;
-                        border-radius: 10px;
-                        font-size: 13px;
-                        font-weight: 600;
-                    }
+                .web-article {
+                    background: #fff;
+                    border: 1px solid #e5e7eb;
+                    border-radius: 22px;
+                    padding: 55px;
+                    box-shadow: 0 15px 50px rgba(15, 23, 42, 0.06);
+                    animation: fadeIn 0.6s ease-out;
+                }
 
-                    .web-flow-arrow {
-                        color: #6366f1;
-                        font-size: 22px;
-                        font-weight: 700;
-                    }
+                .web-article h2 {
+                    margin: 40px 0 16px;
+                    font-size: 28px;
+                    letter-spacing: -0.5px;
+                }
 
+                .web-article p {
+                    margin: 0 0 16px;
+                    line-height: 1.8;
+                    color: #374151;
+                    font-size: 16px;
+                }
+
+                .web-parts-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 18px;
+                    margin: 30px 0;
+                }
+
+                .web-two-cards {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 20px;
+                    margin: 30px 0;
+                }
+
+                .web-api-row {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 15px;
+                    flex-wrap: wrap;
+                }
+
+                .web-render-flow {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 14px;
+                    flex-wrap: wrap;
+                    padding: 30px;
+                    margin: 30px 0;
+                    background: #f8fafc;
+                    border-radius: 15px;
+                }
+
+                .web-render-plus {
+                    color: #6366f1;
+                    font-size: 22px;
+                    font-weight: 700;
+                }
+
+                .web-timeline {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 12px;
+                    margin: 30px 0;
+                }
+
+                .web-about {
+                    max-width: 1050px;
+                    margin: 0 auto 70px;
+                    padding: 50px;
+                    background: #111827;
+                    color: #fff;
+                    border-radius: 20px;
+                }
+
+                .web-about h2 {
+                    font-size: 32px;
+                    margin: 16px 0;
+                }
+
+                .web-about p {
+                    font-size: 18px;
+                    line-height: 1.8;
+                    color: #d1d5db;
+                    max-width: 700px;
+                }
+
+                .web-footer-inner {
+                    max-width: 1050px;
+                    margin: 0 auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 30px;
+                }
+
+                @media (max-width: 800px) {
                     .web-hero-inner {
-                        max-width: 1000px;
-                        margin: 0 auto;
-                        padding: 105px 22px 95px;
-                        animation: fadeIn 0.8s ease-out;
+                        padding: 75px 20px;
                     }
 
                     .web-hero-title {
-                        margin: 25px 0 20px;
-                        font-size: clamp(48px, 8vw, 82px);
-                        line-height: 1;
-                        letter-spacing: -5px;
-                        max-width: 850px;
+                        font-size: 48px;
+                        letter-spacing: -2px;
                     }
 
                     .web-article-section {
-                        max-width: 1050px;
-                        margin: 0 auto;
-                        padding: 65px 20px;
+                        padding: 30px 14px;
                     }
 
                     .web-article {
-                        background: #fff;
-                        border: 1px solid #e5e7eb;
-                        border-radius: 22px;
-                        padding: 55px;
-                        box-shadow: 0 15px 50px rgba(15,23,42,.06);
-                        animation: fadeIn 0.6s ease-out;
+                        padding: 28px 20px;
+                        border-radius: 15px;
                     }
 
                     .web-article h2 {
-                        margin: 40px 0 16px;
-                        font-size: 28px;
-                        letter-spacing: -0.5px;
+                        font-size: 22px;
                     }
 
-                    .web-article p {
-                        margin: 0 0 16px 0;
-                        line-height: 1.8;
-                        color: #374151;
-                        font-size: 16px;
-                    }
-
-                    .web-parts-grid {
-                        display: grid;
-                        grid-template-columns: repeat(3, 1fr);
-                        gap: 18px;
-                        margin: 30px 0;
-                    }
-
+                    .web-parts-grid,
                     .web-two-cards {
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
-                        gap: 20px;
-                        margin: 30px 0;
+                        grid-template-columns: 1fr;
                     }
 
                     .web-flow {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        gap: 10px;
-                        flex-wrap: wrap;
-                        padding: 28px 15px;
-                        margin: 30px 0;
-                        background: #f8fafc;
-                        border: 1px solid #e5e7eb;
-                        border-radius: 15px;
+                        flex-direction: column;
+                    }
+
+                    .web-flow-arrow {
+                        transform: rotate(90deg);
                     }
 
                     .web-api-row {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        gap: 15px;
-                        flex-wrap: wrap;
+                        flex-direction: column;
                     }
 
                     .web-render-flow {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        gap: 14px;
-                        flex-wrap: wrap;
-                        padding: 30px;
-                        margin: 30px 0;
-                        background: #f8fafc;
-                        border-radius: 15px;
+                        flex-direction: column;
                     }
 
                     .web-render-plus {
-                        color: #6366f1;
-                        font-size: 22px;
-                        font-weight: 700;
+                        transform: rotate(90deg);
                     }
 
                     .web-timeline {
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
-                        gap: 12px;
-                        margin: 30px 0;
+                        grid-template-columns: 1fr;
                     }
 
                     .web-about {
-                        max-width: 1050px;
-                        margin: 0 auto 70px;
-                        padding: 50px;
-                        background: #111827;
-                        color: #fff;
-                        border-radius: 20px;
-                        animation: fadeIn 0.8s ease-out;
+                        margin: 20px 14px 50px;
+                        padding: 30px 22px;
                     }
 
                     .web-about h2 {
-                        font-size: 32px;
-                        margin: 16px 0;
-                        letter-spacing: -1px;
-                    }
-
-                    .web-about p {
-                        font-size: 18px;
-                        line-height: 1.8;
-                        color: #d1d5db;
-                        max-width: 700px;
+                        font-size: 24px;
                     }
 
                     .web-footer-inner {
-                        max-width: 1050px;
-                        margin: 0 auto;
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        gap: 30px;
+                        flex-direction: column;
+                        text-align: center;
                     }
-
-                    @media (max-width: 800px) {
-                        .web-nav {
-                            display: none !important;
-                        }
-
-                        .web-hero-inner {
-                            padding: 75px 20px !important;
-                        }
-
-                        .web-hero-title {
-                            font-size: 48px !important;
-                            letter-spacing: -2px !important;
-                        }
-
-                        .web-article-section {
-                            padding: 30px 14px !important;
-                        }
-
-                        .web-article {
-                            padding: 28px 20px !important;
-                            border-radius: 15px !important;
-                        }
-
-                        .web-article h2 {
-                            font-size: 22px !important;
-                        }
-
-                        .web-parts-grid,
-                        .web-two-cards {
-                            grid-template-columns: 1fr !important;
-                        }
-
-                        .web-flow {
-                            flex-direction: column !important;
-                        }
-
-                        .web-flow-arrow {
-                            transform: rotate(90deg);
-                        }
-
-                        .web-api-row {
-                            flex-direction: column !important;
-                        }
-
-                        .web-render-flow {
-                            flex-direction: column !important;
-                        }
-
-                        .web-render-plus {
-                            transform: rotate(90deg);
-                        }
-
-                        .web-timeline {
-                            grid-template-columns: 1fr !important;
-                        }
-
-                        .web-about {
-                            margin: 20px 14px 50px !important;
-                            padding: 30px 22px !important;
-                        }
-
-                        .web-about h2 {
-                            font-size: 24px !important;
-                        }
-
-                        .web-footer-inner {
-                            flex-direction: column !important;
-                            text-align: center;
-                        }
-                    }
-                `}
-            </style>
+                }
+            `}</style>
 
             <main>
-                <section id="home" style={styles.hero}>
+                <section style={styles.hero}>
                     <div className="web-hero-inner">
                         <div style={styles.badge}>
                             TECHNOLOGY • WEB DEVELOPMENT • GUIDES
@@ -364,18 +342,20 @@ function Random() {
                     </div>
                 </section>
 
-                <section id="article" className="web-article-section">
+                <section className="web-article-section">
                     <article className="web-article">
                         <p style={styles.introduction}>
                             Every time you visit a website, your browser and
                             several other systems work together to deliver
                             the page you see. From DNS and web servers to
                             HTML, CSS, JavaScript and databases, a modern
-                            website is the result of many technologies working
-                            together.
+                            website is the result of many technologies
+                            working together.
                         </p>
 
-                        <h2>What happens when you visit a website?</h2>
+                        <h2>
+                            What happens when you visit a website?
+                        </h2>
 
                         <p>
                             Imagine that you type the following address into
@@ -383,10 +363,14 @@ function Random() {
                         </p>
 
                         <div style={styles.urlBox}>
-                            <span style={styles.protocol}>https://</span>
+                            <span style={styles.protocol}>
+                                https://
+                            </span>
+
                             <span style={styles.domain}>
                                 example.com
                             </span>
+
                             <span style={styles.path}>
                                 /article
                             </span>
@@ -424,32 +408,23 @@ function Random() {
                         </p>
 
                         <div className="web-parts-grid">
-                            <div style={styles.partCard}>
-                                <div style={styles.partNumber}>01</div>
-                                <h3 style={styles.partTitle}>Protocol</h3>
-                                <p style={styles.partText}>
-                                    HTTPS tells the browser how it should
-                                    communicate with the server.
-                                </p>
-                            </div>
+                            <PartCard
+                                number="01"
+                                title="Protocol"
+                                text="HTTPS tells the browser how it should communicate with the server."
+                            />
 
-                            <div style={styles.partCard}>
-                                <div style={styles.partNumber}>02</div>
-                                <h3 style={styles.partTitle}>Domain</h3>
-                                <p style={styles.partText}>
-                                    The domain is the human-readable address
-                                    of the website.
-                                </p>
-                            </div>
+                            <PartCard
+                                number="02"
+                                title="Domain"
+                                text="The domain is the human-readable address of the website."
+                            />
 
-                            <div style={styles.partCard}>
-                                <div style={styles.partNumber}>03</div>
-                                <h3 style={styles.partTitle}>Path</h3>
-                                <p style={styles.partText}>
-                                    The path identifies a particular resource
-                                    or page.
-                                </p>
-                            </div>
+                            <PartCard
+                                number="03"
+                                title="Path"
+                                text="The path identifies a particular resource or page."
+                            />
                         </div>
 
                         <h2>2. DNS finds the server</h2>
@@ -467,7 +442,9 @@ function Random() {
                         </p>
 
                         <div style={styles.infoCard}>
-                            <div style={styles.infoIcon}>🌐</div>
+                            <div style={styles.infoIcon}>
+                                🌐
+                            </div>
 
                             <div>
                                 <h3 style={styles.infoTitle}>
@@ -506,16 +483,9 @@ function Random() {
                             resource.
                         </p>
 
-                        <pre style={styles.code}>
-{`GET /article HTTP/1.1
+                        <pre style={styles.code}>{`GET /article HTTP/1.1
 Host: example.com
-Accept: text/html`}
-                        </pre>
-
-                        <p>
-                            The server receives this request and decides how
-                            to respond.
-                        </p>
+Accept: text/html`}</pre>
 
                         <h2>5. The server processes the request</h2>
 
@@ -526,29 +496,17 @@ Accept: text/html`}
                         </p>
 
                         <div className="web-two-cards">
-                            <div style={styles.serverCard}>
-                                <div style={styles.cardIcon}>📄</div>
+                            <ServerCard
+                                icon="📄"
+                                title="Static Website"
+                                text="The server returns files that already exist, such as HTML, CSS, JavaScript and images."
+                            />
 
-                                <h3 style={styles.serverCardTitle}>Static Website</h3>
-
-                                <p style={styles.serverCardText}>
-                                    The server returns files that already
-                                    exist, such as HTML, CSS, JavaScript and
-                                    images.
-                                </p>
-                            </div>
-
-                            <div style={styles.serverCard}>
-                                <div style={styles.cardIcon}>⚙️</div>
-
-                                <h3 style={styles.serverCardTitle}>Dynamic Website</h3>
-
-                                <p style={styles.serverCardText}>
-                                    Backend code can process requests,
-                                    communicate with databases and generate
-                                    responses dynamically.
-                                </p>
-                            </div>
+                            <ServerCard
+                                icon="⚙️"
+                                title="Dynamic Website"
+                                text="Backend code can process requests, communicate with databases and generate responses dynamically."
+                            />
                         </div>
 
                         <h2>6. Backend and databases</h2>
@@ -582,23 +540,14 @@ Accept: text/html`}
                             an HTTP response back to the browser.
                         </p>
 
-                        <pre style={styles.code}>
-{`HTTP/1.1 200 OK
+                        <pre style={styles.code}>{`HTTP/1.1 200 OK
 Content-Type: text/html
 
 <html>
     <body>
         <h1>Hello World</h1>
     </body>
-</html>`}
-                        </pre>
-
-                        <p>
-                            The HTTP status code tells the browser what
-                            happened. A successful request commonly returns
-                            a 2xx status such as 200, while a missing resource
-                            commonly results in a 404 response.
-                        </p>
+</html>`}</pre>
 
                         <h2>8. HTML creates the structure</h2>
 
@@ -608,8 +557,7 @@ Content-Type: text/html
                             other elements are represented using HTML.
                         </p>
 
-                        <pre style={styles.code}>
-{`<main>
+                        <pre style={styles.code}>{`<main>
     <h1>How Websites Work</h1>
 
     <p>
@@ -619,8 +567,7 @@ Content-Type: text/html
     <a href="/about">
         Learn More
     </a>
-</main>`}
-                        </pre>
+</main>`}</pre>
 
                         <h2>9. CSS makes the page look good</h2>
 
@@ -631,8 +578,7 @@ Content-Type: text/html
                             designs.
                         </p>
 
-                        <pre style={styles.code}>
-{`.article {
+                        <pre style={styles.code}>{`.article {
     max-width: 800px;
     margin: 0 auto;
     padding: 40px;
@@ -640,8 +586,7 @@ Content-Type: text/html
 
 .article h1 {
     font-size: 42px;
-}`}
-                        </pre>
+}`}</pre>
 
                         <h2>10. JavaScript makes websites interactive</h2>
 
@@ -652,35 +597,35 @@ Content-Type: text/html
                         </p>
 
                         <p>
-                            For example, JavaScript can send an API request,
-                            receive JSON data and update the page without
-                            reloading the entire document.
+                            JavaScript can send an API request, receive JSON
+                            data and update the page without reloading the
+                            entire document.
                         </p>
 
                         <div style={styles.apiBox}>
                             <div className="web-api-row">
-                                <div style={styles.apiItem}>
-                                    <strong>Frontend</strong>
-                                    <span>React / JavaScript</span>
-                                </div>
+                                <ApiItem
+                                    title="Frontend"
+                                    subtitle="React / JavaScript"
+                                />
 
                                 <div style={styles.apiArrow}>
                                     →
                                 </div>
 
-                                <div style={styles.apiItem}>
-                                    <strong>API</strong>
-                                    <span>HTTP Request</span>
-                                </div>
+                                <ApiItem
+                                    title="API"
+                                    subtitle="HTTP Request"
+                                />
 
                                 <div style={styles.apiArrow}>
                                     →
                                 </div>
 
-                                <div style={styles.apiItem}>
-                                    <strong>Backend</strong>
-                                    <span>Node.js / Server</span>
-                                </div>
+                                <ApiItem
+                                    title="Backend"
+                                    subtitle="Node.js / Server"
+                                />
                             </div>
 
                             <div style={styles.apiResponse}>
@@ -697,45 +642,44 @@ Content-Type: text/html
                             the page.
                         </p>
 
-                        <p>
-                            The browser processes these resources and builds
-                            the structures needed to render the document.
-                            Eventually, the result is displayed on your
-                            screen.
-                        </p>
-
                         <div className="web-render-flow">
                             <RenderBox
                                 title="HTML"
                                 subtitle="Structure"
                             />
 
-                            <span className="web-render-plus">+</span>
+                            <span className="web-render-plus">
+                                +
+                            </span>
 
                             <RenderBox
                                 title="CSS"
                                 subtitle="Appearance"
                             />
 
-                            <span className="web-render-plus">+</span>
+                            <span className="web-render-plus">
+                                +
+                            </span>
 
                             <RenderBox
                                 title="JavaScript"
                                 subtitle="Behavior"
                             />
 
-                            <span className="web-render-plus">→</span>
+                            <span className="web-render-plus">
+                                →
+                            </span>
 
                             <div style={styles.finalRender}>
                                 Web Page
                             </div>
                         </div>
 
-                        <h2 id="how">The complete journey</h2>
+                        <h2>The complete journey</h2>
 
                         <p>
-                            Putting everything together, a simplified website
-                            request looks like this:
+                            Putting everything together, a simplified
+                            website request looks like this:
                         </p>
 
                         <div className="web-timeline">
@@ -791,8 +735,7 @@ Content-Type: text/html
                                 </h3>
 
                                 <p style={styles.conclusionText}>
-                                    A website is not simply a collection of
-                                    files. It is a combination of browsers,
+                                    A website is a combination of browsers,
                                     networks, DNS, servers, backend
                                     applications, APIs, databases and
                                     frontend technologies working together.
@@ -803,34 +746,23 @@ Content-Type: text/html
                         <h2>Why understanding this matters</h2>
 
                         <p>
-                            If you are learning web development, understanding
-                            this process makes technologies such as React,
-                            Node.js, Express, APIs, databases and cloud
-                            deployment much easier to understand.
+                            If you are learning web development,
+                            understanding this process makes technologies
+                            such as React, Node.js, Express, APIs, databases
+                            and cloud deployment much easier to understand.
                         </p>
 
                         <p>
                             Once you understand how the browser communicates
-                            with a server, you can start understanding what
-                            happens when an API request fails, why CORS
-                            errors occur, how domains point to servers and
-                            how frontend and backend applications communicate.
+                            with a server, you can understand what happens
+                            when an API request fails, why CORS errors occur,
+                            how domains point to servers and how frontend and
+                            backend applications communicate.
                         </p>
-
-                        <div style={styles.learnMore}>
-                            <h3 style={styles.learnMoreTitle}>Keep learning</h3>
-
-                            <p style={styles.learnMoreText}>
-                                The web is built from many interconnected
-                                technologies. Start with HTTP, DNS, HTML,
-                                CSS and JavaScript, then move into backend
-                                development and databases.
-                            </p>
-                        </div>
                     </article>
                 </section>
 
-                <section id="about" className="web-about">
+                <section className="web-about">
                     <div style={styles.badgeDark}>
                         ABOUT THIS GUIDE
                     </div>
@@ -861,13 +793,13 @@ Content-Type: text/html
                         </p>
                     </div>
 
-                    <div>
-                        <p style={styles.footerCopyright}>© 2026 WebGuide</p>
-                    </div>
+                    <p style={styles.footerCopyright}>
+                        © 2026 WebGuide
+                    </p>
                 </div>
             </footer>
 
-            {loading && (
+            {loading && !error && (
                 <div style={styles.loadingOverlay}>
                     <div style={styles.spinner} />
 
@@ -884,7 +816,6 @@ Content-Type: text/html
     );
 }
 
-// Helper Components
 function FlowItem({ number, text }) {
     return (
         <div className="web-flow-item">
@@ -905,6 +836,42 @@ function FlowArrow() {
     );
 }
 
+function PartCard({ number, title, text }) {
+    return (
+        <div style={styles.partCard}>
+            <div style={styles.partNumber}>
+                {number}
+            </div>
+
+            <h3 style={styles.partTitle}>
+                {title}
+            </h3>
+
+            <p style={styles.partText}>
+                {text}
+            </p>
+        </div>
+    );
+}
+
+function ServerCard({ icon, title, text }) {
+    return (
+        <div style={styles.serverCard}>
+            <div style={styles.cardIcon}>
+                {icon}
+            </div>
+
+            <h3 style={styles.serverCardTitle}>
+                {title}
+            </h3>
+
+            <p style={styles.serverCardText}>
+                {text}
+            </p>
+        </div>
+    );
+}
+
 function ArchitectureBox({ text }) {
     return (
         <div style={styles.archBox}>
@@ -921,6 +888,15 @@ function ArchitectureArrow() {
     );
 }
 
+function ApiItem({ title, subtitle }) {
+    return (
+        <div style={styles.apiItem}>
+            <strong>{title}</strong>
+            <span>{subtitle}</span>
+        </div>
+    );
+}
+
 function RenderBox({ title, subtitle }) {
     return (
         <div style={styles.renderBox}>
@@ -933,7 +909,10 @@ function RenderBox({ title, subtitle }) {
 function TimelineItem({ number, text }) {
     return (
         <div style={styles.timelineItem}>
-            <strong style={styles.timelineNumber}>{number}</strong>
+            <strong style={styles.timelineNumber}>
+                {number}
+            </strong>
+
             <span>{text}</span>
         </div>
     );
@@ -944,34 +923,6 @@ const styles = {
         minHeight: "100vh",
         background: "#f6f7fb",
         color: "#172033",
-        fontFamily:
-            "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif",
-    },
-
-    header: {
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        background: "rgba(255,255,255,.96)",
-        backdropFilter: "blur(14px)",
-        borderBottom: "1px solid #e5e7eb",
-    },
-
-    navbar: {
-        maxWidth: "1180px",
-        height: "70px",
-        margin: "0 auto",
-        padding: "0 22px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-    },
-
-    logo: {
-        fontSize: "24px",
-        fontWeight: 800,
-        letterSpacing: "-1px",
-        color: "#111827",
     },
 
     hero: {
@@ -1124,7 +1075,7 @@ const styles = {
     },
 
     serverCardTitle: {
-        margin: "0 0 8px 0",
+        margin: "0 0 8px",
         fontSize: "18px",
     },
 
@@ -1256,25 +1207,6 @@ const styles = {
     conclusionText: {
         marginBottom: 0,
         color: "#374151",
-        lineHeight: 1.7,
-    },
-
-    learnMore: {
-        marginTop: "40px",
-        padding: "28px",
-        background: "#111827",
-        color: "#fff",
-        borderRadius: "15px",
-    },
-
-    learnMoreTitle: {
-        margin: "0 0 10px 0",
-        fontSize: "20px",
-    },
-
-    learnMoreText: {
-        margin: 0,
-        color: "#d1d5db",
         lineHeight: 1.7,
     },
 
