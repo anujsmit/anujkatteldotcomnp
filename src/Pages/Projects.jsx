@@ -1,4 +1,3 @@
-
 import React from "react";
 import { FaArrowUpRightFromSquare, FaBookOpen } from "react-icons/fa6";
 import servexImage from "../assets/servex.png";
@@ -12,6 +11,7 @@ const projects = [
     category: "Service Marketplace",
     image: servexImage,
     link: "https://play.google.com/store/apps/details?id=com.laayo.servexapp&hl=en_IN",
+    bloglink: "https://blog.anujkattel.com.np/how-we-started-servex-our-story-and-vision/",
   },
   {
     id: 2,
@@ -31,110 +31,88 @@ const projects = [
 
 function Projects() {
   return (
-    <>
+    <main className="projects-page">
+      <div className="projects-container">
+        {/* HEADER */}
+        <header className="projects-header">
+          <span className="projects-eyebrow">Selected Work</span>
 
+          <h1>
+            Things I've <span>Built.</span>
+          </h1>
 
-      <main className="projects-page">
-        <div className="projects-container">
+          <p>
+            A collection of projects I've designed and developed, focused on
+            solving real-world problems through clean, practical and
+            user-friendly digital experiences.
+          </p>
+        </header>
 
-          {/* HEADER */}
+        {/* PROJECTS */}
+        <section className="projects-grid" aria-label="Projects">
+          {projects.map((project) => (
+            <article className="project-card" key={project.id}>
+              {/* IMAGE */}
+              <div className="project-image-wrapper">
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  className="project-image"
+                />
 
-          <header className="projects-header">
-            <span className="projects-eyebrow">
-              Selected Work
-            </span>
+                <span className="project-number">
+                  0{project.id}
+                </span>
+              </div>
 
-            <h1>
-              Things I've <span>Built.</span>
-            </h1>
+              {/* CONTENT */}
+              <div className="project-content">
+                <span className="project-category">
+                  {project.category}
+                </span>
 
-            <p>
-              A collection of projects I've designed and developed,
-              focused on solving real-world problems through clean,
-              practical and user-friendly digital experiences.
-            </p>
-          </header>
+                <h2>{project.name}</h2>
 
-          {/* PROJECTS */}
-
-          <section
-            className="projects-grid"
-            aria-label="Projects"
-          >
-            {projects.map((project) => (
-              <article
-                className="project-card"
-                key={project.id}
-              >
-                {/* IMAGE */}
-
-                <div className="project-image-wrapper">
-                  <img
-                    src={project.image}
-                    alt={project.name}
-                    className="project-image"
-                  />
-
-                  <span className="project-number">
-                    0{project.id}
-                  </span>
-                </div>
-
-                {/* CONTENT */}
-
-                <div className="project-content">
-                  <span className="project-category">
-                    {project.category}
+                {/* FOOTER */}
+                <div className="project-footer">
+                  <span className="project-index">
+                    PROJECT 0{project.id}
                   </span>
 
-                  <h2>{project.name}</h2>
+                  <div className="project-actions">
+                    {/* READ BLOG */}
+                    {project.bloglink && (
+                      <a
+                        href={project.bloglink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link secondary"
+                      >
+                        Read Blog
+                        <FaBookOpen />
+                      </a>
+                    )}
 
-                  {/* FOOTER */}
-
-                  <div className="project-footer">
-                    <span className="project-index">
-                      PROJECT 0{project.id}
-                    </span>
-
-                    <div className="project-actions">
-
-                      {/* READ BLOG */}
-
-                      {project.bloglink && (
-                        <a
-                          href={project.bloglink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="project-link secondary"
-                        >
-                          Read Blog
-                          <FaBookOpen />
-                        </a>
-                      )}
-
-                      {/* VIEW PROJECT */}
-
-                      {project.link && (
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="project-link primary"
-                        >
-                          View Project
-                          <FaArrowUpRightFromSquare />
-                        </a>
-                      )}
-
-                    </div>
+                    {/* VIEW PROJECT */}
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link primary"
+                      >
+                        View Project
+                        <FaArrowUpRightFromSquare />
+                      </a>
+                    )}
                   </div>
                 </div>
-              </article>
-            ))}
-          </section>
-        </div>
-      </main>
-    </>
+              </div>
+            </article>
+          ))}
+        </section>
+      </div>
+    </main>
   );
 }
 

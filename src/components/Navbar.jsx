@@ -46,6 +46,10 @@ function Navbar() {
       label: "Contact",
       path: "/contact",
     },
+    {
+      label: "Blog",
+      path: "https://blog.anujkattel.com.np/",
+    },
   ];
 
   useEffect(() => {
@@ -248,24 +252,7 @@ function Navbar() {
           </NavLink>
         ))}
 
-        {/* Mobile Theme Button */}
-        <button
-          type="button"
-          className="mobile-theme-button"
-          onClick={toggleTheme}
-        >
-          {darkMode ? (
-            <>
-              <FaSun />
-              Light Mode
-            </>
-          ) : (
-            <>
-              <FaMoon />
-              Dark Mode
-            </>
-          )}
-        </button>
+        
       </div>
     </header>
   );

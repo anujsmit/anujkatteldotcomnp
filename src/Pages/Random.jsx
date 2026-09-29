@@ -1,58 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
-const API_URL =
-    "https://linkgeneratorbackend.anujkattel.com.np/api/link";
-
-function Random() {
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+/* ------------------------------------------------------------------ */
+/*  VIDEO PLAYER                                                        */
+/*  Loads https://open.video/video.js and registers the player config.  */
+/* ------------------------------------------------------------------ */
+function VideoPlayer() {
+    const containerRef = useRef(null);
 
     useEffect(() => {
-        let mounted = true;
+        // Register the player in the global queue
+        window.openVideoPlayers = window.openVideoPlayers || [];
+        window.openVideoPlayers.push({
+            allowPlaylistAds: false,
+            target: containerRef.current,
+            videoID: "jsicrmflBrp",
+            autoplay: true,
+            float: true,
+        });
 
-        const getLink = async () => {
-            try {
-                const response = await fetch(API_URL, {
-                    method: "GET",
-                    cache: "no-store",
-                    headers: {
-                        Accept: "application/json",
-                    },
-                });
-
-                if (!response.ok) {
-                    throw new Error(
-                        `Backend returned ${response.status}`
-                    );
-                }
-
-                const data = await response.json();
-
-                console.log("Smart link response:", data);
-
-                if (data?.success === true && data?.link) {
-                    window.location.replace(data.link);
-                    return;
-                }
-
-                throw new Error("Invalid backend response");
-            } catch (err) {
-                console.error("Failed to get smart link:", err);
-
-                if (mounted) {
-                    setError(true);
-                    setLoading(false);
-                }
-            }
-        };
-
-        getLink();
-
-        return () => {
-            mounted = false;
-        };
+        // Inject the external script once
+        const SRC = "https://open.video/video.js";
+        if (!document.querySelector(`script[src="${SRC}"]`)) {
+            const s = document.createElement("script");
+            s.src = SRC;
+            s.async = true;
+            s.setAttribute("data-ezscrex", "false");
+            s.setAttribute("data-cfasync", "false");
+            document.body.appendChild(s);
+        }
     }, []);
 
+    return (
+        <div
+            ref={containerRef}
+            style={{
+                width: "100%",
+                maxWidth: "560px",
+                height: "315px",
+                margin: "35px auto",
+                borderRadius: "14px",
+                overflow: "hidden",
+                background: "#000",
+            }}
+        />
+    );
+}
+
+/* ------------------------------------------------------------------ */
+/*  MAIN PAGE                                                           */
+/* ------------------------------------------------------------------ */
+function Random() {
     return (
         <div style={styles.page}>
             <style>{`
@@ -509,6 +506,11 @@ Accept: text/html`}</pre>
                             />
                         </div>
 
+                        {/* =================================================== */}
+                        {/* 🎬 VIDEO PLAYER — placed in the middle of the article */}
+                        {/* =================================================== */}
+                        <VideoPlayer />
+
                         <h2>6. Backend and databases</h2>
 
                         <p>
@@ -798,24 +800,13 @@ Content-Type: text/html
                     </p>
                 </div>
             </footer>
-
-            {loading && !error && (
-                <div style={styles.loadingOverlay}>
-                    <div style={styles.spinner} />
-
-                    <h3 style={styles.loadingTitle}>
-                        Please wait...
-                    </h3>
-
-                    <p style={styles.loadingSubtitle}>
-                        Preparing your content
-                    </p>
-                </div>
-            )}
         </div>
     );
 }
 
+/* ------------------------------------------------------------------ */
+/*  HELPER COMPONENTS                                                   */
+/* ------------------------------------------------------------------ */
 function FlowItem({ number, text }) {
     return (
         <div className="web-flow-item">
@@ -918,6 +909,9 @@ function TimelineItem({ number, text }) {
     );
 }
 
+/* ------------------------------------------------------------------ */
+/*  STYLES                                                              */
+/* ------------------------------------------------------------------ */
 const styles = {
     page: {
         minHeight: "100vh",
@@ -1238,38 +1232,6 @@ const styles = {
 
     footerCopyright: {
         margin: 0,
-        fontSize: "14px",
-    },
-
-    loadingOverlay: {
-        position: "fixed",
-        inset: 0,
-        zIndex: 1000,
-        background: "rgba(255,255,255,.97)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-    },
-
-    spinner: {
-        width: "45px",
-        height: "45px",
-        border: "4px solid #e5e7eb",
-        borderTop: "4px solid #4f46e5",
-        borderRadius: "50%",
-        animation: "spin .8s linear infinite",
-    },
-
-    loadingTitle: {
-        margin: "18px 0 5px",
-        color: "#111827",
-        fontSize: "20px",
-    },
-
-    loadingSubtitle: {
-        margin: 0,
-        color: "#6b7280",
         fontSize: "14px",
     },
 };
